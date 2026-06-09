@@ -127,10 +127,10 @@ export function PageTransition() {
       setActive(true)
       playEerie()
 
-      // Hold the dark "eyes" screen ~3s before navigating.
+      // Hold the dark "eyes" screen briefly before navigating.
       window.setTimeout(() => {
         router.push(href)
-      }, 3000)
+      }, 1500)
     }
 
     // `true` = capture phase, so we intercept before React/Next Link handlers.

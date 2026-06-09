@@ -1,5 +1,3 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
 import { Skull, MessageSquareOff, UserX, Pickaxe, ShieldAlert, Bug } from "lucide-react"
 
@@ -68,9 +66,7 @@ const ruleCategories = [
 
 export default function RulesPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <SiteHeader />
-      <main className="flex-1">
+    <main className="flex-1">
         <PageHeader
           eyebrow="Закон Зловісного"
           title="Правила сервера"
@@ -112,7 +108,5 @@ export default function RulesPage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
-    </div>
   )
 }

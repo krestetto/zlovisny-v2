@@ -1,5 +1,3 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Gift, Trophy, Crown } from "lucide-react"
@@ -21,9 +19,7 @@ const topVoters = [
 
 export default function VotePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <SiteHeader />
-      <main className="flex-1">
+    <main className="flex-1">
         <PageHeader
           eyebrow="Підтримай сервер"
           title="Голосування"
@@ -97,7 +93,5 @@ export default function VotePage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
-    </div>
   )
 }

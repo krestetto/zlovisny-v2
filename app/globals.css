@@ -251,6 +251,52 @@
     transform: scale(0.97);
   }
 
+  /* ============================================================
+     Universal button image layer.
+     Add the `btn-img` class to ANY button/link to drop a picture
+     UNDER its text. Replace the default image globally by swapping
+     /placeholder-button-bg.png, OR override a single button inline:
+        style={{ ['--btn-img' as any]: "url('/my-photo.png')" }}
+     ============================================================ */
+  .btn-img {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .btn-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1; /* sits behind the text/content */
+    background-image: var(--btn-img, url('/placeholder-button-bg.png'));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: var(--btn-img-opacity, 0.85);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .btn-img:hover::before {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  /* Header background image layer (replace /placeholder-header-bg.png) */
+  .header-img {
+    position: relative;
+    isolation: isolate;
+  }
+  .header-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: var(--header-img, url('/placeholder-header-bg.png'));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: var(--header-img-opacity, 0.5);
+  }
+
   /* ===== Custom framed panel (replace placeholder-border.png) ===== */
   .custom-frame {
     border: 30px solid transparent;
@@ -328,27 +374,41 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: oklch(0.05 0.02 285);
+    /* Fully opaque pure-dark screen so nothing (incl. crimson page glow)
+       shows through behind the eyes. */
+    background: oklch(0.03 0 0);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.6s ease;
+    transition: opacity 0.1s ease;
   }
   .page-fade.is-active {
     opacity: 1;
     pointer-events: all;
   }
-  @keyframes eye-blink {
-    0%, 100% {
+  @keyframes eye-fade-in {
+    from {
       opacity: 0;
-      transform: scale(0.9);
+      transform: scale(0.96);
     }
-    35%, 80% {
-      opacity: 0.7;
+    to {
+      opacity: 0.85;
       transform: scale(1);
     }
   }
+  /* "Eyes in the dark" — faint pixel art that fades in once (no looping). */
+  .eyes-in-dark {
+    width: min(70vmin, 640px);
+    height: min(70vmin, 640px);
+    background-image: url('/placeholder-eyes.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+  }
   .eyes-faint {
-    animation: eye-blink 2.6s ease-in-out infinite;
-    filter: drop-shadow(0 0 18px oklch(0.6 0.22 18 / 50%));
+    opacity: 0;
+  }
+  .page-fade.is-active .eyes-faint {
+    animation: eye-fade-in 0.1s ease-out forwards;
   }
 }

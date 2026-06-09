@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import Image from 'next/image'
 
 /**
  * Plays a short, quiet, eerie ambience (wind + whisper-like noise) using the
@@ -115,33 +114,33 @@ export function PageTransition() {
       const [path] = href.split('#')
       if (path === pathname || href.startsWith('#')) return
 
+      // Stop Next.js <Link> from navigating immediately. We listen in the
+      // capture phase so this runs BEFORE the Link's own click handler.
       e.preventDefault()
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+
+      // Avoid re-triggering while a transition is already running.
+      if (pendingHref.current) return
+
       pendingHref.current = href
       setActive(true)
       playEerie()
 
       // Hold the dark "eyes" screen ~3s before navigating.
-      setTimeout(() => {
+      window.setTimeout(() => {
         router.push(href)
       }, 3000)
     }
 
-    document.addEventListener('click', onClick)
-    return () => document.removeEventListener('click', onClick)
+    // `true` = capture phase, so we intercept before React/Next Link handlers.
+    document.addEventListener('click', onClick, true)
+    return () => document.removeEventListener('click', onClick, true)
   }, [pathname, router, playEerie])
 
   return (
     <div className={`page-fade ${active ? 'is-active' : ''}`} aria-hidden={!active}>
-      <div className="eyes-in-dark eyes-faint relative h-[60vmin] w-[60vmin] max-w-2xl opacity-0">
-        <Image
-          src="/transition-eyes.png"
-          alt=""
-          fill
-          sizes="60vmin"
-          className="object-contain"
-          style={{ imageRendering: 'pixelated' }}
-        />
-      </div>
+      <div className="eyes-in-dark eyes-faint" role="presentation" />
     </div>
   )
 }

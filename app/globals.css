@@ -340,14 +340,25 @@
   @keyframes eye-blink {
     0%, 100% {
       opacity: 0;
-      transform: scale(0.9);
+      transform: scale(0.92);
     }
     35%, 80% {
-      opacity: 0.7;
+      opacity: 0.85;
       transform: scale(1);
     }
   }
+  /* "Eyes in the dark" — faintly glowing pixel art that fades in and blinks */
+  .eyes-in-dark {
+    width: min(70vmin, 640px);
+    height: min(70vmin, 640px);
+    background-image: url('/placeholder-eyes.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+  }
   .eyes-faint {
+    opacity: 0;
     animation: eye-blink 2.6s ease-in-out infinite;
     filter: drop-shadow(0 0 18px oklch(0.6 0.22 18 / 50%));
   }

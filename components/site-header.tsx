@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Menu, X, Copy, Check, ChevronDown, ExternalLink } from 'lucide-react'
 
 const SERVER_IP = 'play.zlovisny.space'
@@ -24,7 +24,7 @@ const navItems: NavItem[] = [
       { href: WIKI_URL, label: 'Вікі / Лор', external: true },
     ],
   },
-  { href: '/store', label: 'Магазин' },
+  { href: '/store', label: 'Прохідка' },
   {
     label: 'Спільнота',
     children: [
@@ -35,11 +35,16 @@ const navItems: NavItem[] = [
   },
 ]
 
-/** Discord glyph (lucide has no brand icon). */
+/** Official-style Discord brand glyph. */
 function DiscordIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-      <path d="M20.317 4.369A19.79 19.79 0 0 0 16.558 3c-.2.36-.43.84-.59 1.23a18.27 18.27 0 0 0-3.937 0A12.6 12.6 0 0 0 11.44 3a19.74 19.74 0 0 0-3.762 1.369C3.92 7.92 3.18 11.38 3.5 14.79a19.93 19.93 0 0 0 5.99 3.03c.48-.66.91-1.36 1.28-2.1-.7-.26-1.37-.59-2-.98.17-.12.33-.25.49-.38a14.2 14.2 0 0 0 12.08 0c.16.13.32.26.49.38-.63.39-1.3.72-2.01.98.37.74.8 1.44 1.28 2.1a19.9 19.9 0 0 0 6-3.03c.38-3.95-.65-7.38-2.78-10.42ZM9.68 12.71c-.97 0-1.77-.89-1.77-1.99 0-1.1.78-1.99 1.77-1.99.99 0 1.79.9 1.77 1.99 0 1.1-.78 1.99-1.77 1.99Zm4.64 0c-.97 0-1.77-.89-1.77-1.99 0-1.1.78-1.99 1.77-1.99.99 0 1.79.9 1.77 1.99 0 1.1-.78 1.99-1.77 1.99Z" />
+    <svg
+      viewBox="0 0 127.14 96.36"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69Zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69Z" />
     </svg>
   )
 }
@@ -119,6 +124,14 @@ export function SiteHeader() {
   const [mobileSub, setMobileSub] = useState<string | null>(null)
   const pathname = usePathname()
 
+  // Lock body scroll while the fullscreen menu is open.
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
   const copyIp = async () => {
     try {
       await navigator.clipboard.writeText(SERVER_IP)
@@ -143,8 +156,8 @@ export function SiteHeader() {
             href={DISCORD_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Discord"
-            className="shine flex h-9 w-9 items-center justify-center rounded-sm border border-primary/40 bg-primary/10 text-primary transition-all hover:scale-110 hover:bg-primary hover:text-primary-foreground"
+            aria-label="Приєднатися до Discord"
+            className="shine inline-flex h-11 w-11 items-center justify-center rounded-md border border-primary/40 bg-primary/10 text-primary transition-all hover:scale-110 hover:bg-primary hover:text-primary-foreground"
           >
             <DiscordIcon className="h-5 w-5" />
           </a>
@@ -190,86 +203,119 @@ export function SiteHeader() {
           </button>
         </div>
 
+        {/* Burger trigger */}
         <button
-          className="text-foreground lg:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Меню"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border bg-secondary/50 text-foreground transition-colors hover:border-primary/50 hover:text-primary lg:hidden"
+          onClick={() => setOpen(true)}
+          aria-label="Відкрити меню"
         >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          <Menu className="h-6 w-6" />
         </button>
       </div>
 
-      {open && (
-        <div className="border-t border-border bg-background lg:hidden">
-          <nav className="flex flex-col gap-1 px-4 py-4">
-            {navItems.map((item) =>
-              item.children ? (
-                <div key={item.label}>
-                  <button
-                    onClick={() => setMobileSub(mobileSub === item.label ? null : item.label)}
-                    className="flex w-full items-center justify-between rounded-sm px-3 py-3 text-sm font-medium uppercase tracking-wide text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                  >
-                    {item.label}
-                    <ChevronDown
-                      className={`h-4 w-4 transition-transform ${
-                        mobileSub === item.label ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  {mobileSub === item.label && (
-                    <div className="ml-3 flex flex-col border-l border-primary/40 pl-3">
-                      {item.children.map((child) =>
-                        child.external ? (
-                          <a
-                            key={child.label}
-                            href={child.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={() => setOpen(false)}
-                            className="flex items-center gap-1.5 rounded-sm px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
-                          >
-                            {child.label}
-                            <ExternalLink className="h-3 w-3" />
-                          </a>
-                        ) : (
-                          <Link
-                            key={child.label}
-                            href={child.href!}
-                            onClick={() => setOpen(false)}
-                            className={`rounded-sm px-3 py-2.5 text-sm transition-colors hover:bg-primary hover:text-primary-foreground ${
-                              pathname === child.href ? 'nav-active' : 'text-muted-foreground'
-                            }`}
-                          >
-                            {child.label}
-                          </Link>
-                        ),
-                      )}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Link
-                  key={item.label}
-                  href={item.href!}
-                  onClick={() => setOpen(false)}
-                  className={`rounded-sm px-3 py-3 text-sm font-medium uppercase tracking-wide transition-colors hover:bg-secondary hover:text-foreground ${
-                    pathname === item.href ? 'nav-active' : 'text-muted-foreground'
-                  }`}
+      {/* Fullscreen mobile menu */}
+      <div className={`mobile-menu lg:hidden ${open ? 'is-open' : ''}`}>
+        <div className="flex h-16 items-center justify-between border-b border-border px-4">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="Логотип Зловісний"
+              width={36}
+              height={36}
+              className="h-9 w-9 object-contain"
+            />
+            <span className="font-heading text-lg font-bold uppercase tracking-widest text-foreground">
+              Зловісний
+            </span>
+          </div>
+          <button
+            className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border bg-secondary/50 text-foreground"
+            onClick={() => setOpen(false)}
+            aria-label="Закрити меню"
+          >
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+
+        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-4 py-6">
+          {navItems.map((item) =>
+            item.children ? (
+              <div key={item.label} className="border-b border-border/40">
+                <button
+                  onClick={() => setMobileSub(mobileSub === item.label ? null : item.label)}
+                  className="flex min-h-[52px] w-full items-center justify-between rounded-sm px-3 text-base font-semibold uppercase tracking-wide text-foreground"
                 >
                   {item.label}
-                </Link>
-              ),
-            )}
-            <button
-              onClick={copyIp}
-              className="mt-2 flex items-center justify-center gap-2 rounded-sm border border-primary/50 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary"
-            >
-              <span className="font-mono">{SERVER_IP}</span>
-              {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-            </button>
-          </nav>
-        </div>
-      )}
+                  <ChevronDown
+                    className={`h-5 w-5 transition-transform ${
+                      mobileSub === item.label ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                {mobileSub === item.label && (
+                  <div className="mb-2 ml-3 flex flex-col border-l border-primary/40 pl-3">
+                    {item.children.map((child) =>
+                      child.external ? (
+                        <a
+                          key={child.label}
+                          href={child.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setOpen(false)}
+                          className="flex min-h-[44px] items-center gap-1.5 rounded-sm px-3 text-base text-muted-foreground transition-colors hover:text-primary"
+                        >
+                          {child.label}
+                          <ExternalLink className="h-4 w-4" />
+                        </a>
+                      ) : (
+                        <Link
+                          key={child.label}
+                          href={child.href!}
+                          onClick={() => setOpen(false)}
+                          className={`flex min-h-[44px] items-center rounded-sm px-3 text-base transition-colors hover:text-primary ${
+                            pathname === child.href ? 'text-primary' : 'text-muted-foreground'
+                          }`}
+                        >
+                          {child.label}
+                        </Link>
+                      ),
+                    )}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                key={item.label}
+                href={item.href!}
+                onClick={() => setOpen(false)}
+                className={`flex min-h-[52px] items-center border-b border-border/40 px-3 text-base font-semibold uppercase tracking-wide transition-colors hover:text-primary ${
+                  pathname === item.href ? 'text-primary' : 'text-foreground'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
+
+          <button
+            onClick={copyIp}
+            className="mt-6 flex min-h-[52px] items-center justify-center gap-2 rounded-md border border-primary/50 bg-primary/10 px-4 text-base font-semibold text-primary"
+          >
+            <span className="font-mono">{SERVER_IP}</span>
+            {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
+          </button>
+
+          <a
+            href={DISCORD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 flex min-h-[52px] items-center justify-center gap-2 rounded-md bg-primary px-4 text-base font-bold uppercase tracking-wide text-primary-foreground"
+          >
+            <DiscordIcon className="h-5 w-5" />
+            Discord
+          </a>
+        </nav>
+      </div>
     </header>
   )
 }

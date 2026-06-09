@@ -1,120 +1,209 @@
+'use client'
+
+import { useState } from 'react'
 import { PageHeader } from '@/components/page-header'
-import { FeatureSection } from '@/components/feature-section'
 import {
-  Skull,
+  Landmark,
+  Building2,
+  CookingPot,
+  Palette,
   Swords,
-  Gem,
+  Sparkles,
   Map,
   Users,
-  Crown,
-  Flame,
-  Ghost,
 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
-const classes = [
+type Feature = {
+  id: string
+  icon: LucideIcon
+  label: string
+  title: string
+  description: string
+  points: string[]
+}
+
+const FEATURES: Feature[] = [
   {
+    id: 'politics',
+    icon: Landmark,
+    label: 'Політика',
+    title: 'Жива політична система',
+    description:
+      'На Зловісному гравці самі формують владу. Створюйте фракції, укладайте союзи, оголошуйте війни та боріться за вплив на планеті.',
+    points: [
+      'Вибори лідерів та рад міст',
+      'Дипломатія, союзи та зради',
+      'Податки й спільна скарбниця фракції',
+      'Війни за території та ресурси',
+    ],
+  },
+  {
+    id: 'cities',
+    icon: Building2,
+    label: 'Міста',
+    title: 'Будівництво власних міст',
+    description:
+      'Засновуйте поселення, розширюйте їх до велетенських мегаполісів та захищайте свої землі від загарбників і темних створінь.',
+    points: [
+      'Приватизація та захист територій',
+      'Ролі мешканців і права доступу',
+      'Спільні склади та інфраструктура',
+      'Унікальні бафи для розвинених міст',
+    ],
+  },
+  {
+    id: 'cooking',
+    icon: CookingPot,
+    label: 'Куховарство',
+    title: 'Глибока система куховарства',
+    description:
+      'Збирайте інгредієнти, відкривайте рецепти та готуйте страви, що дарують потужні тимчасові ефекти для пригод і боїв.',
+    points: [
+      'Сотні рецептів різної складності',
+      'Страви з бойовими та утиліті-ефектами',
+      'Рідкісні інгредієнти з підземель',
+      'Прокачування навички кухаря',
+    ],
+  },
+  {
+    id: 'painting',
+    icon: Palette,
+    label: 'Малювання',
+    title: 'Малювання та кастомізація',
+    description:
+      'Перетворюйте свій світ на витвір мистецтва — створюйте власні картини, прапори фракцій та унікальний декор.',
+    points: [
+      'Кастомні картини й банери',
+      'Особисті герби та емблеми фракцій',
+      'Декоративні блоки та меблі',
+      'Галереї у містах гравців',
+    ],
+  },
+  {
+    id: 'classes',
     icon: Swords,
-    name: 'Жнець',
-    desc: 'Майстер ближнього бою, що живиться душами полеглих ворогів.',
+    label: 'Прокачування класів',
+    title: 'Розвиток пробуджених класів',
+    description:
+      'Оберіть один із пробуджених шляхів сили та розвивайте його — відкривайте здібності, комбінуйте навички та станьте легендою.',
+    points: [
+      '7 унікальних класів зі своїм стилем',
+      'Дерева навичок та активні вміння',
+      'Спорядження під кожен клас',
+      'Пробудження прихованих сил',
+    ],
   },
   {
-    icon: Flame,
-    name: 'Підпалювач',
-    desc: 'Володар проклятого вогню, спалює все на своєму шляху.',
+    id: 'pve',
+    icon: Sparkles,
+    label: 'Боси та лут',
+    title: 'Древні боси й легендарний лут',
+    description:
+      'Кидайте виклик колосальним босам планети та здобувайте найрідкісніші артефакти, кожен з власним темним благословенням.',
+    points: [
+      'Десятки унікальних босів',
+      'Рейди для команд та фракцій',
+      'Легендарні сети спорядження',
+      'Артефакти з особливими ефектами',
+    ],
   },
   {
-    icon: Ghost,
-    name: 'Спіритист',
-    desc: 'Прикликає духів темряви та керує силами потойбіччя.',
+    id: 'world',
+    icon: Map,
+    label: 'Світи',
+    title: 'Кілька вимірів для дослідження',
+    description:
+      'Окремі біоми та виміри зі своєю атмосферою, мешканцями й небезпеками чекають на найхоробріших дослідників.',
+    points: [
+      'Унікальні біоми та локації',
+      'Жива інтерактивна мапа сервера',
+      'Приховані підземелля та секрети',
+      'Динамічні події у світі',
+    ],
   },
   {
-    icon: Crown,
-    name: 'Тиран',
-    desc: 'Танк-командир, що веде союзників у найжахливіші битви.',
+    id: 'community',
+    icon: Users,
+    label: 'Спільнота',
+    title: 'Активна спільнота гравців',
+    description:
+      'Долучайтеся до дружньої спільноти, беріть участь в івентах та знаходьте союзників для нових звершень.',
+    points: [
+      'Регулярні івенти з нагородами',
+      'Активний Discord-сервер',
+      'Підтримка від адміністрації',
+      'Конкурси будівництва та арту',
+    ],
   },
-]
-
-const highlights = [
-  { icon: Skull, title: '120+ босів', desc: 'Унікальні моторошні боси з власними механіками.' },
-  { icon: Map, title: '4 проклятих світи', desc: 'Окремі біоми зі своєю атмосферою жаху.' },
-  { icon: Gem, title: 'Легендарний лут', desc: 'Сотні проклятих предметів та артефактів.' },
-  { icon: Users, title: 'Гільдії', desc: 'Об\u2019єднуйтесь та захоплюйте території.' },
 ]
 
 export default function FeaturesPage() {
+  const [active, setActive] = useState(FEATURES[0].id)
+  const current = FEATURES.find((f) => f.id === active) ?? FEATURES[0]
+  const Icon = current.icon
+
   return (
-    <main>
+    <main className="flex-1">
       <PageHeader
         eyebrow="Особливості"
-        title="Що приховує темрява"
-        description="Зловісний — це не просто сервер. Це проклятий світ, наповнений небезпеками, таємницями та винагородами для найхоробріших."
+        title="Міні-вікі сервера"
+        description="Зловісний — це цілий всесвіт можливостей. Обери розділ, щоб дізнатися більше про ключові механіки гри."
       />
 
-      <section className="border-b border-border">
-        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
-          {highlights.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-md border border-border bg-card p-6 transition-colors hover:border-primary/40"
-            >
-              <item.icon className="h-8 w-8 text-primary" />
-              <h3 className="mt-4 font-heading text-lg font-bold uppercase tracking-wide text-foreground">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <FeatureSection
-        eyebrow="Боси"
-        title="Жахи, що чекають на тебе"
-        description="Кожен бос Зловісного — це випробування на межі можливого. Від велетенських ельдрітч-створінь до проклятих лицарів — кожен бій вимагає стратегії, координації та неабиякої сміливості. Перемога приносить найрідкісніший лут на сервері."
-        image="/bg-eyes.png"
-        href="/store"
-        linkLabel="Підготуватися до бою"
-      />
-
-      <FeatureSection
-        eyebrow="Лут"
-        title="Сила проклятих артефактів"
-        description="Збирайте легендарні зброю та обладунки, кожна частина яких несе власне темне благословення. Комбінуйте ефекти, куйте набори та станьте легендою серед гравців проклятого світу."
-        image="/bg-veins.png"
-        href="/store"
-        linkLabel="Переглянути артефакти"
-        reverse
-      />
-
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-          <div className="text-center">
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
-              Класи
-            </span>
-            <h2 className="mt-4 font-heading text-3xl font-bold uppercase tracking-tight text-foreground sm:text-4xl">
-              Обери свій шлях у темряві
-            </h2>
-          </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {classes.map((cls) => (
-              <div
-                key={cls.name}
-                className="group flex flex-col items-center rounded-md border border-border bg-card p-8 text-center transition-all hover:border-accent/50 hover:bg-secondary/40"
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+        {/* Tab strip */}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+          {FEATURES.map((f) => {
+            const TabIcon = f.icon
+            const isActive = f.id === active
+            return (
+              <button
+                key={f.id}
+                onClick={() => setActive(f.id)}
+                aria-pressed={isActive}
+                className={`shine flex min-h-[44px] items-center gap-2 rounded-md border px-4 py-2.5 text-sm font-semibold uppercase tracking-wide transition-all ${
+                  isActive
+                    ? 'border-primary bg-primary text-primary-foreground shadow-[0_0_24px_oklch(0.62_0.24_320_/_45%)]'
+                    : 'border-border bg-card text-muted-foreground hover:border-primary/50 hover:text-foreground'
+                }`}
               >
-                <div className="flex h-16 w-16 items-center justify-center rounded-sm border border-accent/30 bg-accent/10 transition-colors group-hover:bg-accent/20">
-                  <cls.icon className="h-8 w-8 text-accent" />
-                </div>
-                <h3 className="mt-5 font-heading text-xl font-bold uppercase tracking-wide text-foreground">
-                  {cls.name}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {cls.desc}
-                </p>
-              </div>
-            ))}
+                <TabIcon className="h-4 w-4 shrink-0" />
+                {f.label}
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Active panel */}
+        <div
+          key={current.id}
+          className="art-frame mt-10 grid gap-8 rounded-lg border border-primary/40 bg-card/70 p-6 backdrop-blur-sm duration-500 animate-in fade-in slide-in-from-bottom-4 sm:p-10 md:grid-cols-[auto_1fr]"
+        >
+          <div className="flex md:flex-col md:items-center">
+            <div className="flex h-20 w-20 items-center justify-center rounded-xl border border-primary/40 bg-primary/10 text-primary shadow-[0_0_30px_oklch(0.62_0.24_320_/_35%)]">
+              <Icon className="h-10 w-10" />
+            </div>
+          </div>
+
+          <div>
+            <h2 className="font-heading text-2xl font-bold uppercase tracking-tight text-foreground sm:text-3xl">
+              {current.title}
+            </h2>
+            <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
+              {current.description}
+            </p>
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              {current.points.map((p) => (
+                <li
+                  key={p}
+                  className="flex items-start gap-2 rounded-md border border-border bg-secondary/40 px-3 py-2.5 text-sm text-foreground"
+                >
+                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

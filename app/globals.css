@@ -333,7 +333,7 @@
     background: oklch(0.03 0 0);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.1s ease;
   }
   .page-fade.is-active {
     opacity: 1;
@@ -363,6 +363,6 @@
     opacity: 0;
   }
   .page-fade.is-active .eyes-faint {
-    animation: eye-fade-in 0.3s ease-out forwards;
+    animation: eye-fade-in 0.1s ease-out forwards;
   }
 }

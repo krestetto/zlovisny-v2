@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Youtube, MessageCircle, Twitch } from 'lucide-react'
+import { MessageCircle, Send, Globe } from 'lucide-react'
 
 const footerNav = [
   {
@@ -51,7 +51,7 @@ export function SiteFooter() {
             тінь приховує загрозу, а кожна перемога має свою ціну.
           </p>
           <div className="mt-6 flex gap-3">
-            {[Youtube, MessageCircle, Twitch].map((Icon, i) => (
+            {[MessageCircle, Send, Globe].map((Icon, i) => (
               <a
                 key={i}
                 href="#"

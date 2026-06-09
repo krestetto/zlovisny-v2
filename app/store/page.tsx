@@ -2,15 +2,18 @@
 
 import { useState } from 'react'
 import { PageHeader } from '@/components/page-header'
-import { Crown, Check, Sparkles } from 'lucide-react'
+import { Crown, Check, ArrowUpCircle, Sparkles } from 'lucide-react'
 
 const ranks = [
   {
     name: 'Послушник',
-    price: '149₴',
+    priceMonth: '49₴',
+    priceOne: '149₴',
     color: 'border-border',
     accent: 'text-muted-foreground',
+    glow: '',
     btn: 'border border-border bg-secondary text-foreground hover:bg-secondary/70',
+    base: true,
     perks: [
       'Префікс [Послушник]',
       '2 додаткові домівки',
@@ -19,11 +22,12 @@ const ranks = [
     ],
   },
   {
-    name: 'Адепт',
-    price: '349₴',
+    name: 'Пакт',
+    priceMonth: '99₴',
+    priceOne: '349₴',
     color: 'border-accent/50',
     accent: 'text-accent',
-    featured: false,
+    glow: 'hover:shadow-[0_0_60px_oklch(0.6_0.22_18_/_45%)]',
     btn: 'border border-accent/50 bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground',
     perks: [
       'Усе з рангу Послушник',
@@ -34,14 +38,16 @@ const ranks = [
     ],
   },
   {
-    name: 'Темний Лорд',
-    price: '699₴',
+    name: 'Адепт',
+    priceMonth: '199₴',
+    priceOne: '699₴',
     color: 'border-primary',
     accent: 'text-primary',
     featured: true,
+    glow: 'hover:shadow-[0_0_70px_oklch(0.62_0.24_320_/_55%)]',
     btn: 'bg-primary text-primary-foreground hover:opacity-90',
     perks: [
-      'Усе з рангу Адепт',
+      'Усе з рангу Пакт',
       'Необмежені домівки',
       'Унікальний світний префікс',
       'Ексклюзивні косметичні ефекти',
@@ -51,30 +57,36 @@ const ranks = [
   },
 ]
 
-const crates = [
-  { name: 'Скриня Тіней', price: '49₴', items: '5 предметів' },
-  { name: 'Проклята Скриня', price: '99₴', items: '10 предметів + рідкісний шанс' },
-  { name: 'Скриня Ельдрітча', price: '199₴', items: '15 предметів + гарантований легендарний' },
-]
-
 export default function StorePage() {
-  const [billing, setBilling] = useState<'one' | 'month'>('one')
+  // Monthly is the default & first option.
+  const [billing, setBilling] = useState<'month' | 'one'>('month')
 
   return (
-    <main>
+    <main className="flex-1">
       <PageHeader
-        eyebrow="Магазин"
-        title="Уклади угоду з темрявою"
+        eyebrow="Прохідка"
+        title="Обери свою прохідку"
         description="Підтримай сервер та отримай ексклюзивні переваги. Усі покупки активуються миттєво після оплати."
       />
 
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <section>
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+          {/* Billing toggle — monthly first & active by default */}
           <div className="mb-12 flex justify-center">
-            <div className="inline-flex rounded-sm border border-border bg-card p-1">
+            <div className="inline-flex rounded-md border border-border bg-card p-1">
+              <button
+                onClick={() => setBilling('month')}
+                className={`min-h-[44px] rounded-sm px-5 text-sm font-semibold uppercase tracking-wide transition-colors ${
+                  billing === 'month'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                На місяць
+              </button>
               <button
                 onClick={() => setBilling('one')}
-                className={`rounded-sm px-5 py-2 text-sm font-semibold uppercase tracking-wide transition-colors ${
+                className={`min-h-[44px] rounded-sm px-5 text-sm font-semibold uppercase tracking-wide transition-colors ${
                   billing === 'one'
                     ? 'bg-primary text-primary-foreground'
                     : 'text-muted-foreground hover:text-foreground'
@@ -82,25 +94,15 @@ export default function StorePage() {
               >
                 Назавжди
               </button>
-              <button
-                onClick={() => setBilling('month')}
-                className={`rounded-sm px-5 py-2 text-sm font-semibold uppercase tracking-wide transition-colors ${
-                  billing === 'month'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                Щомісяця
-              </button>
             </div>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="grid gap-8 pt-4 lg:grid-cols-3">
             {ranks.map((rank) => (
               <div
                 key={rank.name}
-                className={`relative flex flex-col rounded-md border bg-card p-8 ${rank.color} ${
-                  rank.featured ? 'shadow-[0_0_40px_oklch(0.52_0.22_20_/_25%)]' : ''
+                className={`art-frame relative flex flex-col rounded-md border bg-card p-8 transition-all duration-300 hover:z-10 hover:-translate-y-2 hover:scale-105 ${rank.color} ${rank.glow} ${
+                  rank.featured ? 'shadow-[0_0_40px_oklch(0.62_0.24_320_/_25%)]' : ''
                 }`}
               >
                 {rank.featured && (
@@ -114,7 +116,7 @@ export default function StorePage() {
                 </h3>
                 <div className="mt-4 flex items-end gap-1">
                   <span className={`font-heading text-4xl font-black ${rank.accent}`}>
-                    {rank.price}
+                    {billing === 'month' ? rank.priceMonth : rank.priceOne}
                   </span>
                   <span className="mb-1 text-sm text-muted-foreground">
                     {billing === 'month' ? '/міс' : ' разово'}
@@ -129,41 +131,41 @@ export default function StorePage() {
                   ))}
                 </ul>
                 <button
-                  className={`mt-8 rounded-sm px-6 py-3 text-sm font-bold uppercase tracking-wide transition-all ${rank.btn}`}
+                  className={`shine mt-8 min-h-[44px] rounded-sm px-6 text-sm font-bold uppercase tracking-wide transition-all ${rank.btn}`}
                 >
                   Придбати
                 </button>
+                {/* Prominent glowing upgrade button inside Пакт & Адепт */}
+                {!rank.base && (
+                  <button className="shine mt-3 flex min-h-[44px] items-center justify-center gap-2 rounded-sm border border-primary bg-primary/15 px-6 text-sm font-bold uppercase tracking-wide text-primary shadow-[0_0_22px_oklch(0.62_0.24_320_/_45%)] transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_40px_oklch(0.62_0.24_320_/_70%)]">
+                    <ArrowUpCircle className="h-4 w-4" />
+                    Покращити прохідку
+                  </button>
+                )}
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section>
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-          <div className="flex items-center gap-3">
-            <Sparkles className="h-6 w-6 text-accent" />
-            <h2 className="font-heading text-2xl font-bold uppercase tracking-wide text-foreground sm:text-3xl">
-              Скрині та ключі
-            </h2>
-          </div>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {crates.map((crate) => (
-              <div
-                key={crate.name}
-                className="flex items-center justify-between rounded-md border border-border bg-card p-6 transition-colors hover:border-accent/40"
-              >
-                <div>
-                  <h3 className="font-heading text-lg font-bold uppercase tracking-wide text-foreground">
-                    {crate.name}
-                  </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{crate.items}</p>
-                </div>
-                <button className="rounded-sm border border-accent/50 bg-accent/10 px-4 py-2 text-sm font-bold text-accent transition-colors hover:bg-accent hover:text-accent-foreground">
-                  {crate.price}
-                </button>
+          {/* Big prominent upgrade banner */}
+          <div className="art-frame mt-14 overflow-hidden rounded-lg border border-primary/60 bg-gradient-to-r from-primary/15 via-card to-accent/15 p-8 shadow-[0_0_50px_oklch(0.62_0.24_320_/_30%)]">
+            <div className="flex flex-col items-center gap-6 text-center md:flex-row md:text-left">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-primary/50 bg-primary/20 text-primary shadow-[0_0_30px_oklch(0.62_0.24_320_/_50%)]">
+                <ArrowUpCircle className="h-9 w-9" />
               </div>
-            ))}
+              <div className="flex-1">
+                <h3 className="flex items-center justify-center gap-2 font-heading text-2xl font-bold uppercase tracking-tight text-foreground md:justify-start">
+                  <Sparkles className="h-5 w-5 text-accent" />
+                  Уже маєте прохідку?
+                </h3>
+                <p className="mt-2 text-pretty leading-relaxed text-muted-foreground">
+                  Не платіть повну ціну! Доплатіть лише різницю між вашим поточним
+                  рангом і новим — і миттєво підніміться на вищий рівень сили.
+                </p>
+              </div>
+              <button className="shine min-h-[52px] shrink-0 rounded-md bg-primary px-8 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_30px_oklch(0.62_0.24_320_/_55%)] transition-all hover:scale-105 hover:shadow-[0_0_50px_oklch(0.62_0.24_320_/_75%)]">
+                Покращити зараз
+              </button>
+            </div>
           </div>
         </div>
       </section>

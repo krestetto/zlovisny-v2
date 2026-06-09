@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Cinzel } from 'next/font/google'
 import './globals.css'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
+import { PageTransition } from '@/components/page-transition'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
 const geistMono = Geist_Mono({
@@ -17,9 +18,9 @@ const cinzel = Cinzel({
 })
 
 export const metadata: Metadata = {
-  title: 'Зловісний — Майнкрафт сервер',
+  title: 'Зловісний — Майнкрафт всесвіт',
   description:
-    'Зловісний — найтемніший Minecraft сервер. Досліджуй проклятий світ, перемагай моторошних босів та збирай легендарний лут.',
+    'Зловісний — Minecraft сервер у далекому космосі. Дослідіть прокляту планету, перемагайте древніх босів та збирайте легендарний лут.',
   generator: 'v0.app',
 }
 
@@ -31,9 +32,11 @@ export default function RootLayout({
   return (
     <html
       lang="uk"
+      data-scroll-behavior="smooth"
       className={`dark ${geistSans.variable} ${geistMono.variable} ${cinzel.variable} bg-background`}
     >
       <body className="font-sans antialiased">
+        <PageTransition />
         <SiteHeader />
         {children}
         <SiteFooter />

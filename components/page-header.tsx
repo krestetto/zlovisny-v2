@@ -8,8 +8,17 @@ export function PageHeader({ eyebrow, title, description }: PageHeaderProps) {
   return (
     <section className="relative overflow-hidden border-b border-border">
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-25"
-        style={{ backgroundImage: 'url(/hero-bg.png)' }}
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 0%, oklch(0.3 0.12 300) 0%, oklch(0.17 0.05 285) 70%)',
+        }}
+        aria-hidden="true"
+      />
+      <div className="bg-stars absolute inset-0 opacity-50" aria-hidden="true" />
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-30"
+        style={{ backgroundImage: 'url(/bg-eyes.png)', imageRendering: 'pixelated' }}
         aria-hidden="true"
       />
       <div

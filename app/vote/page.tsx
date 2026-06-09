@@ -1,7 +1,4 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
 import { PageHeader } from "@/components/page-header"
-import { Button } from "@/components/ui/button"
 import { ExternalLink, Gift, Trophy, Crown } from "lucide-react"
 
 const voteSites = [
@@ -21,9 +18,7 @@ const topVoters = [
 
 export default function VotePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <SiteHeader />
-      <main className="flex-1">
+    <main className="flex-1">
         <PageHeader
           eyebrow="Підтримай сервер"
           title="Голосування"
@@ -51,12 +46,15 @@ export default function VotePage() {
                         Нагорода: {site.reward}
                       </p>
                     </div>
-                    <Button asChild className="shrink-0">
-                      <a href={site.url}>
-                        Голосувати
-                        <ExternalLink className="ml-1 h-4 w-4" />
-                      </a>
-                    </Button>
+                    <a
+                      href={site.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shine inline-flex shrink-0 items-center justify-center gap-1 rounded-md bg-primary px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-all hover:scale-105 hover:shadow-[0_0_30px_oklch(0.62_0.24_320_/_55%)]"
+                    >
+                      Голосувати
+                      <ExternalLink className="ml-1 h-4 w-4" />
+                    </a>
                   </div>
                 ))}
               </div>
@@ -97,7 +95,5 @@ export default function VotePage() {
           </div>
         </section>
       </main>
-      <SiteFooter />
-    </div>
   )
 }

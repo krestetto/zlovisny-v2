@@ -11,7 +11,7 @@ export function StatsBar() {
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px px-4 py-12 sm:px-6 lg:grid-cols-4">
         {stats.map((stat) => (
           <div key={stat.label} className="flex flex-col items-center text-center">
-            <span className="font-heading text-4xl font-black text-glow-purple text-accent sm:text-5xl">
+            <span className="font-heading text-4xl font-black text-glow-violet text-primary sm:text-5xl">
               {stat.value}
             </span>
             <span className="mt-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">

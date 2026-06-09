@@ -124,6 +124,19 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Custom pixel cursor (replace cursor-sword-32.png with your own art) */
+    cursor: url('/cursor-sword-32.png') 4 4, auto;
+  }
+  /* Pointer cursor for interactive elements */
+  a,
+  button,
+  [role='button'],
+  summary,
+  label[for],
+  input[type='checkbox'],
+  input[type='radio'],
+  select {
+    cursor: url('/cursor-sword-32.png') 4 4, pointer;
   }
   html {
     @apply font-sans;
@@ -193,5 +206,149 @@
   }
   .animate-drift {
     animation: drift 120s linear infinite;
+  }
+
+  /* ===== Custom art frames (replace placeholder-border.png with your pixel art) ===== */
+  .art-frame {
+    border: 6px solid transparent;
+    border-image: url('/placeholder-border.png') 18 round;
+    border-image-outset: 0;
+    /* Fallback styling until pixel art border is supplied */
+    box-shadow: inset 0 0 0 1px oklch(0.62 0.24 320 / 25%);
+  }
+  .art-panel {
+    background-image: url('/placeholder-panel.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .art-btn {
+    border: 4px solid transparent;
+    border-image: url('/placeholder-button.png') 12 round;
+  }
+
+  /* ===== Custom button with full background art (replace placeholder-button.png) ===== */
+  .custom-btn {
+    position: relative;
+    background-image: url('/placeholder-button.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    min-height: 44px; /* comfortable tap target */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+  .custom-btn > * {
+    position: relative;
+    z-index: 1;
+  }
+  .custom-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15) drop-shadow(0 0 14px oklch(0.62 0.24 320 / 55%));
+  }
+  .custom-btn:active {
+    transform: scale(0.97);
+  }
+
+  /* ===== Custom framed panel (replace placeholder-border.png) ===== */
+  .custom-frame {
+    border: 30px solid transparent;
+    border-image: url('/placeholder-border.png') 30 stretch;
+    background-image: url('/placeholder-panel.png');
+    background-size: cover;
+  }
+
+  /* ===== Mobile fullscreen burger menu ===== */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    background: oklch(0.08 0.03 285);
+    backdrop-filter: blur(8px);
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .mobile-menu.is-open {
+    transform: translateX(0);
+  }
+
+  /* ===== Touch tap-to-reveal (mobile equivalent of hover) ===== */
+  .tap-reveal .reveal-target {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .tap-reveal:hover .reveal-target,
+  .tap-reveal.is-revealed .reveal-target {
+    opacity: 1;
+  }
+
+  /* ===== Shine / glare sweep on hover ===== */
+  .shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .shine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      oklch(1 0 0 / 0%) 30%,
+      oklch(1 0 0 / 45%) 50%,
+      oklch(1 0 0 / 0%) 70%,
+      transparent 100%
+    );
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+  .shine:hover::after {
+    left: 130%;
+  }
+
+  /* ===== Active nav item: enlarged + constant glow ===== */
+  .nav-active {
+    color: var(--primary);
+    transform: scale(1.12);
+    text-shadow: 0 0 12px oklch(0.62 0.24 320 / 80%), 0 0 28px oklch(0.62 0.24 320 / 45%);
+  }
+
+  /* ===== Page transition overlay ===== */
+  .page-fade {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: oklch(0.05 0.02 285);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+  }
+  .page-fade.is-active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  @keyframes eye-blink {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    35%, 80% {
+      opacity: 0.7;
+      transform: scale(1);
+    }
+  }
+  .eyes-faint {
+    animation: eye-blink 2.6s ease-in-out infinite;
+    filter: drop-shadow(0 0 18px oklch(0.6 0.22 18 / 50%));
   }
 }

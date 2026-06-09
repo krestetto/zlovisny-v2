@@ -32,6 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="uk"
+      data-scroll-behavior="smooth"
       className={`dark ${geistSans.variable} ${geistMono.variable} ${cinzel.variable} bg-background`}
     >
       <body className="font-sans antialiased">

@@ -266,7 +266,7 @@
     z-index: 100;
     display: flex;
     flex-direction: column;
-    background: oklch(0.1 0.04 285 / 97%);
+    background: oklch(0.08 0.03 285);
     backdrop-filter: blur(8px);
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);

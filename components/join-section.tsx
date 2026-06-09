@@ -28,7 +28,7 @@ export function JoinSection() {
             Приєднуйся зараз
           </span>
           <h2 className="mt-4 font-heading text-4xl font-black uppercase tracking-tight text-foreground text-balance sm:text-5xl">
-            Грай у <span className="text-glow-red text-primary">Зловісний</span>
+            Грай у <span className="text-glow-violet text-primary">Зловісний</span>
           </h2>
           <p className="mt-5 text-pretty text-muted-foreground">
             Готові розпочати? Запустіть Minecraft: Java Edition і увійдіть на наш

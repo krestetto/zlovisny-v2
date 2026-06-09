@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { PageHeader } from '@/components/page-header'
-import { Crown, Check, Sparkles } from 'lucide-react'
+import { Crown, Check, ArrowUpCircle } from 'lucide-react'
 
 const ranks = [
   {
@@ -10,7 +10,9 @@ const ranks = [
     price: '149₴',
     color: 'border-border',
     accent: 'text-muted-foreground',
+    glow: '',
     btn: 'border border-border bg-secondary text-foreground hover:bg-secondary/70',
+    base: true,
     perks: [
       'Префікс [Послушник]',
       '2 додаткові домівки',
@@ -23,7 +25,7 @@ const ranks = [
     price: '349₴',
     color: 'border-accent/50',
     accent: 'text-accent',
-    featured: false,
+    glow: 'hover:shadow-[0_0_60px_oklch(0.6_0.22_18_/_45%)]',
     btn: 'border border-accent/50 bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground',
     perks: [
       'Усе з рангу Послушник',
@@ -39,6 +41,7 @@ const ranks = [
     color: 'border-primary',
     accent: 'text-primary',
     featured: true,
+    glow: 'hover:shadow-[0_0_70px_oklch(0.62_0.24_320_/_55%)]',
     btn: 'bg-primary text-primary-foreground hover:opacity-90',
     perks: [
       'Усе з рангу Адепт',
@@ -51,12 +54,6 @@ const ranks = [
   },
 ]
 
-const crates = [
-  { name: 'Скриня Тіней', price: '49₴', items: '5 предметів' },
-  { name: 'Проклята Скриня', price: '99₴', items: '10 предметів + рідкісний шанс' },
-  { name: 'Скриня Ельдрітча', price: '199₴', items: '15 предметів + гарантований легендарний' },
-]
-
 export default function StorePage() {
   const [billing, setBilling] = useState<'one' | 'month'>('one')
 
@@ -64,11 +61,11 @@ export default function StorePage() {
     <main>
       <PageHeader
         eyebrow="Магазин"
-        title="Уклади угоду з темрявою"
+        title="Обери свою прохідку"
         description="Підтримай сервер та отримай ексклюзивні переваги. Усі покупки активуються миттєво після оплати."
       />
 
-      <section className="border-b border-border">
+      <section>
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
           <div className="mb-12 flex justify-center">
             <div className="inline-flex rounded-sm border border-border bg-card p-1">
@@ -95,12 +92,12 @@ export default function StorePage() {
             </div>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="grid gap-8 pt-4 lg:grid-cols-3">
             {ranks.map((rank) => (
               <div
                 key={rank.name}
-                className={`relative flex flex-col rounded-md border bg-card p-8 ${rank.color} ${
-                  rank.featured ? 'shadow-[0_0_40px_oklch(0.52_0.22_20_/_25%)]' : ''
+                className={`art-frame relative flex flex-col rounded-md border bg-card p-8 transition-all duration-300 hover:z-10 hover:-translate-y-2 hover:scale-105 ${rank.color} ${rank.glow} ${
+                  rank.featured ? 'shadow-[0_0_40px_oklch(0.62_0.24_320_/_25%)]' : ''
                 }`}
               >
                 {rank.featured && (
@@ -129,42 +126,24 @@ export default function StorePage() {
                   ))}
                 </ul>
                 <button
-                  className={`mt-8 rounded-sm px-6 py-3 text-sm font-bold uppercase tracking-wide transition-all ${rank.btn}`}
+                  className={`shine mt-8 rounded-sm px-6 py-3 text-sm font-bold uppercase tracking-wide transition-all ${rank.btn}`}
                 >
                   Придбати
                 </button>
+                {!rank.base && (
+                  <button className="mt-3 flex items-center justify-center gap-2 rounded-sm border border-border bg-transparent px-6 py-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary">
+                    <ArrowUpCircle className="h-4 w-4" />
+                    Покращити прохідку
+                  </button>
+                )}
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section>
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-          <div className="flex items-center gap-3">
-            <Sparkles className="h-6 w-6 text-accent" />
-            <h2 className="font-heading text-2xl font-bold uppercase tracking-wide text-foreground sm:text-3xl">
-              Скрині та ключі
-            </h2>
-          </div>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {crates.map((crate) => (
-              <div
-                key={crate.name}
-                className="flex items-center justify-between rounded-md border border-border bg-card p-6 transition-colors hover:border-accent/40"
-              >
-                <div>
-                  <h3 className="font-heading text-lg font-bold uppercase tracking-wide text-foreground">
-                    {crate.name}
-                  </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{crate.items}</p>
-                </div>
-                <button className="rounded-sm border border-accent/50 bg-accent/10 px-4 py-2 text-sm font-bold text-accent transition-colors hover:bg-accent hover:text-accent-foreground">
-                  {crate.price}
-                </button>
-              </div>
-            ))}
-          </div>
+          <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-muted-foreground">
+            Уже маєте прохідку? Натисніть «Покращити прохідку», щоб доплатити
+            лише різницю в ціні та миттєво підняти свій ранг.
+          </p>
         </div>
       </section>
     </main>

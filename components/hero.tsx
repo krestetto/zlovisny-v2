@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Copy, Check, ChevronDown } from 'lucide-react'
 
+const SERVER_IP = 'play.zlovisny.space'
+
 export function Hero() {
   const [copied, setCopied] = useState(false)
   const [scrollY, setScrollY] = useState(0)
@@ -14,8 +16,17 @@ export function Hero() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const copyIp = () => {
-    navigator.clipboard.writeText('play.zlovisnyi.net')
+  const copyIp = async () => {
+    try {
+      await navigator.clipboard.writeText(SERVER_IP)
+    } catch {
+      const el = document.createElement('textarea')
+      el.value = SERVER_IP
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand('copy')
+      document.body.removeChild(el)
+    }
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -62,6 +73,17 @@ export function Hero() {
         <span className="mb-6 inline-block rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur-sm">
           Сезон 4 · Пробудження планети
         </span>
+
+        {/* Centered server logo */}
+        <img
+          src="/logo.png"
+          alt="Логотип сервера Зловісний"
+          width={180}
+          height={180}
+          className="animate-float-slow mb-6 h-36 w-36 object-contain drop-shadow-[0_0_50px_oklch(0.6_0.22_18_/_55%)] sm:h-44 sm:w-44"
+          style={{ imageRendering: 'pixelated' }}
+        />
+
         <h1 className="font-heading text-6xl font-black uppercase leading-[0.9] tracking-tight text-balance sm:text-8xl lg:text-9xl">
           <span className="text-glow-violet text-foreground">Зловісний</span>
         </h1>
@@ -69,22 +91,22 @@ export function Hero() {
           Майнкрафт всесвіт
         </p>
         <p className="mt-8 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Далеко за межами зірок обертається проклята планета. Дослідіть її
-          світи, киньте виклик древнім босам та зберіть легендарний лут. Моди не
+          Далеко за межами зірок обертається жива планета. Дослідіть її світи,
+          киньте виклик древнім босам та зберіть легендарний лут. Моди не
           потрібні — лише ваша відвага.
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
           <button
             onClick={copyIp}
-            className="group flex items-center gap-3 rounded-md bg-primary px-8 py-4 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_40px_oklch(0.62_0.24_320_/_50%)] transition-all hover:scale-105 hover:shadow-[0_0_60px_oklch(0.62_0.24_320_/_70%)]"
+            className="shine group flex items-center gap-3 rounded-md bg-primary px-8 py-4 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_40px_oklch(0.62_0.24_320_/_50%)] transition-all hover:scale-105 hover:shadow-[0_0_60px_oklch(0.62_0.24_320_/_70%)]"
           >
-            <span className="font-mono">play.zlovisnyi.net</span>
+            <span className="font-mono">{SERVER_IP}</span>
             {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
           </button>
           <Link
             href="/features"
-            className="rounded-md border border-border bg-secondary/50 px-8 py-4 text-base font-bold uppercase tracking-wide text-foreground backdrop-blur-sm transition-colors hover:border-accent/60 hover:text-accent"
+            className="shine rounded-md border border-border bg-secondary/50 px-8 py-4 text-base font-bold uppercase tracking-wide text-foreground backdrop-blur-sm transition-colors hover:border-accent/60 hover:text-accent"
           >
             Дослідити світ
           </Link>

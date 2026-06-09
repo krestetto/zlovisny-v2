@@ -3,18 +3,29 @@
 import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 
+const SERVER_IP = 'play.zlovisny.space'
+
 const steps = [
   'Запустіть Minecraft: Java Edition',
   'У розділі «Мережева гра» натисніть «Додати сервер»',
   'Введіть IP-адресу сервера у відповідне поле',
-  'Підтвердіть та увійдіть, щоб почати свою темну подорож',
+  'Підтвердіть та увійдіть, щоб почати свою подорож',
 ]
 
 export function JoinSection() {
   const [copied, setCopied] = useState(false)
 
-  const copyIp = () => {
-    navigator.clipboard.writeText('play.zlovisnyi.net')
+  const copyIp = async () => {
+    try {
+      await navigator.clipboard.writeText(SERVER_IP)
+    } catch {
+      const el = document.createElement('textarea')
+      el.value = SERVER_IP
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand('copy')
+      document.body.removeChild(el)
+    }
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -60,7 +71,7 @@ export function JoinSection() {
               onClick={copyIp}
               className="mt-4 flex items-center gap-3 rounded-sm border border-primary/50 bg-primary/10 px-6 py-4 font-mono text-lg font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
             >
-              play.zlovisnyi.net
+              play.zlovisny.space
               {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
             </button>
             <p className="mt-4 text-xs text-muted-foreground">

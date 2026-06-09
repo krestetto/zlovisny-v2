@@ -1,12 +1,16 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { MessageCircle, Send, Globe } from 'lucide-react'
+import { MessageCircle, Globe } from 'lucide-react'
+
+const DISCORD_URL = 'https://discord.gg/fwZQX55VCF'
+const WIKI_URL = 'https://zlovisny.gitbook.io/wiki'
 
 const footerNav = [
   {
     title: 'Гра',
     links: [
       { href: '/features', label: 'Особливості' },
+      { href: '/classes', label: 'Класи' },
       { href: '/rules', label: 'Правила' },
       { href: '/vote', label: 'Голосувати' },
     ],
@@ -14,18 +18,13 @@ const footerNav = [
   {
     title: 'Спільнота',
     links: [
-      { href: '#', label: 'Discord' },
-      { href: '#', label: 'Форум' },
-      { href: '#', label: 'Вікі' },
+      { href: DISCORD_URL, label: 'Discord', external: true },
+      { href: WIKI_URL, label: 'Вікі', external: true },
     ],
   },
   {
     title: 'Магазин',
-    links: [
-      { href: '/store', label: 'Ранги' },
-      { href: '/store', label: 'Скрині' },
-      { href: '/store', label: 'Бустери' },
-    ],
+    links: [{ href: '/store', label: 'Прохідки' }],
   },
 ]
 
@@ -47,20 +46,29 @@ export function SiteFooter() {
             </span>
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            Найтемніший Minecraft сервер. Зануртеся у проклятий світ, де кожна
-            тінь приховує загрозу, а кожна перемога має свою ціну.
+            Зловісний — Minecraft всесвіт на далекій планеті. Зануртеся у світ,
+            де краса космосу межує зі стародавнім злом, а кожна перемога має
+            свою ціну.
           </p>
           <div className="mt-6 flex gap-3">
-            {[MessageCircle, Send, Globe].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-secondary text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
-                aria-label="Соцмережа"
-              >
-                <Icon className="h-5 w-5" />
-              </a>
-            ))}
+            <a
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shine flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-secondary text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+              aria-label="Discord"
+            >
+              <MessageCircle className="h-5 w-5" />
+            </a>
+            <a
+              href={WIKI_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shine flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-secondary text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+              aria-label="Вікі"
+            >
+              <Globe className="h-5 w-5" />
+            </a>
           </div>
         </div>
 
@@ -72,12 +80,23 @@ export function SiteFooter() {
             <ul className="mt-4 flex flex-col gap-3">
               {col.links.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    {link.label}
-                  </Link>
+                  {'external' in link && link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

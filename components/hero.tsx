@@ -99,14 +99,14 @@ export function Hero() {
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
           <button
             onClick={copyIp}
-            className="shine group flex items-center gap-3 rounded-md bg-primary px-8 py-4 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_40px_oklch(0.62_0.24_320_/_50%)] transition-all hover:scale-105 hover:shadow-[0_0_60px_oklch(0.62_0.24_320_/_70%)]"
+            className="btn-img shine group flex items-center gap-3 rounded-md bg-primary px-8 py-4 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_40px_oklch(0.62_0.24_320_/_50%)] transition-all hover:scale-105 hover:shadow-[0_0_60px_oklch(0.62_0.24_320_/_70%)]"
           >
             <span className="font-mono">{SERVER_IP}</span>
             {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
           </button>
           <Link
             href="/features"
-            className="shine rounded-md border border-border bg-secondary/50 px-8 py-4 text-base font-bold uppercase tracking-wide text-foreground backdrop-blur-sm transition-colors hover:border-accent/60 hover:text-accent"
+            className="btn-img shine rounded-md border border-border bg-secondary/50 px-8 py-4 text-base font-bold uppercase tracking-wide text-foreground backdrop-blur-sm transition-colors hover:border-accent/60 hover:text-accent"
           >
             Дослідити світ
           </Link>

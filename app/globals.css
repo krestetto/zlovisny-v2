@@ -251,6 +251,52 @@
     transform: scale(0.97);
   }
 
+  /* ============================================================
+     Universal button image layer.
+     Add the `btn-img` class to ANY button/link to drop a picture
+     UNDER its text. Replace the default image globally by swapping
+     /placeholder-button-bg.png, OR override a single button inline:
+        style={{ ['--btn-img' as any]: "url('/my-photo.png')" }}
+     ============================================================ */
+  .btn-img {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .btn-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1; /* sits behind the text/content */
+    background-image: var(--btn-img, url('/placeholder-button-bg.png'));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: var(--btn-img-opacity, 0.85);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .btn-img:hover::before {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  /* Header background image layer (replace /placeholder-header-bg.png) */
+  .header-img {
+    position: relative;
+    isolation: isolate;
+  }
+  .header-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: var(--header-img, url('/placeholder-header-bg.png'));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: var(--header-img-opacity, 0.5);
+  }
+
   /* ===== Custom framed panel (replace placeholder-border.png) ===== */
   .custom-frame {
     border: 30px solid transparent;

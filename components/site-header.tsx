@@ -149,7 +149,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
+      <header className="header-img sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-3">
           {/* Discord icon — top-left of the header */}
@@ -158,7 +158,7 @@ export function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Приєднатися до Discord"
-            className="shine inline-flex h-11 w-11 items-center justify-center rounded-md border border-primary/40 bg-primary/10 text-primary transition-all hover:scale-110 hover:bg-primary hover:text-primary-foreground"
+            className="btn-img shine inline-flex h-11 w-11 items-center justify-center rounded-md border border-primary/40 bg-primary/10 text-primary transition-all hover:scale-110 hover:bg-primary hover:text-primary-foreground"
           >
             <DiscordIcon className="h-5 w-5" />
           </a>
@@ -197,7 +197,7 @@ export function SiteHeader() {
         <div className="hidden items-center gap-3 lg:flex">
           <button
             onClick={copyIp}
-            className="shine group flex items-center gap-2 rounded-sm border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            className="btn-img shine group flex items-center gap-2 rounded-sm border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
           >
             <span className="font-mono">{SERVER_IP}</span>
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}

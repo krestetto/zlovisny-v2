@@ -61,6 +61,7 @@ export function FeatureSection({
         style={{
           backgroundImage: `url(${image})`,
           transform: `translateY(${offset}px) scale(1.15)`,
+          imageRendering: 'pixelated',
         }}
         aria-hidden="true"
       />

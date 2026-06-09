@@ -18,7 +18,7 @@ export function PageHeader({ eyebrow, title, description }: PageHeaderProps) {
       <div className="bg-stars absolute inset-0 opacity-50" aria-hidden="true" />
       <div
         className="absolute inset-0 bg-cover bg-center opacity-30"
-        style={{ backgroundImage: 'url(/hero-planet.png)' }}
+        style={{ backgroundImage: 'url(/bg-eyes.png)', imageRendering: 'pixelated' }}
         aria-hidden="true"
       />
       <div

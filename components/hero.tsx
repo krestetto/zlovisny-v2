@@ -38,20 +38,16 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      {/* Planet with parallax + float */}
+      {/* Cosmic landscape with parallax */}
       <div
-        className="absolute left-1/2 top-1/2 -z-0 h-[120vmin] w-[120vmin] -translate-x-1/2 -translate-y-1/2"
-        style={{ transform: `translate(-50%, calc(-50% + ${scrollY * 0.3}px)) scale(${1 + scrollY * 0.0004})` }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: 'url(/bg-landscape.png)',
+          transform: `translateY(${scrollY * 0.3}px) scale(${1.05 + scrollY * 0.0003})`,
+          imageRendering: 'pixelated',
+        }}
         aria-hidden="true"
-      >
-        <div
-          className="animate-float-slow h-full w-full bg-contain bg-center bg-no-repeat opacity-90"
-          style={{
-            backgroundImage: 'url(/hero-planet.png)',
-            filter: 'drop-shadow(0 0 120px oklch(0.62 0.24 320 / 45%))',
-          }}
-        />
-      </div>
+      />
 
       {/* Vignette / readability overlay */}
       <div

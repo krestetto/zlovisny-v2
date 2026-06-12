@@ -6,6 +6,7 @@ import { TextField, TextAreaField, SelectField } from '@/components/form-fields'
 
 const CATEGORIES = [
   'Проблема з донатом',
+  'Покращити прохідку',
   'Знайдено баг',
   'Скарга на гравця',
   'Інше',

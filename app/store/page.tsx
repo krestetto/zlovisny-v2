@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
+import Link from 'next/link'
 import { PageHeader } from '@/components/page-header'
 import { Crown, Check, ArrowUpCircle, Sparkles, Info } from 'lucide-react'
 
@@ -14,10 +15,12 @@ const ranks = [
     glow: '',
     btn: 'border border-border bg-secondary text-foreground hover:bg-secondary/70',
     base: true,
+    popular: true,
     img: '/rank-poslushnik.png',
     tagline: 'Перший крок у темряву.',
     detail:
       'Базовий ранг для тих, хто щойно ступив на планету. Дає зручності новачку та виділяє вас у чаті.',
+    gallery: ['/feature-quests.png', '/feature-builds.png', '/section-world.png'],
     perks: [
       'Префікс [Послушник]',
       '2 додаткові домівки',
@@ -37,6 +40,7 @@ const ranks = [
     tagline: 'Уклади угоду заради сили.',
     detail:
       'Розширює можливості гри: політ у спавні, особистий фамільяр і щоденні нагороди. Найкраще співвідношення ціни та переваг.',
+    gallery: ['/feature-loot.png', '/section-loot.png', '/class-spirit.png'],
     perks: [
       'Усе з рангу Послушник',
       '5 додаткових домівок',
@@ -58,6 +62,7 @@ const ranks = [
     tagline: 'Володар прокляту планети.',
     detail:
       'Найвищий рівень сили: безліміт домівок, власна приватна територія та пріоритетний вхід навіть на повний сервер.',
+    gallery: ['/feature-bosses.png', '/section-boss.png', '/class-dragon.png'],
     perks: [
       'Усе з рангу Пакт',
       'Необмежені домівки',
@@ -126,75 +131,125 @@ export default function StorePage() {
 
           <div className="grid gap-8 pt-4 lg:grid-cols-3">
             {ranks.map((rank) => (
-              <div
-                key={rank.name}
-                className={`group art-frame relative flex flex-col overflow-hidden rounded-md border bg-card p-8 transition-all duration-300 hover:z-10 hover:-translate-y-2 hover:scale-105 ${rank.color} ${rank.glow} ${
-                  rank.featured ? 'shadow-[0_0_40px_oklch(0.62_0.24_320_/_25%)]' : ''
-                }`}
-              >
-                {/* Rank artwork — brightens & zooms on hover */}
-                <div className="pointer-events-none absolute inset-0">
-                  <img
-                    src={rank.img || '/placeholder.svg'}
-                    alt=""
-                    aria-hidden="true"
-                    className="h-full w-full object-cover opacity-10 transition-all duration-500 group-hover:scale-110 group-hover:opacity-25"
-                    style={{ imageRendering: 'pixelated' }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/85 to-card/60" />
-                </div>
-
-                {rank.featured && (
-                  <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground">
-                    Популярний
-                  </span>
-                )}
-
-                <div className="relative flex flex-1 flex-col">
-                  <Crown className={`h-8 w-8 ${rank.accent}`} />
-                  <h3 className="mt-4 font-heading text-2xl font-bold uppercase tracking-wide text-foreground">
-                    {rank.name}
-                  </h3>
-                  <p className={`mt-1 text-sm font-medium ${rank.accent}`}>{rank.tagline}</p>
-                  <div className="mt-4 flex items-end gap-1">
-                    <span className={`font-heading text-4xl font-black ${rank.accent}`}>
-                      {billing === 'month' ? rank.priceMonth : rank.priceOne}
-                    </span>
-                    <span className="mb-1 text-sm text-muted-foreground">
-                      {billing === 'month' ? '/міс' : ' разово'}
-                    </span>
-                  </div>
-
-                  {/* Extra info revealed on hover */}
-                  <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 group-hover:mt-4 group-hover:grid-rows-[1fr] group-hover:opacity-100">
-                    <p className="overflow-hidden rounded-sm border border-border/60 bg-secondary/40 p-3 text-sm leading-relaxed text-muted-foreground">
+              <div key={rank.name} className="group relative">
+                {/* Left side panel — descriptive text, slides out on hover */}
+                <div className="pointer-events-none absolute right-full top-1/2 z-20 hidden w-64 -translate-y-1/2 translate-x-4 pr-4 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 xl:block">
+                  <div className="art-frame rounded-md border border-border/70 bg-card/95 p-4 shadow-[0_0_40px_oklch(0_0_0_/_55%)] backdrop-blur-sm">
+                    <h4 className="font-heading text-sm font-bold uppercase tracking-wide text-foreground">
+                      {rank.name}
+                    </h4>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {rank.detail}
                     </p>
                   </div>
+                </div>
 
-                  <ul className="mt-6 flex flex-1 flex-col gap-3">
-                    {rank.perks.map((perk) => (
-                      <li key={perk} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <Check className={`mt-0.5 h-4 w-4 shrink-0 ${rank.accent}`} />
-                        <span>{perk}</span>
-                      </li>
+                {/* Right side panel — gallery photos, slides out on hover */}
+                <div className="pointer-events-none absolute left-full top-1/2 z-20 hidden w-44 -translate-y-1/2 -translate-x-4 pl-4 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 xl:block">
+                  <div className="flex flex-col gap-3">
+                    {rank.gallery.map((src, i) => (
+                      <div
+                        key={src}
+                        className="art-frame overflow-hidden rounded-md border border-border/70 shadow-[0_0_30px_oklch(0_0_0_/_50%)]"
+                        style={{ transitionDelay: `${i * 80}ms` }}
+                      >
+                        <img
+                          src={src || '/placeholder.svg'}
+                          alt={`${rank.name} — ілюстрація ${i + 1}`}
+                          className="h-24 w-full object-cover"
+                          style={{ imageRendering: 'pixelated' }}
+                        />
+                      </div>
                     ))}
-                  </ul>
-                  <button
-                    className={`shine mt-8 min-h-[44px] rounded-sm px-6 text-sm font-bold uppercase tracking-wide transition-all ${rank.btn}`}
-                  >
-                    Придбати
-                  </button>
-                  {/* Prominent glowing upgrade button inside Пакт & Адепт */}
-                  {!rank.base && (
-                    <button
-                      onClick={scrollToUpgrade}
-                      className="shine mt-3 flex min-h-[44px] items-center justify-center gap-2 rounded-sm border border-primary bg-primary/15 px-6 text-sm font-bold uppercase tracking-wide text-primary shadow-[0_0_22px_oklch(0.62_0.24_320_/_45%)] transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_40px_oklch(0.62_0.24_320_/_70%)]"
-                    >
-                      <ArrowUpCircle className="h-4 w-4" />
-                      Покращити прохідку
-                    </button>
+                  </div>
+                </div>
+
+                <div
+                  className={`art-frame relative flex h-full flex-col overflow-hidden rounded-md border bg-card p-8 transition-all duration-300 group-hover:z-10 group-hover:-translate-y-2 group-hover:scale-105 ${rank.color} ${rank.glow} ${
+                    rank.featured ? 'shadow-[0_0_40px_oklch(0.62_0.24_320_/_25%)]' : ''
+                  }`}
+                >
+                  {/* Rank artwork — brightens & zooms on hover */}
+                  <div className="pointer-events-none absolute inset-0">
+                    <img
+                      src={rank.img || '/placeholder.svg'}
+                      alt=""
+                      aria-hidden="true"
+                      className="h-full w-full object-cover opacity-10 transition-all duration-500 group-hover:scale-110 group-hover:opacity-25"
+                      style={{ imageRendering: 'pixelated' }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/85 to-card/60" />
+                  </div>
+
+                  {rank.popular && (
+                    <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground">
+                      Популярний
+                    </span>
                   )}
+
+                  <div className="relative flex flex-1 flex-col">
+                    <Crown className={`h-8 w-8 ${rank.accent}`} />
+                    <h3 className="mt-4 font-heading text-2xl font-bold uppercase tracking-wide text-foreground">
+                      {rank.name}
+                    </h3>
+                    <p className={`mt-1 text-sm font-medium ${rank.accent}`}>{rank.tagline}</p>
+                    <div className="mt-4 flex items-end gap-1">
+                      <span className={`font-heading text-4xl font-black ${rank.accent}`}>
+                        {billing === 'month' ? rank.priceMonth : rank.priceOne}
+                      </span>
+                      <span className="mb-1 text-sm text-muted-foreground">
+                        {billing === 'month' ? '/міс' : ' разово'}
+                      </span>
+                    </div>
+
+                    {/* Extra info revealed on hover (mobile / smaller screens) */}
+                    <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 group-hover:mt-4 group-hover:grid-rows-[1fr] group-hover:opacity-100 xl:hidden">
+                      <p className="overflow-hidden rounded-sm border border-border/60 bg-secondary/40 p-3 text-sm leading-relaxed text-muted-foreground">
+                        {rank.detail}
+                      </p>
+                    </div>
+
+                    {/* Gallery for smaller screens (no room for side panels) */}
+                    <div className="grid grid-cols-3 gap-2 opacity-0 transition-all duration-500 group-hover:mt-4 group-hover:opacity-100 xl:hidden">
+                      {rank.gallery.map((src, i) => (
+                        <div
+                          key={src}
+                          className="overflow-hidden rounded-sm border border-border/60"
+                        >
+                          <img
+                            src={src || '/placeholder.svg'}
+                            alt={`${rank.name} — ілюстрація ${i + 1}`}
+                            className="h-16 w-full object-cover"
+                            style={{ imageRendering: 'pixelated' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                    <ul className="mt-6 flex flex-1 flex-col gap-3">
+                      {rank.perks.map((perk) => (
+                        <li key={perk} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <Check className={`mt-0.5 h-4 w-4 shrink-0 ${rank.accent}`} />
+                          <span>{perk}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <button
+                      className={`shine mt-8 min-h-[44px] rounded-sm px-6 text-sm font-bold uppercase tracking-wide transition-all ${rank.btn}`}
+                    >
+                      Придбати
+                    </button>
+                    {/* Prominent glowing upgrade button inside Пакт & Адепт */}
+                    {!rank.base && (
+                      <button
+                        onClick={scrollToUpgrade}
+                        className="shine mt-3 flex min-h-[44px] items-center justify-center gap-2 rounded-sm border border-primary bg-primary/15 px-6 text-sm font-bold uppercase tracking-wide text-primary shadow-[0_0_22px_oklch(0.62_0.24_320_/_45%)] transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_40px_oklch(0.62_0.24_320_/_70%)]"
+                      >
+                        <ArrowUpCircle className="h-4 w-4" />
+                        Покращити прохідку
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
@@ -203,7 +258,7 @@ export default function StorePage() {
           {/* Big prominent upgrade banner — target of "Покращити прохідку" */}
           <div
             ref={upgradeRef}
-            className={`art-frame mt-14 scroll-mt-28 overflow-hidden rounded-lg border bg-gradient-to-r from-primary/15 via-card to-accent/15 p-8 transition-all duration-500 ${
+            className={`group art-frame mt-14 scroll-mt-28 overflow-hidden rounded-lg border bg-gradient-to-r from-primary/15 via-card to-accent/15 p-8 transition-all duration-500 ${
               highlight
                 ? 'border-primary shadow-[0_0_80px_oklch(0.62_0.24_320_/_70%)] ring-2 ring-primary scale-[1.02]'
                 : 'border-primary/60 shadow-[0_0_50px_oklch(0.62_0.24_320_/_30%)]'
@@ -219,9 +274,16 @@ export default function StorePage() {
                   Уже маєте прохідку?
                 </h3>
                 <p className="mt-2 text-pretty leading-relaxed text-muted-foreground">
-                  Не платіть повну ціну! Доплатіть лише різницю між вашим поточним
-                  рангом і новим — і миттєво підніміться на вищий рівень сили. Ось
-                  чому покращення вигідніше:
+                  Не платіть повну ціну! Щоб покращити прохідку, напишіть у{' '}
+                  <Link
+                    href="/support"
+                    className="font-semibold text-primary underline-offset-2 hover:underline"
+                  >
+                    підтримку
+                  </Link>{' '}
+                  та доплатіть лише різницю між вашим поточним рангом і новим — і
+                  миттєво підніміться на вищий рівень сили. Ось чому покращення
+                  вигідніше:
                 </p>
 
                 {/* Clear explanation of how & why to upgrade */}
@@ -240,23 +302,42 @@ export default function StorePage() {
                 <p className="mt-4 flex items-start gap-2 text-sm text-muted-foreground">
                   <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                   <span>
-                    Як покращити: оберіть бажаний ранг вище, напишіть у{' '}
-                    <a
-                      href="https://discord.gg/fwZQX55VCF"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    Як покращити: оберіть бажаний ранг вище, перейдіть у{' '}
+                    <Link
+                      href="/support"
                       className="font-semibold text-primary underline-offset-2 hover:underline"
                     >
-                      Discord
-                    </a>{' '}
-                    свій нік і поточний ранг — і ми перерахуємо доплату лише за
-                    різницю.
+                      підтримку
+                    </Link>{' '}
+                    та оберіть пункт «Покращити прохідку», вкажіть свій нік і
+                    поточний ранг — і ми перерахуємо доплату лише за різницю.
                   </span>
                 </p>
+
+                {/* 3 photos that appear after hovering the block */}
+                <div className="mt-6 grid grid-cols-3 gap-3 opacity-0 transition-all duration-500 group-hover:opacity-100">
+                  {['/rank-poslushnik.png', '/rank-pakt.png', '/rank-adept.png'].map((src, i) => (
+                    <div
+                      key={src}
+                      className="art-frame overflow-hidden rounded-md border border-primary/40 shadow-[0_0_24px_oklch(0.62_0.24_320_/_30%)]"
+                      style={{ transitionDelay: `${i * 100}ms` }}
+                    >
+                      <img
+                        src={src || '/placeholder.svg'}
+                        alt={`Ілюстрація рангу ${i + 1}`}
+                        className="h-28 w-full object-cover"
+                        style={{ imageRendering: 'pixelated' }}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-              <button className="shine min-h-[52px] shrink-0 rounded-md bg-primary px-8 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_30px_oklch(0.62_0.24_320_/_55%)] transition-all hover:scale-105 hover:shadow-[0_0_50px_oklch(0.62_0.24_320_/_75%)]">
-                Покращити зараз
-              </button>
+              <Link
+                href="/support"
+                className="shine flex min-h-[52px] shrink-0 items-center justify-center rounded-md bg-primary px-8 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_30px_oklch(0.62_0.24_320_/_55%)] transition-all hover:scale-105 hover:shadow-[0_0_50px_oklch(0.62_0.24_320_/_75%)]"
+              >
+                Покращити прохідку
+              </Link>
             </div>
           </div>
         </div>

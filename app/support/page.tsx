@@ -1,6 +1,6 @@
 import { PageHeader } from '@/components/page-header'
 import { SupportForm } from '@/components/support-form'
-import { CreditCard, Bug, UserX, HelpCircle } from 'lucide-react'
+import { CreditCard, Bug, UserX, HelpCircle, ArrowUpCircle } from 'lucide-react'
 
 export const metadata = {
   title: 'Підтримка — Зловісний',
@@ -10,6 +10,7 @@ export const metadata = {
 
 const categories = [
   { icon: CreditCard, title: 'Проблема з донатом', desc: 'Не зарахувалась покупка чи привілей.' },
+  { icon: ArrowUpCircle, title: 'Покращити прохідку', desc: 'Доплатіть різницю та підніміть ранг.' },
   { icon: Bug, title: 'Знайдено баг', desc: 'Повідомте про помилку у грі.' },
   { icon: UserX, title: 'Скарга на гравця', desc: 'Порушення правил іншими.' },
   { icon: HelpCircle, title: 'Інше', desc: 'Будь-яке інше питання.' },
@@ -25,7 +26,7 @@ export default function SupportPage() {
       />
 
       <section className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6">
-        <div className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {categories.map((cat) => {
             const Icon = cat.icon
             return (

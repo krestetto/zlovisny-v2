@@ -86,8 +86,18 @@ export function Hero() {
           style={{ imageRendering: 'pixelated' }}
         />
 
-        <h1 className="font-heading text-6xl font-black uppercase leading-[0.9] tracking-tight text-balance sm:text-8xl lg:text-9xl">
-          <span className="text-glow-violet text-foreground">Зловісний</span>
+        <h1 className="w-full">
+          <span className="sr-only">Зловісний</span>
+          <img
+            src="/wordmark.png"
+            alt="Зловісний"
+            width={2048}
+            height={420}
+            loading="eager"
+            fetchPriority="high"
+            className="mx-auto w-full max-w-3xl object-contain drop-shadow-[0_0_50px_oklch(0.55_0.22_300_/_45%)]"
+            style={{ imageRendering: 'pixelated' }}
+          />
         </h1>
         <p className="mt-3 font-heading text-lg uppercase tracking-[0.35em] text-accent sm:text-2xl">
           Майнкрафт всесвіт

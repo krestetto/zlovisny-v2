@@ -30,6 +30,8 @@ const navItems: NavItem[] = [
     children: [
       { href: '/rules', label: 'Правила' },
       { href: '/vote', label: 'Голосувати' },
+      { href: '/recruitment', label: 'Набір в команду' },
+      { href: '/support', label: 'Підтримка' },
       { href: DISCORD_URL, label: 'Discord', external: true },
     ],
   },

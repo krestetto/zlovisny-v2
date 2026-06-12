@@ -151,7 +151,10 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="header-img sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
+      <header
+        className="header-img sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md"
+        style={{ ['--header-img' as string]: "url('/header-bg-cosmic.png')", ['--header-img-opacity' as string]: '0.6' }}
+      >
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-3">
           {/* Discord icon — top-left of the header */}

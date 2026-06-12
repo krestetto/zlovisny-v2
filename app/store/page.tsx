@@ -129,34 +129,38 @@ export default function StorePage() {
             </div>
           </div>
 
-          <div className="grid gap-8 pt-4 lg:grid-cols-3">
+          <div className="mx-auto grid max-w-4xl gap-8 pt-4 lg:grid-cols-3">
             {ranks.map((rank) => (
               <div key={rank.name} className="group relative">
+                {/* Page-darkening overlay — dims everything around the hovered block */}
+                <div className="pointer-events-none fixed inset-0 z-30 bg-background/85 opacity-0 backdrop-blur-[2px] transition-opacity duration-500 group-hover:opacity-100" />
+
                 {/* Left side panel — descriptive text, slides out on hover */}
-                <div className="pointer-events-none absolute right-full top-1/2 z-20 hidden w-64 -translate-y-1/2 translate-x-4 pr-4 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 xl:block">
-                  <div className="art-frame rounded-md border border-border/70 bg-card/95 p-4 shadow-[0_0_40px_oklch(0_0_0_/_55%)] backdrop-blur-sm">
-                    <h4 className="font-heading text-sm font-bold uppercase tracking-wide text-foreground">
+                <div className="pointer-events-none absolute right-full top-1/2 z-40 hidden w-56 -translate-y-1/2 translate-x-4 pr-4 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 2xl:block">
+                  <div className="art-frame rounded-md border border-primary/40 bg-card p-5 shadow-[0_0_50px_oklch(0_0_0_/_65%)]">
+                    <h4 className={`font-heading text-base font-bold uppercase tracking-wide ${rank.accent}`}>
                       {rank.name}
                     </h4>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    <p className="mt-1 text-xs font-medium text-accent">{rank.tagline}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                       {rank.detail}
                     </p>
                   </div>
                 </div>
 
-                {/* Right side panel — gallery photos, slides out on hover */}
-                <div className="pointer-events-none absolute left-full top-1/2 z-20 hidden w-44 -translate-y-1/2 -translate-x-4 pl-4 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 xl:block">
-                  <div className="flex flex-col gap-3">
+                {/* Right side panel — gallery photos on a block-style background, slides out on hover */}
+                <div className="pointer-events-none absolute left-full top-1/2 z-40 hidden w-48 -translate-y-1/2 -translate-x-4 pl-4 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 2xl:block">
+                  <div className="art-frame flex flex-col gap-3 rounded-md border border-primary/40 bg-card p-3 shadow-[0_0_50px_oklch(0_0_0_/_65%)]">
                     {rank.gallery.map((src, i) => (
                       <div
                         key={src}
-                        className="art-frame overflow-hidden rounded-md border border-border/70 shadow-[0_0_30px_oklch(0_0_0_/_50%)]"
+                        className="overflow-hidden rounded-sm border border-border/70 bg-secondary"
                         style={{ transitionDelay: `${i * 80}ms` }}
                       >
                         <img
                           src={src || '/placeholder.svg'}
                           alt={`${rank.name} — ілюстрація ${i + 1}`}
-                          className="h-24 w-full object-cover"
+                          className="h-32 w-full object-cover"
                           style={{ imageRendering: 'pixelated' }}
                         />
                       </div>
@@ -165,7 +169,7 @@ export default function StorePage() {
                 </div>
 
                 <div
-                  className={`art-frame relative flex h-full flex-col overflow-hidden rounded-md border bg-card p-8 transition-all duration-300 group-hover:z-10 group-hover:-translate-y-2 group-hover:scale-105 ${rank.color} ${rank.glow} ${
+                  className={`art-frame relative flex h-full flex-col overflow-hidden rounded-md border bg-card p-8 transition-all duration-300 group-hover:z-40 group-hover:-translate-y-2 group-hover:scale-105 ${rank.color} ${rank.glow} ${
                     rank.featured ? 'shadow-[0_0_40px_oklch(0.62_0.24_320_/_25%)]' : ''
                   }`}
                 >
@@ -203,23 +207,23 @@ export default function StorePage() {
                     </div>
 
                     {/* Extra info revealed on hover (mobile / smaller screens) */}
-                    <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 group-hover:mt-4 group-hover:grid-rows-[1fr] group-hover:opacity-100 xl:hidden">
+                    <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 group-hover:mt-4 group-hover:grid-rows-[1fr] group-hover:opacity-100 2xl:hidden">
                       <p className="overflow-hidden rounded-sm border border-border/60 bg-secondary/40 p-3 text-sm leading-relaxed text-muted-foreground">
                         {rank.detail}
                       </p>
                     </div>
 
                     {/* Gallery for smaller screens (no room for side panels) */}
-                    <div className="grid grid-cols-3 gap-2 opacity-0 transition-all duration-500 group-hover:mt-4 group-hover:opacity-100 xl:hidden">
+                    <div className="grid grid-cols-3 gap-2 opacity-0 transition-all duration-500 group-hover:mt-4 group-hover:opacity-100 2xl:hidden">
                       {rank.gallery.map((src, i) => (
                         <div
                           key={src}
-                          className="overflow-hidden rounded-sm border border-border/60"
+                          className="overflow-hidden rounded-sm border border-border/60 bg-secondary"
                         >
                           <img
                             src={src || '/placeholder.svg'}
                             alt={`${rank.name} — ілюстрація ${i + 1}`}
-                            className="h-16 w-full object-cover"
+                            className="h-20 w-full object-cover"
                             style={{ imageRendering: 'pixelated' }}
                           />
                         </div>

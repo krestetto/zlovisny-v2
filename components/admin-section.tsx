@@ -5,27 +5,42 @@ const admins = [
     name: 'Морок',
     role: 'Засновник',
     bio: 'Творець всесвіту Зловісний. Керує розвитком сервера та архітектурою світу.',
+    img: '/admin-1.png',
+    imgHover: '/admin-1-alt.png',
   },
   {
     name: 'Вісниця',
     role: 'Головний адміністратор',
     bio: 'Стежить за порядком, балансом та справедливістю на просторах планети.',
+    img: '/admin-2.png',
+    imgHover: '/admin-2-alt.png',
   },
   {
     name: 'Тінь',
     role: 'Розробник',
     bio: 'Створює унікальні механіки, плагіни та класи, якими живе сервер.',
+    img: '/admin-3.png',
+    imgHover: '/admin-3-alt.png',
   },
   {
     name: 'Сяйво',
     role: 'Хелпер',
     bio: 'Завжди готовий допомогти новачкам зробити перші кроки у темряві.',
+    img: '/admin-4.png',
+    imgHover: '/admin-4-alt.png',
   },
 ]
 
 export function AdminSection() {
   return (
     <section className="relative overflow-hidden border-t border-border">
+      {/* Replaceable background photo — swap /home-section-bg.png for your own */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: 'url(/home-section-bg.png)' }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 bg-background/85" aria-hidden="true" />
       <div className="bg-grain absolute inset-0 opacity-30" aria-hidden="true" />
       <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
@@ -47,11 +62,19 @@ export function AdminSection() {
               key={admin.name}
               className="group art-frame relative aspect-[3/4] overflow-hidden rounded-md border border-border bg-card"
             >
-              {/* Placeholder portrait */}
+              {/* Default portrait */}
               <img
-                src="/admin-avatar.png"
+                src={admin.img || "/placeholder.svg"}
                 alt={`Аватар — ${admin.name}`}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:opacity-0"
+                style={{ imageRendering: 'pixelated' }}
+              />
+              {/* Hover portrait — fades in on hover */}
+              <img
+                src={admin.imgHover || "/placeholder.svg"}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full scale-110 object-cover opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100"
                 style={{ imageRendering: 'pixelated' }}
               />
               {/* Permanent darkening so the hidden content reads on hover */}

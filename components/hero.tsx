@@ -80,6 +80,8 @@ export function Hero() {
           alt="Логотип сервера Зловісний"
           width={180}
           height={180}
+          loading="eager"
+          fetchPriority="high"
           className="animate-float-slow mb-6 h-36 w-36 object-contain drop-shadow-[0_0_50px_oklch(0.6_0.22_18_/_55%)] sm:h-44 sm:w-44"
           style={{ imageRendering: 'pixelated' }}
         />

@@ -32,6 +32,17 @@ export function JoinSection() {
 
   return (
     <section className="relative overflow-hidden">
+      {/* Replaceable background photo — swap /home-section-bg.png for your own */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: 'url(/home-section-bg.png)' }}
+        aria-hidden="true"
+      />
+      {/* Readability overlay over the photo */}
+      <div
+        className="absolute inset-0 bg-background/85"
+        aria-hidden="true"
+      />
       <div className="bg-grain absolute inset-0 opacity-30" aria-hidden="true" />
       <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">

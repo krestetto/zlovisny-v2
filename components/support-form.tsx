@@ -22,7 +22,7 @@ export function SupportForm() {
   function validate(data: Record<string, string>): Errors {
     const e: Errors = {}
     if (!data.nickname?.trim()) e.nickname = 'Вкажіть ігровий нікнейм.'
-    if (!data.discord?.trim()) e.discord = 'Вкажіть Discord tag для зв&apos;язку.'
+    if (!data.discord?.trim()) e.discord = "Вкажіть Discord tag для зв'язку."
     if (!data.category) e.category = 'Оберіть категорію проблеми.'
     if (!data.description?.trim()) e.description = 'Опишіть суть проблеми.'
     return e

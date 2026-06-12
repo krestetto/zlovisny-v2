@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server'
+import {
+  checkCooldown,
+  setCooldown,
+  getClientIp,
+  formatRemaining,
+} from '@/lib/cooldown'
 
 export const runtime = 'nodejs'
+
+const FORM = 'recruitment'
 
 const POSITIONS = ['Дизайнер', 'Тех Розробник', 'Модератор', 'Хелпер'] as const
 
@@ -61,6 +69,24 @@ export async function POST(request: Request) {
     )
   }
 
+  // Server-side 10h cooldown (IP + Discord tag) — cannot be bypassed client-side.
+  const ip = getClientIp(request)
+  try {
+    const cd = await checkCooldown(FORM, ip, discord)
+    if (cd.limited) {
+      return NextResponse.json(
+        {
+          error: `Ви вже подавали заявку нещодавно. Спробуйте знову через ${formatRemaining(cd.retryAfterSeconds)}.`,
+          retryAfterSeconds: cd.retryAfterSeconds,
+        },
+        { status: 429 },
+      )
+    }
+  } catch {
+    // If Redis is unreachable, fail closed-ish: allow the request but log.
+    console.log('[v0] cooldown check failed for recruitment')
+  }
+
   const embed = {
     title: '📥 Нова заявка в команду',
     description: `Кандидат подав заявку на посаду **${position}**.`,
@@ -101,6 +127,13 @@ export async function POST(request: Request) {
       { error: "Не вдалося зв'язатися з Discord." },
       { status: 502 },
     )
+  }
+
+  // Submission succeeded — start the cooldown.
+  try {
+    await setCooldown(FORM, ip, discord)
+  } catch {
+    console.log('[v0] failed to set recruitment cooldown')
   }
 
   return NextResponse.json({ ok: true })

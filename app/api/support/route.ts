@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server'
+import {
+  checkCooldown,
+  setCooldown,
+  getClientIp,
+  formatRemaining,
+} from '@/lib/cooldown'
 
 export const runtime = 'nodejs'
+
+const FORM = 'support'
 
 const CATEGORIES = [
   'Проблема з донатом',
@@ -59,6 +67,23 @@ export async function POST(request: Request) {
     )
   }
 
+  // Server-side 10h cooldown (IP + Discord tag) — cannot be bypassed client-side.
+  const ip = getClientIp(request)
+  try {
+    const cd = await checkCooldown(FORM, ip, discord)
+    if (cd.limited) {
+      return NextResponse.json(
+        {
+          error: `Ви вже створювали тікет нещодавно. Спробуйте знову через ${formatRemaining(cd.retryAfterSeconds)}.`,
+          retryAfterSeconds: cd.retryAfterSeconds,
+        },
+        { status: 429 },
+      )
+    }
+  } catch {
+    console.log('[v0] cooldown check failed for support')
+  }
+
   const embed = {
     title: '🎫 Новий тікет підтримки',
     description: `🚨 Категорія: **${category}**`,
@@ -97,6 +122,13 @@ export async function POST(request: Request) {
       { error: "Не вдалося зв'язатися з Discord." },
       { status: 502 },
     )
+  }
+
+  // Submission succeeded — start the cooldown.
+  try {
+    await setCooldown(FORM, ip, discord)
+  } catch {
+    console.log('[v0] failed to set support cooldown')
   }
 
   return NextResponse.json({ ok: true })

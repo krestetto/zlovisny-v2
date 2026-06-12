@@ -31,11 +31,11 @@ const footerNav = [
 export function SiteFooter() {
   return (
     <footer
-      className="group relative w-full overflow-hidden border-t border-border bg-background"
+      className="group fixed inset-x-0 bottom-0 z-40 w-full overflow-hidden border-t border-border bg-background"
       aria-label="Підвал сайту"
     >
-      {/* Collapsed peek + expand on hover */}
-      <div className="relative h-[140px] transition-[height] duration-700 ease-in-out group-hover:h-[620px] sm:h-[150px] sm:group-hover:h-[560px]">
+      {/* Collapsed peek + expand upward on hover (anchored to bottom of viewport) */}
+      <div className="relative h-[70px] transition-[height] duration-700 ease-in-out group-hover:h-[620px] sm:h-[75px] sm:group-hover:h-[560px]">
         {/* Full-width image frame anchored to the bottom */}
         <div className="absolute inset-x-0 bottom-0 top-0">
           <Image
@@ -52,7 +52,7 @@ export function SiteFooter() {
         </div>
 
         {/* Hint shown only while collapsed */}
-        <div className="absolute inset-x-0 top-0 flex h-[140px] flex-col items-center justify-center gap-1 text-center transition-opacity duration-300 group-hover:pointer-events-none group-hover:opacity-0 sm:h-[150px]">
+        <div className="absolute inset-x-0 top-0 flex h-[70px] flex-col items-center justify-center gap-1 text-center transition-opacity duration-300 group-hover:pointer-events-none group-hover:opacity-0 sm:h-[75px]">
           <ChevronUp className="h-5 w-5 animate-pulse text-primary" aria-hidden="true" />
           <span className="font-heading text-xs font-bold uppercase tracking-[0.3em] text-foreground/80">
             Наведіть, щоб відкрити

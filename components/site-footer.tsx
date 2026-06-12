@@ -22,6 +22,8 @@ const footerNav = [
   {
     title: 'Спільнота',
     links: [
+      { href: '/recruitment', label: 'Набір в команду' },
+      { href: '/support', label: 'Підтримка' },
       { href: DISCORD_URL, label: 'Discord', external: true },
       { href: WIKI_URL, label: 'Вікі', external: true },
     ],

@@ -376,21 +376,33 @@
     justify-content: center;
     /* Fully opaque pure-dark screen so nothing (incl. crimson page glow)
        shows through behind the eyes. */
-    background: oklch(0.03 0 0);
+    background: radial-gradient(
+      circle at center,
+      oklch(0.08 0.03 350 / 92%) 0%,
+      oklch(0.03 0 0) 65%
+    );
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.1s ease;
+    /* Real fade: ease in over ~0.55s, ease out a touch faster. */
+    transition: opacity 0.45s ease-in-out, backdrop-filter 0.45s ease-in-out;
+    backdrop-filter: blur(0px) brightness(1);
   }
   .page-fade.is-active {
     opacity: 1;
     pointer-events: all;
+    /* Gradually blur + dim what's behind for a true "darkening" feel. */
+    backdrop-filter: blur(6px) brightness(0.35);
+    transition: opacity 0.55s ease-in-out, backdrop-filter 0.55s ease-in-out;
   }
   @keyframes eye-fade-in {
-    from {
+    0% {
       opacity: 0;
-      transform: scale(0.96);
+      transform: scale(0.92);
     }
-    to {
+    60% {
+      opacity: 0.85;
+    }
+    100% {
       opacity: 0.85;
       transform: scale(1);
     }
@@ -409,6 +421,6 @@
     opacity: 0;
   }
   .page-fade.is-active .eyes-faint {
-    animation: eye-fade-in 0.1s ease-out forwards;
+    animation: eye-fade-in 0.6s ease-out forwards;
   }
 }

@@ -92,7 +92,7 @@ export function PageTransition() {
       const t = setTimeout(() => {
         setActive(false)
         pendingHref.current = null
-      }, 150)
+      }, 450)
       return () => clearTimeout(t)
     }
   }, [pathname])
@@ -127,10 +127,10 @@ export function PageTransition() {
       setActive(true)
       playEerie()
 
-      // Hold the dark "eyes" screen briefly before navigating.
+      // Hold the dark "eyes" screen briefly so the fade is visible before navigating.
       window.setTimeout(() => {
         router.push(href)
-      }, 100)
+      }, 550)
     }
 
     // `true` = capture phase, so we intercept before React/Next Link handlers.

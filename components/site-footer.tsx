@@ -1,9 +1,13 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
-import { MessageCircle, Globe, ChevronUp } from 'lucide-react'
+import { useState } from 'react'
+import { MessageCircle, Globe, ChevronUp, Copy, Check } from 'lucide-react'
 
 const DISCORD_URL = 'https://discord.gg/fwZQX55VCF'
 const WIKI_URL = 'https://zlovisny.gitbook.io/wiki'
+const SERVER_IP = 'play.zlovisny.net'
 
 const footerNav = [
   {
@@ -29,13 +33,25 @@ const footerNav = [
 ]
 
 export function SiteFooter() {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(SERVER_IP)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      /* clipboard unavailable — ignore */
+    }
+  }
+
   return (
     <footer
       className="group fixed inset-x-0 bottom-0 z-40 w-full overflow-hidden border-t border-border bg-background"
       aria-label="Підвал сайту"
     >
       {/* Collapsed peek + expand upward on hover (anchored to bottom of viewport) */}
-      <div className="relative h-[70px] transition-[height] duration-700 ease-in-out group-hover:h-[620px] sm:h-[75px] sm:group-hover:h-[560px]">
+      <div className="relative h-[70px] transition-[height] duration-700 ease-in-out group-hover:h-[330px] sm:h-[75px] sm:group-hover:h-[300px]">
         {/* Full-width image frame anchored to the bottom */}
         <div className="absolute inset-x-0 bottom-0 top-0">
           <Image
@@ -61,81 +77,104 @@ export function SiteFooter() {
 
         {/* Footer content revealed on hover */}
         <div className="pointer-events-none absolute inset-0 flex flex-col justify-end opacity-0 transition-opacity duration-500 delay-100 group-hover:pointer-events-auto group-hover:opacity-100">
-          <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 pb-8 pt-10 sm:px-6 md:grid-cols-2 lg:grid-cols-5">
-            <div className="lg:col-span-2">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-4 pb-4 pt-6 sm:px-6 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
+            {/* Brand + interactive server IP */}
+            <div className="max-w-sm">
               <Link href="/" className="flex items-center gap-3">
                 <Image
                   src="/logo.png"
                   alt="Логотип Зловісний"
-                  width={44}
-                  height={44}
-                  className="h-11 w-11 object-contain"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 object-contain"
                 />
-                <span className="font-heading text-xl font-bold uppercase tracking-widest text-foreground">
+                <span className="font-heading text-lg font-bold uppercase tracking-widest text-foreground">
                   Зловісний
                 </span>
               </Link>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                Зловісний — Minecraft всесвіт на далекій планеті. Зануртеся у
-                світ, де краса космосу межує зі стародавнім злом, а кожна
-                перемога має свою ціну.
-              </p>
-              <div className="mt-6 flex gap-3">
+
+              {/* Interactive: live status + copy server IP */}
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <span className="inline-flex items-center gap-2 rounded-sm border border-border bg-secondary/70 px-3 py-2 text-xs text-foreground backdrop-blur-sm">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                  </span>
+                  Онлайн
+                </span>
+
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="shine group/ip inline-flex items-center gap-2 rounded-sm border border-border bg-secondary/70 px-3 py-2 font-mono text-xs text-foreground backdrop-blur-sm transition-colors hover:border-primary/60 hover:text-primary"
+                  aria-label={`Копіювати IP сервера: ${SERVER_IP}`}
+                >
+                  {copied ? (
+                    <Check className="h-4 w-4 text-emerald-400" aria-hidden="true" />
+                  ) : (
+                    <Copy className="h-4 w-4" aria-hidden="true" />
+                  )}
+                  {copied ? 'Скопійовано!' : SERVER_IP}
+                </button>
+
                 <a
                   href={DISCORD_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shine flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-secondary/80 text-muted-foreground backdrop-blur-sm transition-colors hover:border-primary/50 hover:text-primary"
+                  className="shine flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-secondary/70 text-muted-foreground backdrop-blur-sm transition-colors hover:border-primary/50 hover:text-primary"
                   aria-label="Discord"
                 >
-                  <MessageCircle className="h-5 w-5" />
+                  <MessageCircle className="h-4 w-4" />
                 </a>
                 <a
                   href={WIKI_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shine flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-secondary/80 text-muted-foreground backdrop-blur-sm transition-colors hover:border-primary/50 hover:text-primary"
+                  className="shine flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-secondary/70 text-muted-foreground backdrop-blur-sm transition-colors hover:border-primary/50 hover:text-primary"
                   aria-label="Вікі"
                 >
-                  <Globe className="h-5 w-5" />
+                  <Globe className="h-4 w-4" />
                 </a>
               </div>
             </div>
 
-            {footerNav.map((col) => (
-              <div key={col.title}>
-                <h3 className="font-heading text-sm font-bold uppercase tracking-widest text-foreground">
-                  {col.title}
-                </h3>
-                <ul className="mt-4 flex flex-col gap-3">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      {'external' in link && link.external ? (
-                        <a
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-muted-foreground transition-colors hover:text-primary"
-                        >
-                          {link.label}
-                        </a>
-                      ) : (
-                        <Link
-                          href={link.href}
-                          className="text-sm text-muted-foreground transition-colors hover:text-primary"
-                        >
-                          {link.label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            {/* Nav columns */}
+            <div className="grid flex-1 grid-cols-2 gap-6 sm:grid-cols-3 lg:max-w-xl">
+              {footerNav.map((col) => (
+                <div key={col.title}>
+                  <h3 className="font-heading text-xs font-bold uppercase tracking-widest text-foreground">
+                    {col.title}
+                  </h3>
+                  <ul className="mt-3 flex flex-col gap-2">
+                    {col.links.map((link) => (
+                      <li key={link.label}>
+                        {'external' in link && link.external ? (
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                          >
+                            {link.label}
+                          </a>
+                        ) : (
+                          <Link
+                            href={link.href}
+                            className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                          >
+                            {link.label}
+                          </Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="border-t border-border/60 bg-background/60 backdrop-blur-sm">
-            <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:px-6">
+            <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-1 px-4 py-3 text-xs text-muted-foreground sm:flex-row sm:px-6">
               <p>© {new Date().getFullYear()} Зловісний. Усі права захищені.</p>
               <p>Не пов&apos;язано з Mojang AB чи Microsoft.</p>
             </div>

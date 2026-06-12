@@ -53,7 +53,7 @@ export function SiteFooter() {
       aria-label="Підвал сайту"
     >
       {/* Collapsed peek + expand upward on hover (anchored to bottom of viewport) */}
-      <div className="relative h-[70px] transition-[height] duration-700 ease-in-out group-hover:h-[330px] sm:h-[75px] sm:group-hover:h-[300px]">
+      <div className="relative h-[36px] transition-[height] duration-700 ease-in-out group-hover:h-[180px] sm:h-[38px] sm:group-hover:h-[170px]">
         {/* Full-width image frame anchored to the bottom */}
         <div className="absolute inset-x-0 bottom-0 top-0">
           <Image
@@ -70,9 +70,9 @@ export function SiteFooter() {
         </div>
 
         {/* Hint shown only while collapsed */}
-        <div className="absolute inset-x-0 top-0 flex h-[70px] flex-col items-center justify-center gap-1 text-center transition-opacity duration-300 group-hover:pointer-events-none group-hover:opacity-0 sm:h-[75px]">
-          <ChevronUp className="h-5 w-5 animate-pulse text-primary" aria-hidden="true" />
-          <span className="font-heading text-xs font-bold uppercase tracking-[0.3em] text-foreground/80">
+        <div className="absolute inset-x-0 top-0 flex h-[36px] flex-row items-center justify-center gap-2 text-center transition-opacity duration-300 group-hover:pointer-events-none group-hover:opacity-0 sm:h-[38px]">
+          <ChevronUp className="h-4 w-4 animate-pulse text-primary" aria-hidden="true" />
+          <span className="font-heading text-[0.65rem] font-bold uppercase tracking-[0.3em] text-foreground/80">
             Наведіть, щоб відкрити
           </span>
         </div>

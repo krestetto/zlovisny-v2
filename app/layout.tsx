@@ -35,7 +35,7 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`dark ${geistSans.variable} ${geistMono.variable} ${cinzel.variable} bg-background`}
     >
-      <body className="font-sans antialiased pb-[70px] sm:pb-[75px]">
+      <body className="font-sans antialiased pb-[36px] sm:pb-[38px]">
         <PageTransition />
         <SiteHeader />
         {children}

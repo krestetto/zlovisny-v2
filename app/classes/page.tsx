@@ -15,10 +15,18 @@ export default function ClassesPage() {
     <main className="flex-1">
       <PageHeader
         title="Класи"
-        subtitle="Шість пробуджених шляхів сили — та один, що досі спить. Оберіть свою долю на планеті Зловісний."
+        description="Шість пробуджених шляхів сили — та один, що досі спить. Оберіть свою долю на планеті Зловісний."
       />
 
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+      <section className="relative overflow-hidden">
+        {/* Replaceable background photo — swap /classes-bg.png for your own */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(/classes-bg.png)' }}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-background/88" aria-hidden="true" />
+        <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
         {/* ===== Desktop: sidebar + main content ===== */}
         <div className="hidden gap-8 lg:grid lg:grid-cols-[280px_1fr]">
           {/* Sidebar list */}
@@ -116,6 +124,7 @@ export default function ClassesPage() {
               </div>
             )
           })}
+        </div>
         </div>
       </section>
     </main>

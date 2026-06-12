@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { PageHeader } from '@/components/page-header'
-import { Crown, Check, ArrowUpCircle, Sparkles } from 'lucide-react'
+import { Crown, Check, ArrowUpCircle, Sparkles, Info } from 'lucide-react'
 
 const ranks = [
   {
@@ -14,6 +14,10 @@ const ranks = [
     glow: '',
     btn: 'border border-border bg-secondary text-foreground hover:bg-secondary/70',
     base: true,
+    img: '/rank-poslushnik.png',
+    tagline: 'Перший крок у темряву.',
+    detail:
+      'Базовий ранг для тих, хто щойно ступив на планету. Дає зручності новачку та виділяє вас у чаті.',
     perks: [
       'Префікс [Послушник]',
       '2 додаткові домівки',
@@ -29,6 +33,10 @@ const ranks = [
     accent: 'text-accent',
     glow: 'hover:shadow-[0_0_60px_oklch(0.6_0.22_18_/_45%)]',
     btn: 'border border-accent/50 bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground',
+    img: '/rank-pakt.png',
+    tagline: 'Уклади угоду заради сили.',
+    detail:
+      'Розширює можливості гри: політ у спавні, особистий фамільяр і щоденні нагороди. Найкраще співвідношення ціни та переваг.',
     perks: [
       'Усе з рангу Послушник',
       '5 додаткових домівок',
@@ -46,6 +54,10 @@ const ranks = [
     featured: true,
     glow: 'hover:shadow-[0_0_70px_oklch(0.62_0.24_320_/_55%)]',
     btn: 'bg-primary text-primary-foreground hover:opacity-90',
+    img: '/rank-adept.png',
+    tagline: 'Володар прокляту планети.',
+    detail:
+      'Найвищий рівень сили: безліміт домівок, власна приватна територія та пріоритетний вхід навіть на повний сервер.',
     perks: [
       'Усе з рангу Пакт',
       'Необмежені домівки',
@@ -57,9 +69,24 @@ const ranks = [
   },
 ]
 
+const upgradeBenefits = [
+  'Платите лише різницю в ціні — не повну вартість нового рангу',
+  'Усі переваги попереднього рангу зберігаються та доповнюються',
+  'Підвищення активується миттєво, без втрати прогресу',
+  'Вигідніше, ніж купувати кожен ранг окремо',
+]
+
 export default function StorePage() {
   // Monthly is the default & first option.
   const [billing, setBilling] = useState<'month' | 'one'>('month')
+  const [highlight, setHighlight] = useState(false)
+  const upgradeRef = useRef<HTMLDivElement>(null)
+
+  const scrollToUpgrade = () => {
+    upgradeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    setHighlight(true)
+    window.setTimeout(() => setHighlight(false), 2200)
+  }
 
   return (
     <main className="flex-1">
@@ -101,54 +128,88 @@ export default function StorePage() {
             {ranks.map((rank) => (
               <div
                 key={rank.name}
-                className={`art-frame relative flex flex-col rounded-md border bg-card p-8 transition-all duration-300 hover:z-10 hover:-translate-y-2 hover:scale-105 ${rank.color} ${rank.glow} ${
+                className={`group art-frame relative flex flex-col overflow-hidden rounded-md border bg-card p-8 transition-all duration-300 hover:z-10 hover:-translate-y-2 hover:scale-105 ${rank.color} ${rank.glow} ${
                   rank.featured ? 'shadow-[0_0_40px_oklch(0.62_0.24_320_/_25%)]' : ''
                 }`}
               >
+                {/* Rank artwork — brightens & zooms on hover */}
+                <div className="pointer-events-none absolute inset-0">
+                  <img
+                    src={rank.img || '/placeholder.svg'}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-full w-full object-cover opacity-10 transition-all duration-500 group-hover:scale-110 group-hover:opacity-25"
+                    style={{ imageRendering: 'pixelated' }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/85 to-card/60" />
+                </div>
+
                 {rank.featured && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground">
+                  <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground">
                     Популярний
                   </span>
                 )}
-                <Crown className={`h-8 w-8 ${rank.accent}`} />
-                <h3 className="mt-4 font-heading text-2xl font-bold uppercase tracking-wide text-foreground">
-                  {rank.name}
-                </h3>
-                <div className="mt-4 flex items-end gap-1">
-                  <span className={`font-heading text-4xl font-black ${rank.accent}`}>
-                    {billing === 'month' ? rank.priceMonth : rank.priceOne}
-                  </span>
-                  <span className="mb-1 text-sm text-muted-foreground">
-                    {billing === 'month' ? '/міс' : ' разово'}
-                  </span>
-                </div>
-                <ul className="mt-6 flex flex-1 flex-col gap-3">
-                  {rank.perks.map((perk) => (
-                    <li key={perk} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <Check className={`mt-0.5 h-4 w-4 shrink-0 ${rank.accent}`} />
-                      <span>{perk}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  className={`shine mt-8 min-h-[44px] rounded-sm px-6 text-sm font-bold uppercase tracking-wide transition-all ${rank.btn}`}
-                >
-                  Придбати
-                </button>
-                {/* Prominent glowing upgrade button inside Пакт & Адепт */}
-                {!rank.base && (
-                  <button className="shine mt-3 flex min-h-[44px] items-center justify-center gap-2 rounded-sm border border-primary bg-primary/15 px-6 text-sm font-bold uppercase tracking-wide text-primary shadow-[0_0_22px_oklch(0.62_0.24_320_/_45%)] transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_40px_oklch(0.62_0.24_320_/_70%)]">
-                    <ArrowUpCircle className="h-4 w-4" />
-                    Покращити прохідку
+
+                <div className="relative flex flex-1 flex-col">
+                  <Crown className={`h-8 w-8 ${rank.accent}`} />
+                  <h3 className="mt-4 font-heading text-2xl font-bold uppercase tracking-wide text-foreground">
+                    {rank.name}
+                  </h3>
+                  <p className={`mt-1 text-sm font-medium ${rank.accent}`}>{rank.tagline}</p>
+                  <div className="mt-4 flex items-end gap-1">
+                    <span className={`font-heading text-4xl font-black ${rank.accent}`}>
+                      {billing === 'month' ? rank.priceMonth : rank.priceOne}
+                    </span>
+                    <span className="mb-1 text-sm text-muted-foreground">
+                      {billing === 'month' ? '/міс' : ' разово'}
+                    </span>
+                  </div>
+
+                  {/* Extra info revealed on hover */}
+                  <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 group-hover:mt-4 group-hover:grid-rows-[1fr] group-hover:opacity-100">
+                    <p className="overflow-hidden rounded-sm border border-border/60 bg-secondary/40 p-3 text-sm leading-relaxed text-muted-foreground">
+                      {rank.detail}
+                    </p>
+                  </div>
+
+                  <ul className="mt-6 flex flex-1 flex-col gap-3">
+                    {rank.perks.map((perk) => (
+                      <li key={perk} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <Check className={`mt-0.5 h-4 w-4 shrink-0 ${rank.accent}`} />
+                        <span>{perk}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    className={`shine mt-8 min-h-[44px] rounded-sm px-6 text-sm font-bold uppercase tracking-wide transition-all ${rank.btn}`}
+                  >
+                    Придбати
                   </button>
-                )}
+                  {/* Prominent glowing upgrade button inside Пакт & Адепт */}
+                  {!rank.base && (
+                    <button
+                      onClick={scrollToUpgrade}
+                      className="shine mt-3 flex min-h-[44px] items-center justify-center gap-2 rounded-sm border border-primary bg-primary/15 px-6 text-sm font-bold uppercase tracking-wide text-primary shadow-[0_0_22px_oklch(0.62_0.24_320_/_45%)] transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_40px_oklch(0.62_0.24_320_/_70%)]"
+                    >
+                      <ArrowUpCircle className="h-4 w-4" />
+                      Покращити прохідку
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>
 
-          {/* Big prominent upgrade banner */}
-          <div className="art-frame mt-14 overflow-hidden rounded-lg border border-primary/60 bg-gradient-to-r from-primary/15 via-card to-accent/15 p-8 shadow-[0_0_50px_oklch(0.62_0.24_320_/_30%)]">
-            <div className="flex flex-col items-center gap-6 text-center md:flex-row md:text-left">
+          {/* Big prominent upgrade banner — target of "Покращити прохідку" */}
+          <div
+            ref={upgradeRef}
+            className={`art-frame mt-14 scroll-mt-28 overflow-hidden rounded-lg border bg-gradient-to-r from-primary/15 via-card to-accent/15 p-8 transition-all duration-500 ${
+              highlight
+                ? 'border-primary shadow-[0_0_80px_oklch(0.62_0.24_320_/_70%)] ring-2 ring-primary scale-[1.02]'
+                : 'border-primary/60 shadow-[0_0_50px_oklch(0.62_0.24_320_/_30%)]'
+            }`}
+          >
+            <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-start md:text-left">
               <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-primary/50 bg-primary/20 text-primary shadow-[0_0_30px_oklch(0.62_0.24_320_/_50%)]">
                 <ArrowUpCircle className="h-9 w-9" />
               </div>
@@ -159,7 +220,38 @@ export default function StorePage() {
                 </h3>
                 <p className="mt-2 text-pretty leading-relaxed text-muted-foreground">
                   Не платіть повну ціну! Доплатіть лише різницю між вашим поточним
-                  рангом і новим — і миттєво підніміться на вищий рівень сили.
+                  рангом і новим — і миттєво підніміться на вищий рівень сили. Ось
+                  чому покращення вигідніше:
+                </p>
+
+                {/* Clear explanation of how & why to upgrade */}
+                <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                  {upgradeBenefits.map((b) => (
+                    <li
+                      key={b}
+                      className="flex items-start gap-2 rounded-sm border border-border/60 bg-secondary/40 p-3 text-sm text-foreground"
+                    >
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="mt-4 flex items-start gap-2 text-sm text-muted-foreground">
+                  <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                  <span>
+                    Як покращити: оберіть бажаний ранг вище, напишіть у{' '}
+                    <a
+                      href="https://discord.gg/fwZQX55VCF"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-primary underline-offset-2 hover:underline"
+                    >
+                      Discord
+                    </a>{' '}
+                    свій нік і поточний ранг — і ми перерахуємо доплату лише за
+                    різницю.
+                  </span>
                 </p>
               </div>
               <button className="shine min-h-[52px] shrink-0 rounded-md bg-primary px-8 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_30px_oklch(0.62_0.24_320_/_55%)] transition-all hover:scale-105 hover:shadow-[0_0_50px_oklch(0.62_0.24_320_/_75%)]">

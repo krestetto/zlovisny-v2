@@ -82,7 +82,7 @@ export function JoinSection() {
               onClick={copyIp}
               className="mt-4 flex items-center gap-3 rounded-sm border border-primary/50 bg-primary/10 px-6 py-4 font-mono text-lg font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
             >
-              play.zlovisny.space
+              zlovisny.space
               {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
             </button>
             <p className="mt-4 text-xs text-muted-foreground">

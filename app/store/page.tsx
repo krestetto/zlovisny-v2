@@ -168,6 +168,12 @@ export default function StorePage() {
                   </div>
                 </div>
 
+                {rank.popular && (
+                  <span className="pointer-events-none absolute -top-3 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground shadow-[0_4px_18px_oklch(0.62_0.24_320_/_55%)]">
+                    Популярний
+                  </span>
+                )}
+
                 <div
                   className={`art-frame relative flex h-full flex-col overflow-hidden rounded-md border bg-card p-8 transition-all duration-300 group-hover:z-40 group-hover:-translate-y-2 group-hover:scale-105 ${rank.color} ${rank.glow} ${
                     rank.featured ? 'shadow-[0_0_40px_oklch(0.62_0.24_320_/_25%)]' : ''
@@ -184,12 +190,6 @@ export default function StorePage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-card via-card/85 to-card/60" />
                   </div>
-
-                  {rank.popular && (
-                    <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground">
-                      Популярний
-                    </span>
-                  )}
 
                   <div className="relative flex flex-1 flex-col">
                     <Crown className={`h-8 w-8 ${rank.accent}`} />

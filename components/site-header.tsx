@@ -151,8 +151,11 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="header-img sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+      <header
+        className="header-img sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md"
+        style={{ ['--header-img' as string]: "url('/header-bg-cosmic.png')", ['--header-img-opacity' as string]: '0.6' }}
+      >
+      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-3">
           {/* Discord icon — top-left of the header */}
           <a
@@ -168,9 +171,9 @@ export function SiteHeader() {
             <Image
               src="/logo.png"
               alt="Логотип Зловісний"
-              width={40}
-              height={40}
-              className="h-10 w-10 object-contain drop-shadow-[0_0_12px_oklch(0.52_0.22_20_/_60%)]"
+              width={80}
+              height={80}
+              className="h-20 w-20 object-contain drop-shadow-[0_0_12px_oklch(0.52_0.22_20_/_60%)]"
             />
             <span className="hidden font-heading text-lg font-bold uppercase tracking-widest text-foreground sm:inline">
               Зловісний

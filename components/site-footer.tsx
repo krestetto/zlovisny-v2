@@ -7,7 +7,7 @@ import { MessageCircle, Globe, ChevronUp, Copy, Check } from 'lucide-react'
 
 const DISCORD_URL = 'https://discord.gg/fwZQX55VCF'
 const WIKI_URL = 'https://zlovisny.gitbook.io/wiki'
-const SERVER_IP = 'play.zlovisny.net'
+const SERVER_IP = 'play.zlovisny.space'
 
 const footerNav = [
   {
@@ -53,9 +53,9 @@ export function SiteFooter() {
       aria-label="Підвал сайту"
     >
       {/* Collapsed peek + expand upward on hover (anchored to bottom of viewport) */}
-      <div className="relative h-[36px] transition-[height] duration-700 ease-in-out group-hover:h-[180px] sm:h-[38px] sm:group-hover:h-[170px]">
+      <div className="relative h-[38px] transition-[height] duration-500 ease-in-out group-hover:h-[230px] sm:group-hover:h-[200px]">
         {/* Full-width image frame anchored to the bottom */}
-        <div className="absolute inset-x-0 bottom-0 top-0">
+        <div className="absolute inset-0">
           <Image
             src="/footer-frame.png"
             alt=""
@@ -66,11 +66,11 @@ export function SiteFooter() {
             className="object-cover object-top transition-transform duration-700 ease-in-out group-hover:scale-105"
           />
           {/* Dark overlay deepens on hover so the text stays readable */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/10 opacity-90 transition-opacity duration-700 group-hover:from-background group-hover:via-background/90 group-hover:to-background/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-background/40 opacity-95 transition-opacity duration-700 group-hover:from-background group-hover:via-background/95 group-hover:to-background/70" />
         </div>
 
         {/* Hint shown only while collapsed */}
-        <div className="absolute inset-x-0 top-0 flex h-[36px] flex-row items-center justify-center gap-2 text-center transition-opacity duration-300 group-hover:pointer-events-none group-hover:opacity-0 sm:h-[38px]">
+        <div className="absolute inset-x-0 top-0 flex h-[38px] flex-row items-center justify-center gap-2 text-center transition-opacity duration-300 group-hover:pointer-events-none group-hover:opacity-0">
           <ChevronUp className="h-4 w-4 animate-pulse text-primary" aria-hidden="true" />
           <span className="font-heading text-[0.65rem] font-bold uppercase tracking-[0.3em] text-foreground/80">
             Наведіть, щоб відкрити
@@ -78,26 +78,26 @@ export function SiteFooter() {
         </div>
 
         {/* Footer content revealed on hover */}
-        <div className="pointer-events-none absolute inset-0 flex flex-col justify-end opacity-0 transition-opacity duration-500 delay-100 group-hover:pointer-events-auto group-hover:opacity-100">
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 px-4 pb-4 pt-6 sm:px-6 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
+        <div className="pointer-events-none absolute inset-0 flex flex-col overflow-y-auto opacity-0 transition-opacity duration-500 delay-100 group-hover:pointer-events-auto group-hover:opacity-100">
+          <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-5 px-4 pb-3 pt-5 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
             {/* Brand + interactive server IP */}
             <div className="max-w-sm">
               <Link href="/" className="flex items-center gap-3">
                 <Image
                   src="/logo.png"
                   alt="Логотип Зловісний"
-                  width={40}
-                  height={40}
-                  className="h-10 w-10 object-contain"
+                  width={36}
+                  height={36}
+                  className="h-9 w-9 object-contain"
                 />
-                <span className="font-heading text-lg font-bold uppercase tracking-widest text-foreground">
+                <span className="font-heading text-base font-bold uppercase tracking-widest text-foreground">
                   Зловісний
                 </span>
               </Link>
 
               {/* Interactive: live status + copy server IP */}
-              <div className="mt-4 flex flex-wrap items-center gap-3">
-                <span className="inline-flex items-center gap-2 rounded-sm border border-border bg-secondary/70 px-3 py-2 text-xs text-foreground backdrop-blur-sm">
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-2 rounded-sm border border-border bg-secondary/70 px-2.5 py-1.5 text-xs text-foreground backdrop-blur-sm">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
                     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
@@ -108,7 +108,7 @@ export function SiteFooter() {
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="shine group/ip inline-flex items-center gap-2 rounded-sm border border-border bg-secondary/70 px-3 py-2 font-mono text-xs text-foreground backdrop-blur-sm transition-colors hover:border-primary/60 hover:text-primary"
+                  className="shine group/ip inline-flex items-center gap-2 rounded-sm border border-border bg-secondary/70 px-2.5 py-1.5 font-mono text-xs text-foreground backdrop-blur-sm transition-colors hover:border-primary/60 hover:text-primary"
                   aria-label={`Копіювати IP сервера: ${SERVER_IP}`}
                 >
                   {copied ? (
@@ -123,7 +123,7 @@ export function SiteFooter() {
                   href={DISCORD_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shine flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-secondary/70 text-muted-foreground backdrop-blur-sm transition-colors hover:border-primary/50 hover:text-primary"
+                  className="shine flex h-8 w-8 items-center justify-center rounded-sm border border-border bg-secondary/70 text-muted-foreground backdrop-blur-sm transition-colors hover:border-primary/50 hover:text-primary"
                   aria-label="Discord"
                 >
                   <MessageCircle className="h-4 w-4" />
@@ -132,7 +132,7 @@ export function SiteFooter() {
                   href={WIKI_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shine flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-secondary/70 text-muted-foreground backdrop-blur-sm transition-colors hover:border-primary/50 hover:text-primary"
+                  className="shine flex h-8 w-8 items-center justify-center rounded-sm border border-border bg-secondary/70 text-muted-foreground backdrop-blur-sm transition-colors hover:border-primary/50 hover:text-primary"
                   aria-label="Вікі"
                 >
                   <Globe className="h-4 w-4" />
@@ -141,13 +141,13 @@ export function SiteFooter() {
             </div>
 
             {/* Nav columns */}
-            <div className="grid flex-1 grid-cols-2 gap-6 sm:grid-cols-3 lg:max-w-xl">
+            <div className="grid flex-1 grid-cols-3 gap-6 lg:max-w-xl">
               {footerNav.map((col) => (
                 <div key={col.title}>
                   <h3 className="font-heading text-xs font-bold uppercase tracking-widest text-foreground">
                     {col.title}
                   </h3>
-                  <ul className="mt-3 flex flex-col gap-2">
+                  <ul className="mt-2 flex flex-col gap-1.5">
                     {col.links.map((link) => (
                       <li key={link.label}>
                         {'external' in link && link.external ? (
@@ -175,8 +175,8 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="border-t border-border/60 bg-background/60 backdrop-blur-sm">
-            <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-1 px-4 py-3 text-xs text-muted-foreground sm:flex-row sm:px-6">
+          <div className="border-t border-border/60 bg-background/70 backdrop-blur-sm">
+            <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-1 px-4 py-2 text-xs text-muted-foreground sm:flex-row sm:px-6">
               <p>© {new Date().getFullYear()} Зловісний. Усі права захищені.</p>
               <p>Не пов&apos;язано з Mojang AB чи Microsoft.</p>
             </div>

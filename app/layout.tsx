@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Cinzel } from 'next/font/google'
 import './globals.css'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
+import { EdgeFrames } from '@/components/edge-frames'
 import { PageTransition } from '@/components/page-transition'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
@@ -37,6 +38,7 @@ export default function RootLayout({
     >
       <body className="font-sans antialiased pb-[36px] sm:pb-[38px]">
         <PageTransition />
+        <EdgeFrames />
         <SiteHeader />
         {children}
         <SiteFooter />

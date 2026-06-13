@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
 import { Menu, X, Copy, Check, ChevronDown, ExternalLink } from 'lucide-react'
 
-const SERVER_IP = 'play.zlovisny.space'
+const SERVER_IP = 'zlovisny.space'
 const DISCORD_URL = 'https://discord.gg/fwZQX55VCF'
 const WIKI_URL = 'https://zlovisny.gitbook.io/wiki'
 

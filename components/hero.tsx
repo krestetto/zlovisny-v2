@@ -95,7 +95,7 @@ export function Hero() {
             height={420}
             loading="eager"
             fetchPriority="high"
-            className="mx-auto w-full max-w-3xl object-contain drop-shadow-[0_0_50px_oklch(0.55_0.22_300_/_45%)]"
+            className="mx-auto w-full max-w-5xl object-contain drop-shadow-[0_0_50px_oklch(0.55_0.22_300_/_45%)]"
             style={{ imageRendering: 'pixelated' }}
           />
         </h1>

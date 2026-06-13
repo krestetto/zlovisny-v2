@@ -282,8 +282,7 @@
 
   /* Header background image layer (replace /placeholder-header-bg.png) */
   .header-img {
-    position: relative;
-    isolation: isolate;
+  isolation: isolate;
   }
   .header-img::before {
     content: '';

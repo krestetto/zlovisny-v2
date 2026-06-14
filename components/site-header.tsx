@@ -163,8 +163,8 @@ export function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Приєднатися до Discord"
-            className="btn-img shine inline-flex h-11 w-11 items-center justify-center rounded-md border border-primary/40 bg-primary/10 text-primary transition-all hover:scale-110 hover:bg-primary hover:text-primary-foreground"
-            style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.6' }}
+            className="btn-img shine inline-flex h-11 w-11 items-center justify-center rounded-md border border-primary/40 text-primary transition-all hover:scale-110 hover:text-primary-foreground"
+            style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.9' }}
           >
             <DiscordIcon className="h-5 w-5" />
           </a>
@@ -203,8 +203,8 @@ export function SiteHeader() {
         <div className="hidden items-center gap-3 lg:flex">
           <button
             onClick={copyIp}
-            className="btn-img shine group flex items-center gap-2 rounded-sm border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-            style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.6' }}
+            className="btn-img shine group flex items-center gap-2 rounded-sm border border-primary/50 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:text-primary-foreground"
+            style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.9' }}
           >
             <span className="font-mono">{SERVER_IP}</span>
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}

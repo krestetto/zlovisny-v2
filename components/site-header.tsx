@@ -300,6 +300,7 @@ export function SiteHeader() {
                 className={`flex min-h-[52px] items-center border-b border-border/40 px-3 text-base font-semibold uppercase tracking-wide transition-colors hover:text-primary ${
                   pathname === item.href ? 'text-primary' : 'text-foreground'
                 }`}
+                style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.9' }}
               >
                 {item.label}
               </Link>

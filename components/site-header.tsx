@@ -163,8 +163,8 @@ export function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Приєднатися до Discord"
-            className="btn-img shine inline-flex h-11 w-11 items-center justify-center rounded-md text-primary transition-all hover:scale-110 hover:text-primary-foreground"
-            style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.9' }}
+            className="btn-img shine inline-flex h-16 w-16 items-center justify-center rounded-md text-primary transition-all hover:scale-110 hover:text-primary-foreground"
+            style={{ ['--btn-img' as any]: "url('/button-bg-ds.png')", ['--btn-img-opacity' as any]: '0.9' }}
           >
             <DiscordIcon className="h-5 w-5" />
           </a>

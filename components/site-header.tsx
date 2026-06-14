@@ -203,7 +203,7 @@ export function SiteHeader() {
         <div className="hidden items-center gap-3 lg:flex">
           <button
             onClick={copyIp}
-            className="btn-img shine group flex items-center gap-2 rounded-sm px-4 py-5 text-sm font-semibold text-white transition-colors hover:text-red-600"
+            className="btn-img shine group flex items-center gap-2 rounded-sm px-4 py-5 text-sm font-semibold text-black transition-colors hover:text-red-600 bg-black/40"
             style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.9' }}
           >
             <span className="font-mono">{SERVER_IP}</span>

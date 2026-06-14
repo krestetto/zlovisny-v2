@@ -67,11 +67,12 @@ function DesktopDropdown({ item, pathname }: { item: NavItem; pathname: string }
   return (
     <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
       <button
-        className={`shine flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:bg-secondary hover:text-foreground ${
-          isActive ? 'nav-active' : 'text-muted-foreground'
+        className={`btn-img shine flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:text-red-600 ${
+          isActive ? 'nav-active' : 'text-black'
         }`}
         aria-expanded={open}
         aria-haspopup="true"
+        style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.9' }}
       >
         {item.label}
         <ChevronDown
@@ -190,9 +191,10 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href!}
-                className={`shine rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:bg-secondary hover:text-foreground ${
-                  pathname === item.href ? 'nav-active' : 'text-muted-foreground'
+                className={`btn-img shine rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:text-red-600 ${
+                  pathname === item.href ? 'nav-active' : 'text-black'
                 }`}
+                style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.9' }}
               >
                 {item.label}
               </Link>
@@ -300,7 +302,6 @@ export function SiteHeader() {
                 className={`flex min-h-[52px] items-center border-b border-border/40 px-3 text-base font-semibold uppercase tracking-wide transition-colors hover:text-primary ${
                   pathname === item.href ? 'text-primary' : 'text-foreground'
                 }`}
-                style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.9' }}
               >
                 {item.label}
               </Link>

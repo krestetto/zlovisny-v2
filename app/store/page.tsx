@@ -168,13 +168,6 @@ export default function StorePage() {
               <div key={rank.name} className="group relative">
                 {/* Page-darkening overlay — dims everything around the hovered block */}
                 <div className="pointer-events-none fixed inset-0 z-30 bg-background/85 opacity-0 backdrop-blur-[2px] transition-opacity duration-500 group-hover:opacity-100" />
-                {/* Popular badge — outside overflow-hidden card so it's never clipped */}
-                {rank.popular && (
-                  <span className="pointer-events-none absolute -top-3 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground shadow-[0_4px_18px_oklch(0.62_0.24_320_/_55%)]">
-                    
-                  </span>
-                )}
-
                 {/* Left side panel — descriptive text, slides out on hover */}
                 <div className="pointer-events-none absolute right-full top-1/2 z-40 hidden w-56 -translate-y-1/2 translate-x-4 pr-4 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 2xl:block">
                   <div className="art-frame rounded-md border border-primary/40 bg-card p-5 shadow-[0_0_50px_oklch(0_0_0_/_65%)]">

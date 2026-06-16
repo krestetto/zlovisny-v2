@@ -213,9 +213,16 @@
     border: 6px solid transparent;
     border-image: url('/placeholder-border.png') 18 round;
     border-image-outset: 0;
-    /* Fallback styling until pixel art border is supplied */
     box-shadow: inset 0 0 0 1px oklch(0.62 0.24 320 / 25%);
-    background-image: url('/button-bg-2.png');
+  }
+  .art-frame-classes {
+    background-image: url('/fon-class.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .art-frame-features {
+    background-image: url('/fon-features.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

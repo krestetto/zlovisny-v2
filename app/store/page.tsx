@@ -16,6 +16,7 @@ const ranks = [
     btn: 'border border-border bg-secondary text-foreground hover:bg-secondary/70',
     base: true,
     popular: true,
+    shopBg: '/shop-1.png',
     img: '/rank-poslushnik.png',
     tagline: 'Перший крок у темряву.',
     detail:
@@ -36,6 +37,7 @@ const ranks = [
     accent: 'text-accent',
     glow: 'hover:shadow-[0_0_60px_oklch(0.6_0.22_18_/_45%)]',
     btn: 'border border-accent/50 bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground',
+    shopBg: '/shop-2.png',
     img: '/rank-pakt.png',
     tagline: 'Уклади угоду заради сили.',
     detail:
@@ -58,6 +60,7 @@ const ranks = [
     featured: true,
     glow: 'hover:shadow-[0_0_70px_oklch(0.62_0.24_320_/_55%)]',
     btn: 'bg-primary text-primary-foreground hover:opacity-90',
+    shopBg: '/shop-3.png',
     img: '/rank-adept.png',
     tagline: 'Володар прокляту планети.',
     detail:
@@ -178,6 +181,7 @@ export default function StorePage() {
                   className={`art-frame relative flex h-full flex-col overflow-hidden rounded-md border bg-card p-8 transition-all duration-300 group-hover:z-40 group-hover:-translate-y-2 group-hover:scale-105 ${rank.color} ${rank.glow} ${
                     rank.featured ? 'shadow-[0_0_40px_oklch(0.62_0.24_320_/_25%)]' : ''
                   }`}
+                  style={rank.shopBg ? { backgroundImage: `url('${rank.shopBg}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
                 >
                   {/* Rank artwork — brightens & zooms on hover */}
                   <div className="pointer-events-none absolute inset-0">

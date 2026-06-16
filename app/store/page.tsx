@@ -171,7 +171,7 @@ export default function StorePage() {
                 {/* Popular badge — outside overflow-hidden card so it's never clipped */}
                 {rank.popular && (
                   <span className="pointer-events-none absolute -top-3 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground shadow-[0_4px_18px_oklch(0.62_0.24_320_/_55%)]">
-                    Популярний
+                    
                   </span>
                 )}
 

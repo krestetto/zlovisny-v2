@@ -5,8 +5,8 @@ const admins = [
     name: 'krestetto',
     role: 'Засновник',
     bio: 'Творець серверу Зловісний. Керує розвитком сервера та архітектурою світу.',
-    img: '/admin-1.png',
-    imgHover: '/admin-1-alt.png',
+    img: '/krest_1.gif',
+    imgHover: '/krest.gif',
   },
   {
     name: '?',

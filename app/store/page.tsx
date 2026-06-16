@@ -186,11 +186,11 @@ export default function StorePage() {
                       src={rank.img || '/placeholder.svg'}
                       alt=""
                       aria-hidden="true"
-                      className="h-full w-full object-cover opacity-40 transition-all duration-500 group-hover:scale-110 group-hover:opacity-60"
+                      className="h-full w-full object-cover opacity-10 transition-all duration-500 group-hover:scale-110 group-hover:opacity-20"
                       style={{ imageRendering: 'pixelated' }}
                     />
                     {/* Only a bottom gradient to keep text readable — top stays fully clear */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   </div>
 
                   <div className="relative flex flex-1 flex-col">
@@ -234,7 +234,7 @@ export default function StorePage() {
 
                     <ul className="mt-6 flex flex-1 flex-col gap-3">
                       {rank.perks.map((perk) => (
-                        <li key={perk} className="flex items-start gap-2 rounded-sm bg-black/40 px-2 py-1 text-sm text-foreground backdrop-blur-[2px]">
+                        <li key={perk} className="flex items-start gap-2 rounded-sm bg-black/25 px-2 py-1 text-sm text-foreground backdrop-blur-sm">
                           <Check className={`mt-0.5 h-4 w-4 shrink-0 ${rank.accent}`} />
                           <span>{perk}</span>
                         </li>

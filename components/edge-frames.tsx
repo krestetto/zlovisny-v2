@@ -11,7 +11,7 @@ export function EdgeFrames() {
         className="fixed inset-y-0 left-0 w-[44px] bg-cover bg-no-repeat opacity-50 lg:w-[60px]"
         style={{
           backgroundImage: 'url(/edge-frame.png)',
-          backgroundPosition: '26% center',
+          backgroundPosition: 'right center', // Змінено з 26% на right
         }}
       />
       {/* Right edge (mirrored) */}
@@ -19,7 +19,7 @@ export function EdgeFrames() {
         className="fixed inset-y-0 right-0 w-[44px] bg-cover bg-no-repeat opacity-50 lg:w-[60px]"
         style={{
           backgroundImage: 'url(/edge-frame.png)',
-          backgroundPosition: '26% center',
+          backgroundPosition: 'right center', // Змінено з 26% на right
           transform: 'scaleX(-1)',
         }}
       />

@@ -51,7 +51,7 @@ function DiscordIcon({ className }: { className?: string }) {
   )
 }
 
-function DesktopDropdown({ item, pathname }: { item: NavItem; pathname: string }) {
+function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: string; bgImg?: string }) {
   const [open, setOpen] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isActive = item.children?.some((c) => !c.external && c.href === pathname)
@@ -86,10 +86,10 @@ function DesktopDropdown({ item, pathname }: { item: NavItem; pathname: string }
             : 'pointer-events-none -translate-y-1 opacity-0'
         }`}
       >
-        <div className="art-frame overflow-hidden rounded-md border border-primary/60 bg-background/95 shadow-[0_8px_40px_oklch(0_0_0_/_60%)] backdrop-blur-md">
+        <div className="art-frame overflow-hidden rounded-md border border-primary/60 shadow-[0_8px_40px_oklch(0_0_0_/_60%)] backdrop-blur-md" style={bgImg ? { backgroundImage: `url('${bgImg}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
           {item.children?.map((child) => {
             const cls =
-              'shine group flex items-center justify-between px-4 py-3 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-primary hover:pl-6 hover:text-primary-foreground'
+              'shine group flex items-center justify-between px-4 py-3 text-sm font-medium text-black transition-all duration-200 hover:bg-gray-500/40 hover:pl-6 hover:text-black'
             const inner = (
               <>
                 <span>{child.label}</span>
@@ -184,7 +184,7 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) =>
             item.children ? (
-              <DesktopDropdown key={item.label} item={item} pathname={pathname} />
+              <DesktopDropdown key={item.label} item={item} pathname={pathname} bgImg={item.label === 'Світ' ? '/button-bg-1.png' : '/button-bg-2.png'} />
             ) : (
               <Link
                 key={item.label}

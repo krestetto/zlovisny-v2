@@ -66,7 +66,7 @@ export default function ClassesPage() {
           {/* Main content */}
           <div
             key={active.id}
-            className="art-frame rounded-lg border border-primary/40 bg-card/70 p-8 backdrop-blur-sm duration-500 animate-in fade-in slide-in-from-right-4"
+            className="art-frame art-frame-classes rounded-lg border border-primary/40 bg-card/70 p-8 backdrop-blur-sm duration-500 animate-in fade-in slide-in-from-right-4"
           >
             <ClassDetail info={active} />
           </div>
@@ -80,7 +80,7 @@ export default function ClassesPage() {
             return (
               <div
                 key={c.id}
-                className={`art-frame overflow-hidden rounded-lg border bg-card/70 backdrop-blur-sm transition-all ${
+                className={`art-frame art-frame-classes overflow-hidden rounded-lg border bg-card/70 backdrop-blur-sm transition-all ${
                   isOpen
                     ? 'border-primary/60 shadow-[0_0_30px_oklch(0.62_0.24_320_/_30%)]'
                     : 'border-border'

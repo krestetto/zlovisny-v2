@@ -178,7 +178,7 @@ export default function FeaturesPage() {
         {/* Active panel */}
         <div
           key={current.id}
-          className="art-frame mt-10 grid gap-8 rounded-lg border border-primary/40 bg-card/70 p-6 backdrop-blur-sm duration-500 animate-in fade-in slide-in-from-bottom-4 sm:p-10 md:grid-cols-[auto_1fr]"
+          className="art-frame art-frame-features mt-10 grid gap-8 rounded-lg border border-primary/40 bg-card/70 p-6 backdrop-blur-sm duration-500 animate-in fade-in slide-in-from-bottom-4 sm:p-10 md:grid-cols-[auto_1fr]"
         >
           <div className="flex md:flex-col md:items-center">
             <div className="flex h-20 w-20 items-center justify-center rounded-xl border border-primary/40 bg-primary/10 text-primary shadow-[0_0_30px_oklch(0.62_0.24_320_/_35%)]">

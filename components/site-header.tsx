@@ -90,7 +90,7 @@ function DesktopDropdown({ item, pathname }: { item: NavItem; pathname: string }
         <div className="art-frame overflow-hidden rounded-md border border-primary/60 bg-background/95 shadow-[0_8px_40px_oklch(0_0_0_/_60%)] backdrop-blur-md">
           {item.children?.map((child) => {
             const cls =
-              'shine group flex items-center justify-between px-4 py-3 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-primary hover:pl-6 hover:text-primary-foreground'
+              'shine group flex items-center justify-between px-4 py-3 text-sm font-medium text-black transition-all duration-200 hover:bg-gray-500/40 hover:pl-6 hover:text-black'
             const inner = (
               <>
                 <span>{child.label}</span>

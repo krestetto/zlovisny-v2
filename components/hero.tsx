@@ -71,7 +71,7 @@ export function Hero() {
         style={{ transform: `translateY(${scrollY * -0.12}px)`, opacity: Math.max(0, 1 - scrollY / 600) }}
       >
         <span className="mb-6 inline-block rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur-sm">
-          Сезон 4 · Пробудження планети
+          Бета-тест
         </span>
 
         {/* Centered server logo */}
@@ -100,12 +100,10 @@ export function Hero() {
           />
         </h1>
         <p className="mt-3 font-heading text-lg uppercase tracking-[0.35em] text-accent sm:text-2xl">
-          Майнкрафт всесвіт
+          Майнкрафт сервер
         </p>
         <p className="mt-8 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Далеко за межами зірок обертається жива планета. Дослідіть її світи,
-          киньте виклик древнім босам та зберіть легендарний лут. Моди не
-          потрібні — лише ваша відвага.
+          Обирайте клас та розвивайте свої магічні здібності безпосередньо під час виживання. Засновуйте власні міста та захоплюйте стратегічні точки ресурсів на карті для отримання пасивного прибутку. Досліджуйте кастомні предмети з унікальною їжею та проявляйте креативність, малюючи справжні картини прямо в грі. Спілкуйтеся через локальний голосовий чат і насолоджуйтеся повною свободою дій завдяки мінімуму правил.
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">

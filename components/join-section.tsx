@@ -3,13 +3,13 @@
 import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
 
-const SERVER_IP = 'play.zlovisny.space'
+const SERVER_IP = 'zlovisny.space'
 
 const steps = [
   'Запустіть Minecraft: Java Edition',
   'У розділі «Мережева гра» натисніть «Додати сервер»',
   'Введіть IP-адресу сервера у відповідне поле',
-  'Підтвердіть та увійдіть, щоб почати свою подорож',
+  'Отримайте прохідку, та насолоджуйтесь сервером.',
 ]
 
 export function JoinSection() {
@@ -50,12 +50,11 @@ export function JoinSection() {
             Приєднуйся зараз
           </span>
           <h2 className="mt-4 font-heading text-4xl font-black uppercase tracking-tight text-foreground text-balance sm:text-5xl">
-            Грай у <span className="text-glow-violet text-primary">Зловісний</span>
+            Грай на <span className="text-glow-violet text-primary">Зловісному</span>
           </h2>
           <p className="mt-5 text-pretty text-muted-foreground">
             Готові розпочати? Запустіть Minecraft: Java Edition і увійдіть на наш
-            сервер. Жодних модів не потрібно — лише ваша рішучість зустрітися з
-            темрявою.
+            сервер. Жодних модів не потрібно - лише ваша рішучість.
           </p>
         </div>
 
@@ -82,11 +81,11 @@ export function JoinSection() {
               onClick={copyIp}
               className="mt-4 flex items-center gap-3 rounded-sm border border-primary/50 bg-primary/10 px-6 py-4 font-mono text-lg font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
             >
-              play.zlovisny.space
+              zlovisny.space
               {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
             </button>
             <p className="mt-4 text-xs text-muted-foreground">
-              Версія: 1.21.x · Java Edition
+              Версія: 1.21.х · Java Edition
             </p>
           </div>
         </div>

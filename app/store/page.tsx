@@ -168,11 +168,7 @@ export default function StorePage() {
                   </div>
                 </div>
 
-                {rank.popular && (
-                  <span className="pointer-events-none absolute -top-3 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground shadow-[0_4px_18px_oklch(0.62_0.24_320_/_55%)]">
-                    Популярний
-                  </span>
-                )}
+
 
                 <div
                   className={`art-frame relative flex h-full flex-col overflow-hidden rounded-md border p-8 transition-all duration-300 group-hover:z-40 group-hover:-translate-y-2 group-hover:scale-105 ${rank.color} ${rank.glow} ${
@@ -180,6 +176,11 @@ export default function StorePage() {
                   }`}
                   style={rank.shopBg ? { backgroundImage: `url('${rank.shopBg}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : { background: 'var(--card)' }}
                 >
+                  {rank.popular && (
+                    <span className="pointer-events-none absolute -top-3 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground shadow-[0_4px_18px_oklch(0.62_0.24_320_/_55%)]">
+                      Популярний
+                    </span>
+                  )}
                   {/* Rank artwork — now fully visible, zooms on hover */}
                   <div className="pointer-events-none absolute inset-0">
                     <img
@@ -195,17 +196,17 @@ export default function StorePage() {
 
                   <div className="relative flex flex-1 flex-col">
                     <Crown className={`h-8 w-8 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] ${rank.accent}`} />
-                    <div className="mt-4 w-fit rounded-sm bg-black/25 px-2 py-1 backdrop-blur-sm">
-                      <h3 className="font-heading text-2xl font-bold uppercase tracking-wide text-foreground drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
+                    <div className="mt-4">
+                      <h3 className="font-heading text-2xl font-bold uppercase tracking-wide text-foreground [text-shadow:0_2px_4px_rgba(0,0,0,1),0_0_20px_rgba(0,0,0,0.9)]">
                         {rank.name}
                       </h3>
-                      <p className={`mt-0.5 text-sm font-medium drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)] ${rank.accent}`}>{rank.tagline}</p>
+                      <p className={`mt-0.5 text-sm font-medium [text-shadow:0_1px_4px_rgba(0,0,0,1),0_0_12px_rgba(0,0,0,0.8)] ${rank.accent}`}>{rank.tagline}</p>
                     </div>
-                    <div className="mt-3 w-fit rounded-sm bg-black/25 px-2 py-1 backdrop-blur-sm flex items-end gap-1">
-                      <span className={`font-heading text-4xl font-black drop-shadow-[0_2px_12px_rgba(0,0,0,1)] ${rank.accent}`}>
+                    <div className="mt-3 flex items-end gap-1">
+                      <span className={`font-heading text-4xl font-black transition-all duration-300 [text-shadow:0_2px_8px_rgba(0,0,0,1),0_0_20px_rgba(0,0,0,0.9)] group-hover:[filter:brightness(1.4)] group-hover:[text-shadow:0_0_20px_currentColor,0_2px_8px_rgba(0,0,0,1)] ${rank.accent}`}>
                         {billing === 'month' ? rank.priceMonth : rank.priceOne}
                       </span>
-                      <span className="mb-1 text-sm text-muted-foreground drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
+                      <span className="mb-1 text-sm text-muted-foreground [text-shadow:0_1px_4px_rgba(0,0,0,1)]">
                         {billing === 'month' ? '/міс' : ' разово'}
                       </span>
                     </div>

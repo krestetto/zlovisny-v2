@@ -37,7 +37,6 @@ const ranks = [
     glow: 'hover:shadow-[0_0_60px_oklch(0.6_0.22_18_/_45%)]',
     btn: 'border border-accent/50 bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground',
     shopBg: '/shop-2.png',
-    img: '/rank-pakt.png',
     tagline: 'Уклади угоду заради сили.',
     detail:
       'Розширює можливості гри: політ у спавні, особистий фамільяр і щоденні нагороди. Найкраще співвідношення ціни та переваг.',
@@ -60,7 +59,6 @@ const ranks = [
     glow: 'hover:shadow-[0_0_70px_oklch(0.62_0.24_320_/_55%)]',
     btn: 'bg-primary text-primary-foreground hover:opacity-90',
     shopBg: '/shop-3.png',
-    img: '/rank-adept.png',
     tagline: 'Володар прокляту планети.',
     detail:
       'Найвищий рівень сили: безліміт домівок, власна приватна територія та пріоритетний вхід навіть на повний сервер.',

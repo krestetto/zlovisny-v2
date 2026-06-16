@@ -215,6 +215,10 @@
     border-image-outset: 0;
     /* Fallback styling until pixel art border is supplied */
     box-shadow: inset 0 0 0 1px oklch(0.62 0.24 320 / 25%);
+    background-image: url('/button-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   .art-panel {
     background-image: url('/placeholder-panel.png');
@@ -269,7 +273,7 @@
     inset: 0;
     z-index: -1; /* sits behind the text/content */
     background-image: var(--btn-img, url('/placeholder-button-bg.png'));
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     opacity: var(--btn-img-opacity, 0.85);

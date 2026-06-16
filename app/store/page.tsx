@@ -17,7 +17,6 @@ const ranks = [
     base: true,
     popular: true,
     shopBg: '/shop-1.png',
-    img: '/rank-poslushnik.png',
     tagline: 'Перший крок у темряву.',
     detail:
       'Базовий ранг для тих, хто щойно ступив на планету. Дає зручності новачку та виділяє вас у чаті.',

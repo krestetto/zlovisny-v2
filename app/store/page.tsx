@@ -178,34 +178,35 @@ export default function StorePage() {
                 )}
 
                 <div
-                  className={`art-frame relative flex h-full flex-col overflow-hidden rounded-md border bg-card p-8 transition-all duration-300 group-hover:z-40 group-hover:-translate-y-2 group-hover:scale-105 ${rank.color} ${rank.glow} ${
+                  className={`art-frame relative flex h-full flex-col overflow-hidden rounded-md border p-8 transition-all duration-300 group-hover:z-40 group-hover:-translate-y-2 group-hover:scale-105 ${rank.color} ${rank.glow} ${
                     rank.featured ? 'shadow-[0_0_40px_oklch(0.62_0.24_320_/_25%)]' : ''
                   }`}
-                  style={rank.shopBg ? { backgroundImage: `url('${rank.shopBg}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
+                  style={rank.shopBg ? { backgroundImage: `url('${rank.shopBg}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : { background: 'var(--card)' }}
                 >
-                  {/* Rank artwork — brightens & zooms on hover */}
+                  {/* Rank artwork — now fully visible, zooms on hover */}
                   <div className="pointer-events-none absolute inset-0">
                     <img
                       src={rank.img || '/placeholder.svg'}
                       alt=""
                       aria-hidden="true"
-                      className="h-full w-full object-cover opacity-10 transition-all duration-500 group-hover:scale-110 group-hover:opacity-25"
+                      className="h-full w-full object-cover opacity-40 transition-all duration-500 group-hover:scale-110 group-hover:opacity-60"
                       style={{ imageRendering: 'pixelated' }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/85 to-card/60" />
+                    {/* Only a bottom gradient to keep text readable — top stays fully clear */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                   </div>
 
                   <div className="relative flex flex-1 flex-col">
-                    <Crown className={`h-8 w-8 ${rank.accent}`} />
-                    <h3 className="mt-4 font-heading text-2xl font-bold uppercase tracking-wide text-foreground">
+                    <Crown className={`h-8 w-8 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] ${rank.accent}`} />
+                    <h3 className="mt-4 font-heading text-2xl font-bold uppercase tracking-wide text-foreground drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
                       {rank.name}
                     </h3>
-                    <p className={`mt-1 text-sm font-medium ${rank.accent}`}>{rank.tagline}</p>
+                    <p className={`mt-1 text-sm font-medium drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)] ${rank.accent}`}>{rank.tagline}</p>
                     <div className="mt-4 flex items-end gap-1">
-                      <span className={`font-heading text-4xl font-black ${rank.accent}`}>
+                      <span className={`font-heading text-4xl font-black drop-shadow-[0_2px_12px_rgba(0,0,0,1)] ${rank.accent}`}>
                         {billing === 'month' ? rank.priceMonth : rank.priceOne}
                       </span>
-                      <span className="mb-1 text-sm text-muted-foreground">
+                      <span className="mb-1 text-sm text-muted-foreground drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
                         {billing === 'month' ? '/міс' : ' разово'}
                       </span>
                     </div>
@@ -236,7 +237,7 @@ export default function StorePage() {
 
                     <ul className="mt-6 flex flex-1 flex-col gap-3">
                       {rank.perks.map((perk) => (
-                        <li key={perk} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <li key={perk} className="flex items-start gap-2 rounded-sm bg-black/40 px-2 py-1 text-sm text-foreground backdrop-blur-[2px]">
                           <Check className={`mt-0.5 h-4 w-4 shrink-0 ${rank.accent}`} />
                           <span>{perk}</span>
                         </li>

@@ -9,11 +9,11 @@ const admins = [
     imgHover: '/krest.gif',
   },
   {
-    name: '?',
-    role: '?',
-    bio: '?',
-    img: '/admin-2.png',
-    imgHover: '/admin-2-alt.png',
+    name: 'milenk',
+    role: 'Модератор',
+    bio: 'Слідкує за порядком, відповідає на запитання гравців та блокує порушників.',
+    img: '/milenk_1.gif',
+    imgHover: '/milenk.gif',
   },
   {
     name: '?',

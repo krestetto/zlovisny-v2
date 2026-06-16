@@ -51,7 +51,7 @@ function DiscordIcon({ className }: { className?: string }) {
   )
 }
 
-function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: string; bgImg?: string }) {
+function DesktopDropdown({ item, pathname }: { item: NavItem; pathname: string }) {
   const [open, setOpen] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isActive = item.children?.some((c) => !c.external && c.href === pathname)
@@ -67,11 +67,12 @@ function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: s
   return (
     <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
       <button
-        className={`shine flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:bg-secondary hover:text-foreground ${
-          isActive ? 'nav-active' : 'text-muted-foreground'
+        className={`btn-img shine flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:text-red-600 ${
+          isActive ? 'nav-active' : 'text-black'
         }`}
         aria-expanded={open}
         aria-haspopup="true"
+        style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.9' }}
       >
         {item.label}
         <ChevronDown
@@ -86,7 +87,7 @@ function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: s
             : 'pointer-events-none -translate-y-1 opacity-0'
         }`}
       >
-        <div className="art-frame overflow-hidden rounded-md border border-primary/60 shadow-[0_8px_40px_oklch(0_0_0_/_60%)] backdrop-blur-md" style={bgImg ? { backgroundImage: `url('${bgImg}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
+        <div className="art-frame overflow-hidden rounded-md border border-primary/60 bg-background/95 shadow-[0_8px_40px_oklch(0_0_0_/_60%)] backdrop-blur-md">
           {item.children?.map((child) => {
             const cls =
               'shine group flex items-center justify-between px-4 py-3 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-primary hover:pl-6 hover:text-primary-foreground'
@@ -163,7 +164,8 @@ export function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Приєднатися до Discord"
-            className="btn-img shine inline-flex h-11 w-11 items-center justify-center rounded-md border border-primary/40 bg-primary/10 text-primary transition-all hover:scale-110 hover:bg-primary hover:text-primary-foreground"
+            className="btn-img shine inline-flex h-11 w-11 items-center justify-center rounded-md text-black transition-all hover:scale-110 hover:text-red-600"
+            style={{ ['--btn-img' as any]: "url('/button-bg-ds.png')", ['--btn-img-opacity' as any]: '0.9' }}
           >
             <DiscordIcon className="h-5 w-5" />
           </a>
@@ -184,14 +186,15 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) =>
             item.children ? (
-              <DesktopDropdown key={item.label} item={item} pathname={pathname} bgImg={item.label === 'Світ' ? '/button-bg.png' : '/button-bg-2.png'} />
+              <DesktopDropdown key={item.label} item={item} pathname={pathname} />
             ) : (
               <Link
                 key={item.label}
                 href={item.href!}
-                className={`shine rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:bg-secondary hover:text-foreground ${
-                  pathname === item.href ? 'nav-active' : 'text-muted-foreground'
+                className={`btn-img shine rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:text-red-600 ${
+                  pathname === item.href ? 'nav-active' : 'text-black'
                 }`}
+                style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.9' }}
               >
                 {item.label}
               </Link>
@@ -202,7 +205,8 @@ export function SiteHeader() {
         <div className="hidden items-center gap-3 lg:flex">
           <button
             onClick={copyIp}
-            className="btn-img shine group flex items-center gap-2 rounded-sm border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            className="btn-img shine group flex items-center gap-2 rounded-sm px-4 py-5 text-sm font-semibold text-black transition-colors hover:text-red-600"
+            style={{ ['--btn-img' as any]: "url('/button-bg.png')", ['--btn-img-opacity' as any]: '0.9' }}
           >
             <span className="font-mono">{SERVER_IP}</span>
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}

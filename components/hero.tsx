@@ -128,7 +128,7 @@ export function Hero() {
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
           </span>
           <span>
-            <span className="font-bold text-foreground">1 247</span> мандрівників онлайн
+            <span className="font-bold text-foreground">1 248</span> мандрівників онлайн
           </span>
         </div>
       </div>

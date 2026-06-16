@@ -70,7 +70,7 @@ export function Hero() {
         className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-4 py-24 text-center"
         style={{ transform: `translateY(${scrollY * -0.12}px)`, opacity: Math.max(0, 1 - scrollY / 600) }}
       >
-        <span className="mb-6 inline-block rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur-sm">
+        <span className="mb-6 inline-block rounded-full border border-primary/40 bg-primary/10 px-6 py-2.5 text-sm font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur-sm">
           Бета-тест
         </span>
 

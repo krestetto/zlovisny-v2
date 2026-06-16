@@ -10,6 +10,8 @@ const ranks = [
     name: 'Послушник',
     priceMonth: '49₴',
     priceOne: '149₴',
+    monoLinkMonth: 'https://send.monobank.ua/jar/your-jar-id?amount=4900&comment=Прохідка+Послушник+на+місяць',
+    monoLinkOne: 'https://send.monobank.ua/jar/your-jar-id?amount=14900&comment=Прохідка+Послушник+назавжди',
     color: 'border-border',
     accent: 'text-muted-foreground',
     glow: '',
@@ -32,6 +34,8 @@ const ranks = [
     name: 'Пакт',
     priceMonth: '99₴',
     priceOne: '349₴',
+    monoLinkMonth: 'https://send.monobank.ua/jar/your-jar-id?amount=9900&comment=Прохідка+Пакт+на+місяць',
+    monoLinkOne: 'https://send.monobank.ua/jar/your-jar-id?amount=34900&comment=Прохідка+Пакт+назавжди',
     color: 'border-accent/50',
     accent: 'text-accent',
     glow: 'hover:shadow-[0_0_60px_oklch(0.6_0.22_18_/_45%)]',
@@ -53,6 +57,8 @@ const ranks = [
     name: 'Адепт',
     priceMonth: '199₴',
     priceOne: '699₴',
+    monoLinkMonth: 'https://send.monobank.ua/jar/your-jar-id?amount=19900&comment=Прохідка+Адепт+на+місяць',
+    monoLinkOne: 'https://send.monobank.ua/jar/your-jar-id?amount=69900&comment=Прохідка+Адепт+назавжди',
     color: 'border-primary',
     accent: 'text-primary',
     featured: true,
@@ -103,6 +109,34 @@ export default function StorePage() {
 
       <section>
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+          {/* How-to-buy instruction banner */}
+          <div className="mb-10 mx-auto max-w-2xl rounded-lg border border-primary/60 bg-primary/10 p-5 shadow-[0_0_40px_oklch(0.62_0.24_320_/_20%)]">
+            <div className="flex items-start gap-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary/20 text-primary text-xl font-black">
+                !
+              </div>
+              <div>
+                <h2 className="font-heading text-base font-bold uppercase tracking-wide text-foreground">
+                  Як правильно придбати прохідку
+                </h2>
+                <ol className="mt-3 flex flex-col gap-2">
+                  <li className="flex items-start gap-2 text-sm text-foreground">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-sm bg-primary text-xs font-bold text-primary-foreground">1</span>
+                    <span>Оберіть прохідку нижче та натисніть кнопку <strong className="text-primary">«Придбати»</strong> — вас відкриє MonoBank з уже виставленою сумою.</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-foreground">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-sm bg-primary text-xs font-bold text-primary-foreground">2</span>
+                    <span>У полі <strong className="text-primary">«Коментар»</strong> обов'язково вкажіть ваш Minecraft нікнейм <span className="text-muted-foreground">(ліцензія або піратка)</span>.</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-foreground">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-sm bg-primary text-xs font-bold text-primary-foreground">3</span>
+                    <span>Підтвердіть оплату — прохідка активується <strong className="text-primary">миттєво</strong> після надходження коштів.</span>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
           {/* Billing toggle — monthly first & active by default */}
           <div className="mb-12 flex justify-center">
             <div className="inline-flex rounded-md border border-border bg-card p-1">
@@ -134,6 +168,12 @@ export default function StorePage() {
               <div key={rank.name} className="group relative">
                 {/* Page-darkening overlay — dims everything around the hovered block */}
                 <div className="pointer-events-none fixed inset-0 z-30 bg-background/85 opacity-0 backdrop-blur-[2px] transition-opacity duration-500 group-hover:opacity-100" />
+                {/* Popular badge — outside overflow-hidden card so it's never clipped */}
+                {rank.popular && (
+                  <span className="pointer-events-none absolute -top-3 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground shadow-[0_4px_18px_oklch(0.62_0.24_320_/_55%)]">
+                    Популярний
+                  </span>
+                )}
 
                 {/* Left side panel — descriptive text, slides out on hover */}
                 <div className="pointer-events-none absolute right-full top-1/2 z-40 hidden w-56 -translate-y-1/2 translate-x-4 pr-4 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 2xl:block">
@@ -176,11 +216,6 @@ export default function StorePage() {
                   }`}
                   style={rank.shopBg ? { backgroundImage: `url('${rank.shopBg}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : { background: 'var(--card)' }}
                 >
-                  {rank.popular && (
-                    <span className="pointer-events-none absolute -top-3 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-sm bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-foreground shadow-[0_4px_18px_oklch(0.62_0.24_320_/_55%)]">
-                      Популярний
-                    </span>
-                  )}
                   {/* Rank artwork — now fully visible, zooms on hover */}
                   <div className="pointer-events-none absolute inset-0">
                     <img
@@ -243,11 +278,14 @@ export default function StorePage() {
                         </li>
                       ))}
                     </ul>
-                    <button
-                      className={`shine mt-8 min-h-[44px] rounded-sm px-6 text-sm font-bold uppercase tracking-wide transition-all ${rank.btn}`}
+                    <a
+                      href={billing === 'month' ? rank.monoLinkMonth : rank.monoLinkOne}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`shine mt-8 flex min-h-[44px] items-center justify-center rounded-sm px-6 text-sm font-bold uppercase tracking-wide transition-all ${rank.btn}`}
                     >
                       Придбати
-                    </button>
+                    </a>
                     {/* Prominent glowing upgrade button inside Пакт & Адепт */}
                     {!rank.base && (
                       <button

@@ -102,7 +102,7 @@ export function Hero() {
         <p className="mt-3 font-heading text-lg uppercase tracking-[0.35em] text-accent sm:text-2xl">
           Майнкрафт сервер
         </p>
-        <p className="mt-8 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+        <p className="mt-8 max-w-2xl text-pretty text-base leading-relaxed text-black sm:text-lg">
           Обирайте клас та розвивайте свої магічні здібності безпосередньо під час виживання. Засновуйте власні міста та захоплюйте стратегічні точки ресурсів на карті для отримання пасивного прибутку. Досліджуйте кастомні предмети з унікальною їжею та проявляйте креативність, малюючи справжні картини прямо в грі. Спілкуйтеся через локальний голосовий чат і насолоджуйтеся повною свободою дій завдяки мінімуму правил.
         </p>
 

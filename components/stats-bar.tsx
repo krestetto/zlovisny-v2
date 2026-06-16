@@ -1,8 +1,8 @@
 const stats = [
-  { value: '50K+', label: 'Гравців' },
-  { value: '120+', label: 'Унікальних босів' },
-  { value: '4', label: 'Проклятих світи' },
-  { value: '99.9%', label: 'Аптайм' },
+  { value: 'Відкрито', label: 'Бета-тест' },
+  { value: '100%', label: 'Український Сервер' },
+  { value: '24/7', label: 'Стабільний аптайм' },
+  { value: '99.9%', label: 'Унікальний Лор' },
 ]
 
 export function StatsBar() {

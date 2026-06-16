@@ -195,11 +195,13 @@ export default function StorePage() {
 
                   <div className="relative flex flex-1 flex-col">
                     <Crown className={`h-8 w-8 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] ${rank.accent}`} />
-                    <h3 className="mt-4 font-heading text-2xl font-bold uppercase tracking-wide text-foreground drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
-                      {rank.name}
-                    </h3>
-                    <p className={`mt-1 text-sm font-medium drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)] ${rank.accent}`}>{rank.tagline}</p>
-                    <div className="mt-4 flex items-end gap-1">
+                    <div className="mt-4 w-fit rounded-sm bg-black/25 px-2 py-1 backdrop-blur-sm">
+                      <h3 className="font-heading text-2xl font-bold uppercase tracking-wide text-foreground drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
+                        {rank.name}
+                      </h3>
+                      <p className={`mt-0.5 text-sm font-medium drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)] ${rank.accent}`}>{rank.tagline}</p>
+                    </div>
+                    <div className="mt-3 w-fit rounded-sm bg-black/25 px-2 py-1 backdrop-blur-sm flex items-end gap-1">
                       <span className={`font-heading text-4xl font-black drop-shadow-[0_2px_12px_rgba(0,0,0,1)] ${rank.accent}`}>
                         {billing === 'month' ? rank.priceMonth : rank.priceOne}
                       </span>

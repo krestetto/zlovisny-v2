@@ -19,15 +19,15 @@ const admins = [
     name: '?',
     role: '?',
     bio: '?',
-    img: '/admin-3.png',
-    imgHover: '/admin-3-alt.png',
+    img: '/2.png',
+    imgHover: '/2.png',
   },
   {
     name: '?',
     role: '?',
     bio: '?',
-    img: '/admin-4.png',
-    imgHover: '/admin-4-alt.png',
+    img: '/2.png',
+    imgHover: '/2.png',
   },
 ]
 

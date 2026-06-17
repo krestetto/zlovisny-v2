@@ -71,7 +71,7 @@ function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: s
           isActive ? 'nav-active text-accent' : 'text-white'
         }`}
         style={{
-          backgroundImage: "url('/button-bg-1.jpg')", // Шлях до твоєї текстури
+          backgroundImage: "url('/button-bg-1.png')", // Шлях до твоєї текстури
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

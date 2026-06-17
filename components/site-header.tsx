@@ -88,14 +88,12 @@ function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: s
       >
         <div className="art-frame overflow-hidden rounded-md border border-primary/60 shadow-[0_8px_40px_oklch(0_0_0_/_60%)] backdrop-blur-md" style={bgImg ? { backgroundImage: `url('${bgImg}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
           {item.children?.map((child) => {
-            // Перевіряємо, чи активна зараз ця сторінка (як у хедері)
             const isActiveChild = pathname === child.href;
             
-            // Нові стилі, ідентичні головному меню
-            const cls = `shine group flex items-center justify-between rounded-sm px-4 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-300 hover:bg-accent/10 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
+            const cls = `shine group flex items-center justify-between rounded-sm px-4 py-2.5 text-sm font-medium uppercase tracking-wide transition-all duration-300 bg-black/40 backdrop-blur-md mb-1 last:mb-0 hover:bg-accent/40 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
               isActiveChild 
                 ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]' 
-                : 'text-muted-foreground/70'
+                : 'text-white'
             }`
             const inner = (
               <>

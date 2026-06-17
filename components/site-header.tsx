@@ -90,7 +90,7 @@ function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: s
           {item.children?.map((child) => {
             const isActiveChild = pathname === child.href;
             
-            const cls = `shine group flex items-center justify-between rounded-sm px-4 py-2.5 text-sm font-medium uppercase tracking-wide transition-all duration-300 bg-black/20 backdrop-blur-md mb-1 last:mb-0 hover:bg-accent/30 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
+            const cls = `shine group flex items-center justify-between rounded-sm px-4 py-2.5 text-sm font-medium uppercase tracking-wide transition-all duration-300 bg-black/5 backdrop-blur-md mb-1 last:mb-0 hover:bg-accent/30 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
               isActiveChild 
                 ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]' 
                 : 'text-white'

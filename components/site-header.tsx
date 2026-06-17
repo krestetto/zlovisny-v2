@@ -86,14 +86,27 @@ function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: s
             : 'pointer-events-none -translate-y-1 opacity-0'
         }`}
       >
-        <div className="art-frame overflow-hidden rounded-md border border-primary/60 shadow-[0_8px_40px_oklch(0_0_0_/_60%)] backdrop-blur-md" style={bgImg ? { backgroundImage: `url('${bgImg}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
+        <div
+          className="art-frame overflow-hidden rounded-md border border-primary/60 p-1" // Додано p-1
+          style={
+            bgImg
+              ? {
+                  backgroundImage: `url('${bgImg}')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundColor: 'rgba(0, 0, 0, 0.3)', // ТРОХИ ЗАТЕМНИЛИ КАРТУ
+                  backgroundBlendMode: 'overlay', // Змішування затемнення з фоном
+                }
+              : { backgroundColor: 'rgba(0, 0, 0, 0.3)' } // Затемнення за замовчуванням
+          }
+        >
           {item.children?.map((child) => {
             const isActiveChild = pathname === child.href;
 
             const cls = `shine group flex items-center justify-between px-4 py-3 text-sm font-medium uppercase tracking-wide transition-all duration-200 [text-shadow:0_1px_2px_rgba(0,0,0,0.8)] ${
               isActiveChild
                 ? 'nav-active text-accent' // Колір акценту, який має бути червоним
-                : 'text-yellow'
+                : 'text-white'
             } hover:bg-red-500/30 hover:text-white` // ЧЕРВОНА ПЛАШКА ПРИ НАВЕДЕННІ
             const inner = (
               <>

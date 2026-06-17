@@ -67,9 +67,14 @@ function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: s
   return (
     <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
       <button
-        className={`shine flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:bg-secondary hover:text-foreground ${
-          isActive ? 'nav-active' : 'text-muted-foreground'
+        className={`shine flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:text-accent [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] ${
+          isActive ? 'nav-active text-accent' : 'text-white'
         }`}
+        style={{
+          backgroundImage: "url('/button-bg-1.jpg')", // Шлях до твоєї текстури
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
         aria-expanded={open}
         aria-haspopup="true"
       >
@@ -207,11 +212,16 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href!}
-                className={`shine rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-300 hover:bg-accent/10 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
+                className={`shine rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
                   pathname === item.href 
                     ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]' 
-                    : 'text-muted-foreground/70'
+                    : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
                 }`}
+                style={{
+                  backgroundImage: "url('/button-bg-1.jpg')", // Шлях до твоєї текстури
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
               >
                 {item.label}
               </Link>

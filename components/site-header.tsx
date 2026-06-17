@@ -93,7 +93,7 @@ function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: s
             const cls = `shine group flex items-center justify-between px-4 py-3 text-sm font-medium uppercase tracking-wide transition-all duration-200 [text-shadow:0_1px_2px_rgba(0,0,0,0.8)] ${
               isActiveChild
                 ? 'nav-active text-accent' // Колір акценту, який має бути червоним
-                : 'text-white'
+                : 'text-yellow'
             } hover:bg-red-500/30 hover:text-white` // ЧЕРВОНА ПЛАШКА ПРИ НАВЕДЕННІ
             const inner = (
               <>

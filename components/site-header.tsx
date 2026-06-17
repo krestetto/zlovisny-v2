@@ -189,8 +189,10 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href!}
-                className={`shine rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:bg-secondary hover:text-foreground ${
-                  pathname === item.href ? 'nav-active' : 'text-muted-foreground'
+                className={`shine rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-300 hover:bg-accent/10 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
+                  pathname === item.href 
+                    ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]' 
+                    : 'text-muted-foreground/70'
                 }`}
               >
                 {item.label}

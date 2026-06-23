@@ -41,7 +41,7 @@ export default function ClassesPage() {
                   aria-pressed={isActive}
                   className={`shine flex min-h-[56px] items-center gap-3 rounded-md border px-4 text-left transition-all ${
                     isActive
-                      ? 'border-primary bg-primary/15 text-foreground shadow-[0_0_24px_oklch(0.62_0.24_320_/_35%)]'
+                      ? 'border-primary bg-primary/15 text-foreground shadow-[0_0_24px_oklch(0.55_0.23_27_/_35%)]'
                       : 'border-border bg-card text-muted-foreground hover:border-primary/50 hover:text-foreground'
                   }`}
                 >
@@ -82,7 +82,7 @@ export default function ClassesPage() {
                 key={c.id}
                 className={`art-frame art-frame-classes overflow-hidden rounded-lg border bg-card/70 backdrop-blur-sm transition-all ${
                   isOpen
-                    ? 'border-primary/60 shadow-[0_0_30px_oklch(0.62_0.24_320_/_30%)]'
+                    ? 'border-primary/60 shadow-[0_0_30px_oklch(0.55_0.23_27_/_30%)]'
                     : 'border-border'
                 }`}
               >

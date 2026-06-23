@@ -43,7 +43,7 @@ export function ClassDetail({ info }: { info: ClassInfo }) {
               </div>
               <div className="mt-1 h-2 overflow-hidden rounded-full bg-secondary">
                 <div
-                  className="h-full rounded-full bg-primary shadow-[0_0_12px_oklch(0.62_0.24_320_/_60%)] transition-all duration-700"
+                  className="h-full rounded-full bg-primary shadow-[0_0_12px_oklch(0.55_0.23_27_/_60%)] transition-all duration-700"
                   style={{ width: `${s.value}%` }}
                 />
               </div>
@@ -56,7 +56,7 @@ export function ClassDetail({ info }: { info: ClassInfo }) {
             href={info.videoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="shine mt-7 inline-flex min-h-[44px] items-center gap-2 rounded-md bg-primary px-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-all hover:scale-105 hover:shadow-[0_0_30px_oklch(0.62_0.24_320_/_55%)]"
+            className="shine mt-7 inline-flex min-h-[44px] items-center gap-2 rounded-md bg-primary px-6 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-all hover:scale-105 hover:shadow-[0_0_30px_oklch(0.55_0.23_27_/_55%)]"
           >
             <Play className="h-4 w-4" />
             Дивитися відео-огляд

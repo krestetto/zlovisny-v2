@@ -38,7 +38,7 @@ export function Hero() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 30%, oklch(0.3 0.12 300) 0%, oklch(0.17 0.05 285) 55%, oklch(0.12 0.04 280) 100%)',
+            'radial-gradient(ellipse at 50% 30%, oklch(0.93 0.05 25) 0%, oklch(0.98 0.012 22) 55%, oklch(0.99 0.004 20) 100%)',
         }}
         aria-hidden="true"
       />
@@ -95,7 +95,7 @@ export function Hero() {
             height={420}
             loading="eager"
             fetchPriority="high"
-            className="mx-auto w-full max-w-7xl object-contain drop-shadow-[0_0_50px_oklch(0.55_0.22_300_/_45%)]"
+            className="mx-auto w-full max-w-7xl object-contain drop-shadow-[0_0_50px_oklch(0.55_0.23_27_/_45%)]"
             style={{ imageRendering: 'pixelated' }}
           />
         </h1>
@@ -109,7 +109,7 @@ export function Hero() {
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
           <button
             onClick={copyIp}
-            className="btn-img shine group flex items-center gap-3 rounded-md bg-primary px-8 py-4 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_40px_oklch(0.62_0.24_320_/_50%)] transition-all hover:scale-105 hover:shadow-[0_0_60px_oklch(0.62_0.24_320_/_70%)]"
+            className="btn-img shine group flex items-center gap-3 rounded-md bg-primary px-8 py-4 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_40px_oklch(0.55_0.23_27_/_50%)] transition-all hover:scale-105 hover:shadow-[0_0_60px_oklch(0.55_0.23_27_/_70%)]"
           >
             <span className="font-mono">{SERVER_IP}</span>
             {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}

@@ -82,7 +82,7 @@ export function Hero() {
           height={180}
           loading="eager"
           fetchPriority="high"
-          className="animate-float-slow mb-6 h-36 w-36 object-contain drop-shadow-[0_0_50px_oklch(0.6_0.22_18_/_55%)] sm:h-44 sm:w-44"
+          className="animate-float-slow mb-6 h-36 w-36 object-contain sm:h-44 sm:w-44"
           style={{ imageRendering: 'pixelated' }}
         />
 
@@ -95,7 +95,7 @@ export function Hero() {
             height={420}
             loading="eager"
             fetchPriority="high"
-            className="mx-auto w-full max-w-7xl object-contain drop-shadow-[0_0_50px_oklch(0.55_0.23_27_/_45%)]"
+            className="mx-auto w-full max-w-7xl object-contain"
             style={{ imageRendering: 'pixelated' }}
           />
         </h1>

@@ -60,9 +60,10 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      {/* Vignette / readability overlay */}
+      {/* Vignette / readability overlay — fades to dark at the bottom so it
+          flows into the cosmic sections below instead of a flat white bar */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background"
+        className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-black/92"
         aria-hidden="true"
       />
 
@@ -116,24 +117,24 @@ export function Hero() {
           </button>
           <Link
             href="/features"
-            className="btn-img shine rounded-md border border-border bg-secondary/50 px-8 py-4 text-base font-bold uppercase tracking-wide text-foreground backdrop-blur-sm transition-colors hover:border-accent/60 hover:text-accent"
+            className="btn-img shine rounded-md border border-primary/30 bg-black/35 px-8 py-4 text-base font-bold uppercase tracking-wide text-white backdrop-blur-sm transition-colors [text-shadow:0_1px_3px_rgba(0,0,0,0.6)] hover:border-accent/60 hover:text-accent"
           >
             Дослідити світ
           </Link>
         </div>
 
-        <div className="mt-10 flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="mt-10 flex items-center gap-2 text-sm text-white/70 [text-shadow:0_1px_3px_rgba(0,0,0,0.7)]">
           <span className="relative flex h-2.5 w-2.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
           </span>
           <span>
-            <span className="font-bold text-foreground">1 248</span> мандрівників онлайн
+            <span className="font-bold text-white">1 248</span> мандрівників онлайн
           </span>
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce text-muted-foreground">
+      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce text-white/60 [text-shadow:0_1px_3px_rgba(0,0,0,0.7)]">
         <ChevronDown className="h-6 w-6" />
       </div>
     </section>

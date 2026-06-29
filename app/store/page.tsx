@@ -38,7 +38,7 @@ const ranks = [
     monoLinkOne: 'https://send.monobank.ua/jar/your-jar-id?amount=34900&comment=Прохідка+Пакт+назавжди',
     color: 'border-accent/50',
     accent: 'text-accent',
-    glow: 'hover:shadow-[0_0_60px_oklch(0.6_0.22_18_/_45%)]',
+    glow: 'hover:shadow-[0_0_60px_oklch(0.6_0.22_18_/_20%)]',
     btn: 'border border-accent/50 bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground',
     shopBg: '/shop-2.png',
     tagline: 'Уклади угоду заради сили.',

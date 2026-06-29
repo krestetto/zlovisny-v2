@@ -247,7 +247,7 @@ export function SiteHeader() {
         </div>
 
         {/* CENTER — Logo with tooltip */}
-        <div className="flex flex-1 items-center justify-center">
+        <div className="flex items-center justify-center px-2">
           <div className="relative group/logo">
             <Link href="/" className="flex items-center justify-center">
               <Image

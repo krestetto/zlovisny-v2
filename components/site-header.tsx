@@ -11,22 +11,24 @@ const DISCORD_URL = 'https://discord.gg/fwZQX55VCF'
 const WIKI_URL = 'https://zlovisny.gitbook.io/wiki'
 
 type NavChild = { href: string; label: string; external?: boolean }
-type NavItem = { href?: string; label: string; children?: NavChild[] }
+type NavItem = { href?: string; label: string; children?: NavChild[]; btnBg?: string }
 
 const navItems: NavItem[] = [
-  { href: '/', label: 'Головна' },
-  { href: '/features', label: 'Особливості' },
-  { href: '/classes', label: 'Класи' },
+  { href: '/', label: 'Головна', btnBg: '/button-bg-3.png' },
+  { href: '/features', label: 'Особливості', btnBg: '/button-bg-3.png' },
+  { href: '/classes', label: 'Класи', btnBg: '/button-bg-3.png' },
   {
     label: 'Світ',
+    btnBg: '/button-bg-3.png',
     children: [
       { href: 'https://map.zlovisny.space', label: 'Жива Мапа', external: true },
       { href: WIKI_URL, label: 'Вікі / Лор', external: true },
     ],
   },
-  { href: '/store', label: 'Прохідка' },
+  { href: '/store', label: 'Прохідка', btnBg: '/button-bg-3.png' },
   {
     label: 'Спільнота',
+    btnBg: '/button-bg-3.png',
     children: [
       { href: '/rules', label: 'Правила' },
       { href: '/vote', label: 'Голосувати' },
@@ -51,7 +53,7 @@ function DiscordIcon({ className }: { className?: string }) {
   )
 }
 
-function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: string; bgImg?: string }) {
+function DesktopDropdown({ item, pathname, bgImg, btnBg }: { item: NavItem; pathname: string; bgImg?: string; btnBg?: string }) {
   const [open, setOpen] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isActive = item.children?.some((c) => !c.external && c.href === pathname)
@@ -71,7 +73,7 @@ function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: s
           isActive ? 'nav-active text-accent' : 'text-white'
         }`}
         style={{
-          backgroundImage: "url('/button-bg-1.png')", // Шлях до твоєї текстури
+          backgroundImage: btnBg ? `url('${btnBg}')` : "url('/button-bg-1.png')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -207,7 +209,7 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) =>
             item.children ? (
-              <DesktopDropdown key={item.label} item={item} pathname={pathname} bgImg={item.label === 'Світ' ? '/button-bg-1.png' : '/button-bg-2.png'} />
+              <DesktopDropdown key={item.label} item={item} pathname={pathname} bgImg={item.label === 'Світ' ? '/button-bg-1.png' : '/button-bg-2.png'} btnBg={item.btnBg} />
             ) : (
               <Link
                 key={item.label}
@@ -218,7 +220,7 @@ export function SiteHeader() {
                     : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
                 }`}
                 style={{
-                  backgroundImage: "url('/button-bg-3.png')", // Шлях до твоєї текстури
+                  backgroundImage: item.btnBg ? `url('${item.btnBg}')` : undefined,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}

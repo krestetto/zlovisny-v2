@@ -67,9 +67,9 @@ function DesktopDropdown({ item, pathname, bgImg, btnBg }: { item: NavItem; path
   }
 
   return (
-    <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
+    <div className="relative self-stretch flex" onMouseEnter={show} onMouseLeave={hide}>
       <button
-        className={`shine flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:text-accent [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] ${
+        className={`shine flex h-full items-center gap-1 px-5 text-sm font-medium uppercase tracking-widest transition-all duration-200 hover:text-accent [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] border-x border-white/10 ${
           isActive ? 'nav-active text-accent' : 'text-white'
         }`}
         style={{
@@ -180,8 +180,8 @@ export function SiteHeader() {
         className="header-img sticky top-0 z-50 border-b border-border/40 bg-transparent backdrop-blur-md"
         style={{ ['--header-img' as string]: "url('/header-bg-cosmic.png')", ['--header-img-opacity' as string]: '1' }}
       >
-      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
-        <div className="flex items-center gap-3">
+      <div className="mx-auto flex h-24 max-w-7xl items-stretch justify-between">
+        <div className="flex items-center gap-3 px-4">
           {/* Discord icon — top-left of the header */}
           <a
             href={DISCORD_URL}
@@ -200,13 +200,17 @@ export function SiteHeader() {
               height={80}
               className="h-20 w-20 object-contain drop-shadow-[0_0_12px_oklch(0.52_0.22_20_/_60%)]"
             />
-            <span className="hidden font-heading text-lg font-bold uppercase tracking-widest text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.8)] sm:inline">
-              Зловісний
-            </span>
+            <Image
+              src="/wordmark.png"
+              alt="Зловісний"
+              width={160}
+              height={40}
+              className="hidden h-10 w-auto object-contain drop-shadow-[0_0_10px_rgba(0,0,0,0.8)] sm:block"
+            />
           </Link>
         </div>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden self-stretch items-stretch lg:flex">
           {navItems.map((item) =>
             item.children ? (
               <DesktopDropdown key={item.label} item={item} pathname={pathname} bgImg={item.label === 'Світ' ? '/button-bg-1.png' : '/button-bg-2.png'} btnBg={item.btnBg} />
@@ -214,9 +218,9 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href!}
-                className={`shine rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
-                  pathname === item.href 
-                    ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]' 
+                className={`shine flex items-center px-5 text-sm font-medium uppercase tracking-widest transition-all duration-300 border-x border-white/10 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
+                  pathname === item.href
+                    ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]'
                     : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
                 }`}
                 style={{
@@ -231,7 +235,7 @@ export function SiteHeader() {
           )}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 px-4 lg:flex">
           <button
             onClick={copyIp}
             className="btn-img shine group flex items-center gap-2 rounded-sm border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"

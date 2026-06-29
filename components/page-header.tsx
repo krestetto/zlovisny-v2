@@ -11,7 +11,7 @@ export function PageHeader({ eyebrow, title, description }: PageHeaderProps) {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 0%, oklch(0.92 0.06 25) 0%, oklch(0.99 0.004 20) 70%)',
+            'radial-gradient(ellipse at 50% 0%, oklch(0.2 0.08 25) 0%, oklch(0.09 0.012 25) 70%)',
         }}
         aria-hidden="true"
       />
@@ -25,7 +25,7 @@ export function PageHeader({ eyebrow, title, description }: PageHeaderProps) {
         className="absolute inset-0 bg-gradient-to-b from-background/60 to-background"
         aria-hidden="true"
       />
-      <div className="relative mx-auto max-w-7xl px-4 py-20 text-center sm:px-6 lg:py-28">
+      <div className="relative mx-auto max-w-7xl px-4 py-12 text-center sm:px-6 lg:py-16">
         {eyebrow && (
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">
             {eyebrow}

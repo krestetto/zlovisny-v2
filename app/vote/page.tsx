@@ -50,7 +50,7 @@ export default function VotePage() {
                       href={site.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="shine inline-flex shrink-0 items-center justify-center gap-1 rounded-md bg-primary px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-all hover:scale-105 hover:shadow-[0_0_30px_oklch(0.62_0.24_320_/_55%)]"
+                      className="shine inline-flex shrink-0 items-center justify-center gap-1 rounded-md bg-primary px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-all hover:scale-105 hover:shadow-[0_0_30px_oklch(0.55_0.23_27_/_55%)]"
                     >
                       Голосувати
                       <ExternalLink className="ml-1 h-4 w-4" />

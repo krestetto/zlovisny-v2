@@ -11,7 +11,7 @@ export function PageHeader({ eyebrow, title, description }: PageHeaderProps) {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 0%, oklch(0.3 0.12 300) 0%, oklch(0.17 0.05 285) 70%)',
+            'radial-gradient(ellipse at 50% 0%, oklch(0.92 0.06 25) 0%, oklch(0.99 0.004 20) 70%)',
         }}
         aria-hidden="true"
       />

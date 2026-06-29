@@ -62,7 +62,7 @@ const ranks = [
     color: 'border-primary',
     accent: 'text-primary',
     featured: true,
-    glow: 'hover:shadow-[0_0_70px_oklch(0.62_0.24_320_/_55%)]',
+    glow: 'hover:shadow-[0_0_70px_oklch(0.55_0.23_27_/_55%)]',
     btn: 'bg-primary text-primary-foreground hover:opacity-90',
     shopBg: '/shop-3.png',
     tagline: 'Володар прокляту планети.',
@@ -110,7 +110,7 @@ export default function StorePage() {
       <section>
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
           {/* How-to-buy instruction banner */}
-          <div className="mb-10 mx-auto max-w-2xl rounded-lg border border-primary/60 bg-primary/10 p-5 shadow-[0_0_40px_oklch(0.62_0.24_320_/_20%)]">
+          <div className="mb-10 mx-auto max-w-2xl rounded-lg border border-primary/60 bg-primary/10 p-5 shadow-[0_0_40px_oklch(0.55_0.23_27_/_20%)]">
             <div className="flex items-start gap-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary/20 text-primary text-xl font-black">
                 !
@@ -205,7 +205,7 @@ export default function StorePage() {
 
                 <div
                   className={`art-frame relative flex h-full flex-col overflow-hidden rounded-md border p-8 transition-all duration-300 group-hover:z-40 group-hover:-translate-y-2 group-hover:scale-105 ${rank.color} ${rank.glow} ${
-                    rank.featured ? 'shadow-[0_0_40px_oklch(0.62_0.24_320_/_25%)]' : ''
+                    rank.featured ? 'shadow-[0_0_40px_oklch(0.55_0.23_27_/_25%)]' : ''
                   }`}
                   style={rank.shopBg ? { backgroundImage: `url('${rank.shopBg}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : { background: 'var(--card)' }}
                 >
@@ -283,7 +283,7 @@ export default function StorePage() {
                     {!rank.base && (
                       <button
                         onClick={scrollToUpgrade}
-                        className="shine mt-3 flex min-h-[44px] items-center justify-center gap-2 rounded-sm border border-primary bg-primary/15 px-6 text-sm font-bold uppercase tracking-wide text-primary shadow-[0_0_22px_oklch(0.62_0.24_320_/_45%)] transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_40px_oklch(0.62_0.24_320_/_70%)]"
+                        className="shine mt-3 flex min-h-[44px] items-center justify-center gap-2 rounded-sm border border-primary bg-primary/15 px-6 text-sm font-bold uppercase tracking-wide text-primary shadow-[0_0_22px_oklch(0.55_0.23_27_/_45%)] transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_40px_oklch(0.55_0.23_27_/_70%)]"
                       >
                         <ArrowUpCircle className="h-4 w-4" />
                         Покращити прохідку
@@ -300,12 +300,12 @@ export default function StorePage() {
             ref={upgradeRef}
             className={`group art-frame mt-14 scroll-mt-28 overflow-hidden rounded-lg border bg-gradient-to-r from-primary/15 via-card to-accent/15 p-8 transition-all duration-500 ${
               highlight
-                ? 'border-primary shadow-[0_0_80px_oklch(0.62_0.24_320_/_70%)] ring-2 ring-primary scale-[1.02]'
-                : 'border-primary/60 shadow-[0_0_50px_oklch(0.62_0.24_320_/_30%)]'
+                ? 'border-primary shadow-[0_0_80px_oklch(0.55_0.23_27_/_70%)] ring-2 ring-primary scale-[1.02]'
+                : 'border-primary/60 shadow-[0_0_50px_oklch(0.55_0.23_27_/_30%)]'
             }`}
           >
             <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-start md:text-left">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-primary/50 bg-primary/20 text-primary shadow-[0_0_30px_oklch(0.62_0.24_320_/_50%)]">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-primary/50 bg-primary/20 text-primary shadow-[0_0_30px_oklch(0.55_0.23_27_/_50%)]">
                 <ArrowUpCircle className="h-9 w-9" />
               </div>
               <div className="flex-1">
@@ -359,7 +359,7 @@ export default function StorePage() {
                   {['/rank-poslushnik.png', '/rank-pakt.png', '/rank-adept.png'].map((src, i) => (
                     <div
                       key={src}
-                      className="art-frame overflow-hidden rounded-md border border-primary/40 shadow-[0_0_24px_oklch(0.62_0.24_320_/_30%)]"
+                      className="art-frame overflow-hidden rounded-md border border-primary/40 shadow-[0_0_24px_oklch(0.55_0.23_27_/_30%)]"
                       style={{ transitionDelay: `${i * 100}ms` }}
                     >
                       <img
@@ -374,7 +374,7 @@ export default function StorePage() {
               </div>
               <Link
                 href="/support"
-                className="shine flex min-h-[52px] shrink-0 items-center justify-center rounded-md bg-primary px-8 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_30px_oklch(0.62_0.24_320_/_55%)] transition-all hover:scale-105 hover:shadow-[0_0_50px_oklch(0.62_0.24_320_/_75%)]"
+                className="shine flex min-h-[52px] shrink-0 items-center justify-center rounded-md bg-primary px-8 text-base font-bold uppercase tracking-wide text-primary-foreground shadow-[0_0_30px_oklch(0.55_0.23_27_/_55%)] transition-all hover:scale-105 hover:shadow-[0_0_50px_oklch(0.55_0.23_27_/_75%)]"
               >
                 Покращити прохідку
               </Link>

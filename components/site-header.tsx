@@ -67,9 +67,14 @@ function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: s
   return (
     <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
       <button
-        className={`shine flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:bg-secondary hover:text-foreground ${
-          isActive ? 'nav-active' : 'text-muted-foreground'
+        className={`shine flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:text-accent [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] ${
+          isActive ? 'nav-active text-accent' : 'text-white'
         }`}
+        style={{
+          backgroundImage: "url('/button-bg-1.png')", // Шлях до твоєї текстури
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
         aria-expanded={open}
         aria-haspopup="true"
       >
@@ -86,10 +91,28 @@ function DesktopDropdown({ item, pathname, bgImg }: { item: NavItem; pathname: s
             : 'pointer-events-none -translate-y-1 opacity-0'
         }`}
       >
-        <div className="art-frame overflow-hidden rounded-md border border-primary/60 shadow-[0_8px_40px_oklch(0_0_0_/_60%)] backdrop-blur-md" style={bgImg ? { backgroundImage: `url('${bgImg}')`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
+        <div
+          className="art-frame overflow-hidden rounded-md border border-primary/60 p-1" // Додано p-1
+          style={
+            bgImg
+              ? {
+                  backgroundImage: `url('${bgImg}')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundColor: 'rgba(0, 0, 0, 0.3)', // ТРОХИ ЗАТЕМНИЛИ КАРТУ
+                  backgroundBlendMode: 'overlay', // Змішування затемнення з фоном
+                }
+              : { backgroundColor: 'rgba(0, 0, 0, 0.3)' } // Затемнення за замовчуванням
+          }
+        >
           {item.children?.map((child) => {
-            const cls =
-              'shine group flex items-center justify-between px-4 py-3 text-sm font-medium text-black transition-all duration-200 hover:bg-gray-500/40 hover:pl-6 hover:text-black'
+            const isActiveChild = pathname === child.href;
+
+            const cls = `shine group flex items-center justify-between px-4 py-3 text-sm font-medium uppercase tracking-wide transition-all duration-200 [text-shadow:0_1px_2px_rgba(0,0,0,0.8)] ${
+              isActiveChild
+                ? 'nav-active text-accent' // Колір акценту, який має бути червоним
+                : 'text-white'
+            } hover:bg-red-500/30 hover:text-white` // ЧЕРВОНА ПЛАШКА ПРИ НАВЕДЕННІ
             const inner = (
               <>
                 <span>{child.label}</span>
@@ -189,9 +212,16 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href!}
-                className={`shine rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-200 hover:bg-secondary hover:text-foreground ${
-                  pathname === item.href ? 'nav-active' : 'text-muted-foreground'
+                className={`shine rounded-sm px-3 py-2 text-sm font-medium uppercase tracking-wide transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
+                  pathname === item.href 
+                    ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]' 
+                    : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
                 }`}
+                style={{
+                  backgroundImage: "url('/button-bg-1.png')", // Шлях до твоєї текстури
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
               >
                 {item.label}
               </Link>

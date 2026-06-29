@@ -27,7 +27,7 @@ const navItems: NavItem[] = [
       { href: WIKI_URL, label: 'Вікі / Лор', external: true },
     ],
   },
-  { href: '/store', label: 'Прохідка', btnBg: '/button-bg-3.png', minW: '110px', btnH: '52px' },
+  { href: '/store', label: 'Прохідка', btnBg: '/button-bg-4.png', minW: '110px', btnH: '52px' },
   {
     label: 'Спільнота',
     btnBg: '/button-bg-3.png',

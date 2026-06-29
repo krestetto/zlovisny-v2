@@ -78,7 +78,7 @@ function DesktopDropdown({ item, pathname, bgImg, btnBg }: { item: NavItem; path
           backgroundSize: '100% 100%',
           backgroundPosition: 'center',
           minWidth: item.minW,
-          height: '52px',
+          height: '45px',
         }}
         aria-expanded={open}
         aria-haspopup="true"

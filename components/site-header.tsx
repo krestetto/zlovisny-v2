@@ -183,21 +183,39 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className="header-img sticky top-0 z-50 border-b border-border/40 bg-transparent backdrop-blur-md"
+        className="header-img sticky top-0 z-50 bg-transparent backdrop-blur-md"
         style={{ ['--header-img' as string]: "url('/header-bg-cosmic.png')", ['--header-img-opacity' as string]: '1' }}
       >
       <div className="mx-auto flex h-24 max-w-7xl items-stretch justify-between">
-        <div className="flex items-center gap-3 px-4">
-          {/* Discord icon — top-left of the header */}
-          <a
-            href={DISCORD_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Приєднатися до Discord"
-            className="btn-img shine inline-flex h-16 w-16 items-center justify-center rounded-md border-2 border-primary/50 bg-primary/10 text-primary transition-all hover:scale-105 hover:bg-primary hover:text-primary-foreground"
-          >
-            <DiscordIcon className="h-8 w-8" />
-          </a>
+        <div className="flex items-center gap-2 px-4">
+          {/* Discord icon with tooltip */}
+          <div className="relative group/discord">
+            <a
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Приєднатися до Discord"
+              className="btn-img shine inline-flex h-16 w-16 items-center justify-center rounded-md border-2 border-primary/50 bg-primary/10 text-primary transition-all hover:scale-105 hover:bg-primary hover:text-primary-foreground"
+            >
+              <DiscordIcon className="h-8 w-8" />
+            </a>
+            {/* Tooltip */}
+            <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-3 w-52 -translate-x-1/2 opacity-0 translate-y-1 transition-all duration-200 group-hover/discord:opacity-100 group-hover/discord:translate-y-0">
+              <div
+                className="rounded-md border border-primary/60 p-3 text-center"
+                style={{ backgroundColor: 'rgba(10,5,5,0.92)', backgroundImage: "url('/button-bg-2.png')", backgroundSize: 'cover', backgroundBlendMode: 'overlay' }}
+              >
+                <DiscordIcon className="mx-auto mb-1.5 h-5 w-5 text-primary" />
+                <p className="text-xs font-bold uppercase tracking-widest text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">Discord сервер</p>
+                <p className="mt-1 text-[11px] text-primary/80 uppercase tracking-wide">Зловісний</p>
+                <p className="mt-1.5 text-[10px] text-white/50 normal-case tracking-normal">Приєднуйся до спільноти!</p>
+              </div>
+              {/* Arrow */}
+              <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-primary/60" style={{ backgroundColor: 'rgba(10,5,5,0.92)' }} />
+            </div>
+          </div>
+
+          {/* Logo centered between discord and nav */}
           <Link href="/" className="flex items-center justify-center">
             <Image
               src="/logo.png"

@@ -11,25 +11,28 @@ const DISCORD_URL = 'https://discord.gg/fwZQX55VCF'
 const WIKI_URL = 'https://zlovisny.gitbook.io/wiki'
 
 type NavChild = { href: string; label: string; external?: boolean }
-type NavItem = { href?: string; label: string; children?: NavChild[]; btnBg?: string; minW?: string }
+type NavItem = { href?: string; label: string; children?: NavChild[]; btnBg?: string; minW?: string; btnH?: string }
 
 const navItems: NavItem[] = [
-  { href: '/', label: 'Головна', btnBg: '/button-bg-3.png' },
-  { href: '/features', label: 'Особливості', btnBg: '/button-bg-3.png', minW: '140px' },
-  { href: '/classes', label: 'Класи', btnBg: '/button-bg-3.png' },
+  { href: '/', label: 'Головна', btnBg: '/button-bg-3.png', minW: '110px', btnH: '52px' },
+  { href: '/features', label: 'Особливості', btnBg: '/button-bg-3.png', minW: '140px', btnH: '52px' },
+  { href: '/classes', label: 'Класи', btnBg: '/button-bg-3.png', minW: '100px', btnH: '52px' },
   {
     label: 'Світ',
     btnBg: '/button-bg-3.png',
+    minW: '90px',
+    btnH: '52px',
     children: [
       { href: 'https://map.zlovisny.space', label: 'Жива Мапа', external: true },
       { href: WIKI_URL, label: 'Вікі / Лор', external: true },
     ],
   },
-  { href: '/store', label: 'Прохідка', btnBg: '/button-bg-3.png' },
+  { href: '/store', label: 'Прохідка', btnBg: '/button-bg-3.png', minW: '110px', btnH: '52px' },
   {
     label: 'Спільнота',
     btnBg: '/button-bg-3.png',
     minW: '130px',
+    btnH: '52px',
     children: [
       { href: '/rules', label: 'Правила' },
       { href: '/vote', label: 'Голосувати' },
@@ -78,7 +81,7 @@ function DesktopDropdown({ item, pathname, bgImg, btnBg }: { item: NavItem; path
           backgroundSize: '100% 100%',
           backgroundPosition: 'center',
           minWidth: item.minW,
-          height: '45px',
+          height: item.btnH,
         }}
         aria-expanded={open}
         aria-haspopup="true"
@@ -234,7 +237,7 @@ export function SiteHeader() {
                   backgroundSize: '100% 100%',
                   backgroundPosition: 'center',
                   minWidth: item.minW,
-                  height: '52px',
+                  height: item.btnH,
                 }}
               >
                 {item.label}

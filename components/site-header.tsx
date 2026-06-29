@@ -70,14 +70,15 @@ function DesktopDropdown({ item, pathname, bgImg, btnBg }: { item: NavItem; path
   return (
     <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
       <button
-        className={`shine flex items-center justify-center gap-1 px-5 py-2 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-200 hover:text-accent [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] whitespace-nowrap ${
+        className={`shine flex items-center justify-center gap-1 px-5 py-3 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-200 hover:text-accent [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] whitespace-nowrap ${
           isActive ? 'nav-active text-accent' : 'text-white'
         }`}
         style={{
           backgroundImage: btnBg ? `url('${btnBg}')` : "url('/button-bg-1.png')",
-          backgroundSize: 'cover',
+          backgroundSize: '100% 100%',
           backgroundPosition: 'center',
           minWidth: item.minW,
+          height: '52px',
         }}
         aria-expanded={open}
         aria-haspopup="true"
@@ -223,16 +224,17 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href!}
-                className={`shine flex items-center justify-center px-5 py-2 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] whitespace-nowrap ${
+                className={`shine flex items-center justify-center px-5 py-3 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] whitespace-nowrap ${
                   pathname === item.href
                     ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]'
                     : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
                 }`}
                 style={{
                   backgroundImage: item.btnBg ? `url('${item.btnBg}')` : undefined,
-                  backgroundSize: 'cover',
+                  backgroundSize: '100% 100%',
                   backgroundPosition: 'center',
                   minWidth: item.minW,
+                  height: '52px',
                 }}
               >
                 {item.label}

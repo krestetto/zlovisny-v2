@@ -218,7 +218,7 @@ export function SiteHeader() {
                     : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
                 }`}
                 style={{
-                  backgroundImage: "url('/button-bg-2.png')", // Шлях до твоєї текстури
+                  backgroundImage: "url('/button-bg-1.png')", // Шлях до твоєї текстури
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}

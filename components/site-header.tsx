@@ -182,7 +182,7 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className="header-img sticky top-0 z-50 bg-transparent backdrop-blur-md"
+        className="header-img sticky top-0 z-50 bg-transparent backdrop-blur-md overflow-hidden"
         style={{ ['--header-img' as string]: "url('/header-bg-cosmic.png')", ['--header-img-opacity' as string]: '1' }}
       >
       <div className="mx-auto flex h-24 max-w-7xl items-stretch">
@@ -253,9 +253,9 @@ export function SiteHeader() {
               <Image
                 src="/logo.png"
                 alt="Логотип Зловісний"
-                width={104}
-                height={104}
-                className="h-[104px] w-[104px] object-contain drop-shadow-[0_0_16px_oklch(0.52_0.22_20_/_70%)] transition-transform duration-200 group-hover/logo:scale-105"
+                width={80}
+                height={80}
+                className="h-20 w-20 object-contain drop-shadow-[0_0_16px_oklch(0.52_0.22_20_/_70%)] transition-transform duration-200 group-hover/logo:scale-105"
               />
             </Link>
             {/* Logo Tooltip */}

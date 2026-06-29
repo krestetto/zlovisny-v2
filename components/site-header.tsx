@@ -194,28 +194,18 @@ export function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Приєднатися до Discord"
-            className="btn-img shine inline-flex h-11 w-11 items-center justify-center rounded-md border border-primary/40 bg-primary/10 text-primary transition-all hover:scale-110 hover:bg-primary hover:text-primary-foreground"
+            className="btn-img shine inline-flex h-16 w-16 items-center justify-center rounded-md border-2 border-primary/50 bg-primary/10 text-primary transition-all hover:scale-105 hover:bg-primary hover:text-primary-foreground"
           >
-            <DiscordIcon className="h-5 w-5" />
+            <DiscordIcon className="h-8 w-8" />
           </a>
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center justify-center">
             <Image
               src="/logo.png"
               alt="Логотип Зловісний"
-              width={80}
-              height={80}
-              className="h-20 w-20 object-contain drop-shadow-[0_0_12px_oklch(0.52_0.22_20_/_60%)]"
+              width={104}
+              height={104}
+              className="h-[104px] w-[104px] object-contain drop-shadow-[0_0_16px_oklch(0.52_0.22_20_/_70%)]"
             />
-            <span className="hidden sm:block relative">
-              <span className="absolute inset-0 -mx-3 -my-1 rounded-sm bg-white/15 blur-sm" />
-              <Image
-                src="/wordmark.png"
-                alt="Зловісний"
-                width={160}
-                height={40}
-                className="relative h-10 w-auto object-contain drop-shadow-[0_2px_8px_rgba(255,255,255,0.4)]"
-              />
-            </span>
           </Link>
         </div>
 

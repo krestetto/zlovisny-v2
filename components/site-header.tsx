@@ -186,112 +186,112 @@ export function SiteHeader() {
         className="header-img sticky top-0 z-50 bg-transparent backdrop-blur-md"
         style={{ ['--header-img' as string]: "url('/header-bg-cosmic.png')", ['--header-img-opacity' as string]: '1' }}
       >
-      <div className="mx-auto flex h-24 max-w-7xl items-stretch justify-between relative">
+        <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-4 relative">
 
-        {/* Logo — absolutely centered in header */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-          <Link href="/" className="flex items-center justify-center pointer-events-auto">
-            <Image
-              src="/logo.png"
-              alt="Логотип Зловісний"
-              width={104}
-              height={104}
-              className="h-[104px] w-[104px] object-contain drop-shadow-[0_0_16px_oklch(0.52_0.22_20_/_70%)]"
-            />
-          </Link>
-        </div>
+          {/* Ліва частина: Логотип + Discord */}
+          <div className="flex items-center gap-4">
+            <Link href="/" className="flex items-center justify-center flex-shrink-0 z-10">
+              <Image
+                src="/logo.png"
+                alt="Логотип Зловісний"
+                width={104}
+                height={104}
+                className="h-[104px] w-[104px] object-contain drop-shadow-[0_0_16px_oklch(0.52_0.22_20_/_70%)]"
+              />
+            </Link>
 
-        {/* Left — Discord */}
-        <div className="flex items-center px-4">
-          <div className="relative group/discord">
-            <a
-              href={DISCORD_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Приєднатися до Discord"
-              className="btn-img shine inline-flex h-16 w-16 items-center justify-center rounded-md border-2 border-primary/50 bg-primary/10 text-primary transition-all hover:scale-105 hover:bg-primary hover:text-primary-foreground"
-            >
-              <DiscordIcon className="h-8 w-8" />
-            </a>
-            {/* Discord Tooltip */}
-            <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-3 w-52 -translate-x-1/2 opacity-0 translate-y-1 transition-all duration-200 group-hover/discord:opacity-100 group-hover/discord:translate-y-0">
-              <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-primary/60" style={{ backgroundColor: 'rgba(10,5,5,0.92)' }} />
-              <div
-                className="rounded-md border border-primary/60 p-3 text-center"
-                style={{ backgroundColor: 'rgba(10,5,5,0.92)', backgroundImage: "url('/button-bg-2.png')", backgroundSize: 'cover', backgroundBlendMode: 'overlay' }}
+            <div className="relative group/discord">
+              <a
+                href={DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Приєднатися до Discord"
+                className="btn-img shine inline-flex h-16 w-16 items-center justify-center rounded-md border-2 border-primary/50 bg-primary/10 text-primary transition-all hover:scale-105 hover:bg-primary hover:text-primary-foreground"
               >
-                <DiscordIcon className="mx-auto mb-1.5 h-5 w-5 text-primary" />
-                <p className="text-xs font-bold uppercase tracking-widest text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">Discord сервер</p>
-                <p className="mt-1 text-[11px] text-primary/80 uppercase tracking-wide">Зловісний</p>
-                <p className="mt-1.5 text-[10px] text-white/50 normal-case tracking-normal">Приєднуйся до спільноти!</p>
+                <DiscordIcon className="h-8 w-8" />
+              </a>
+              {/* Discord Tooltip */}
+              <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-3 w-52 -translate-x-1/2 opacity-0 translate-y-1 transition-all duration-200 group-hover/discord:opacity-100 group-hover/discord:translate-y-0">
+                <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-primary/60" style={{ backgroundColor: 'rgba(10,5,5,0.92)' }} />
+                <div
+                  className="rounded-md border border-primary/60 p-3 text-center"
+                  style={{ backgroundColor: 'rgba(10,5,5,0.92)', backgroundImage: "url('/button-bg-2.png')", backgroundSize: 'cover', backgroundBlendMode: 'overlay' }}
+                >
+                  <DiscordIcon className="mx-auto mb-1.5 h-5 w-5 text-primary" />
+                  <p className="text-xs font-bold uppercase tracking-widest text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">Discord сервер</p>
+                  <p className="mt-1 text-[11px] text-primary/80 uppercase tracking-wide">Зловісний</p>
+                  <p className="mt-1.5 text-[10px] text-white/50 normal-case tracking-normal">Приєднуйся до спільноти!</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <nav className="hidden self-stretch items-center gap-1 lg:flex">
-          {navItems.map((item) =>
-            item.children ? (
-              <DesktopDropdown key={item.label} item={item} pathname={pathname} bgImg={item.label === 'Світ' ? '/button-bg-1.png' : '/button-bg-2.png'} btnBg={item.btnBg} />
-            ) : (
-              <Link
-                key={item.label}
-                href={item.href!}
-                className={`shine flex items-center justify-center px-5 py-3 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] whitespace-nowrap ${
-                  pathname === item.href
-                    ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]'
-                    : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
-                }`}
-                style={{
-                  backgroundImage: item.btnBg ? `url('${item.btnBg}')` : undefined,
-                  backgroundSize: '100% 100%',
-                  backgroundPosition: 'center',
-                  minWidth: item.minW,
-                  height: item.btnH,
-                }}
+          {/* Центральна частина: Навігація */}
+          <nav className="hidden items-center gap-1 lg:flex">
+            {navItems.map((item) =>
+              item.children ? (
+                <DesktopDropdown key={item.label} item={item} pathname={pathname} bgImg={item.label === 'Світ' ? '/button-bg-1.png' : '/button-bg-2.png'} btnBg={item.btnBg} />
+              ) : (
+                <Link
+                  key={item.label}
+                  href={item.href!}
+                  className={`shine flex items-center justify-center px-5 py-3 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] whitespace-nowrap ${
+                    pathname === item.href
+                      ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]'
+                      : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
+                  }`}
+                  style={{
+                    backgroundImage: item.btnBg ? `url('${item.btnBg}')` : undefined,
+                    backgroundSize: '100% 100%',
+                    backgroundPosition: 'center',
+                    minWidth: item.minW,
+                    height: item.btnH,
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
+          </nav>
+
+          {/* Права частина: IP та Бургер-меню */}
+          <div className="flex items-center gap-3">
+            <div className="hidden lg:flex relative group/ip">
+              <button
+                onClick={copyIp}
+                className="btn-img shine group flex items-center gap-2 rounded-sm border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
               >
-                {item.label}
-              </Link>
-            ),
-          )}
-        </nav>
+                <span className="font-mono">{SERVER_IP}</span>
+                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              </button>
+              {/* IP Tooltip */}
+              <div className="pointer-events-none absolute right-0 top-full z-50 mt-3 w-56 opacity-0 translate-y-1 transition-all duration-200 group-hover/ip:opacity-100 group-hover/ip:translate-y-0">
+                <div className="absolute -top-1.5 right-5 h-3 w-3 rotate-45 border-l border-t border-primary/60" style={{ backgroundColor: 'rgba(10,5,5,0.92)' }} />
+                <div
+                  className="rounded-md border border-primary/60 p-3 text-center"
+                  style={{ backgroundColor: 'rgba(10,5,5,0.92)', backgroundImage: "url('/button-bg-2.png')", backgroundSize: 'cover', backgroundBlendMode: 'overlay' }}
+                >
+                  <Copy className="mx-auto mb-1.5 h-5 w-5 text-primary" />
+                  <p className="text-xs font-bold uppercase tracking-widest text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">Скопіювати IP</p>
+                  <p className="mt-1 font-mono text-[11px] text-primary/80">{SERVER_IP}</p>
+                  <p className="mt-1.5 text-[10px] text-white/50 normal-case tracking-normal">
+                    {copied ? '✓ Скопійовано!' : 'Натисни щоб скопіювати'}
+                  </p>
+                </div>
+              </div>
+            </div>
 
-        <div className="hidden items-center gap-3 px-4 lg:flex">
-          <div className="relative group/ip">
+            {/* Burger trigger */}
             <button
-              onClick={copyIp}
-              className="btn-img shine group flex items-center gap-2 rounded-sm border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border bg-secondary/50 text-foreground transition-colors hover:border-primary/50 hover:text-primary lg:hidden"
+              onClick={() => setOpen(true)}
+              aria-label="Відкрити меню"
             >
-              <span className="font-mono">{SERVER_IP}</span>
-              {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              <Menu className="h-6 w-6" />
             </button>
-            {/* IP Tooltip */}
-            <div className="pointer-events-none absolute right-0 top-full z-50 mt-3 w-56 opacity-0 translate-y-1 transition-all duration-200 group-hover/ip:opacity-100 group-hover/ip:translate-y-0">
-              <div className="absolute -top-1.5 right-5 h-3 w-3 rotate-45 border-l border-t border-primary/60" style={{ backgroundColor: 'rgba(10,5,5,0.92)' }} />
-              <div
-                className="rounded-md border border-primary/60 p-3 text-center"
-                style={{ backgroundColor: 'rgba(10,5,5,0.92)', backgroundImage: "url('/button-bg-2.png')", backgroundSize: 'cover', backgroundBlendMode: 'overlay' }}
-              >
-                <Copy className="mx-auto mb-1.5 h-5 w-5 text-primary" />
-                <p className="text-xs font-bold uppercase tracking-widest text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">Скопіювати IP</p>
-                <p className="mt-1 font-mono text-[11px] text-primary/80">{SERVER_IP}</p>
-                <p className="mt-1.5 text-[10px] text-white/50 normal-case tracking-normal">
-                  {copied ? '✓ Скопійовано!' : 'Натисни щоб скопіювати'}
-                </p>
-              </div>
-            </div>
           </div>
-        </div>
 
-        {/* Burger trigger */}
-        <button
-          className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border bg-secondary/50 text-foreground transition-colors hover:border-primary/50 hover:text-primary lg:hidden"
-          onClick={() => setOpen(true)}
-          aria-label="Відкрити меню"
-        >
-          <Menu className="h-6 w-6" />
-        </button>
-      </div>
+        </div>
       </header>
 
       {/* Fullscreen mobile menu */}

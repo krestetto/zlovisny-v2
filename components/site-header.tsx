@@ -175,8 +175,8 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className="header-img sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md"
-        style={{ ['--header-img' as string]: "url('/header-bg-cosmic.png')", ['--header-img-opacity' as string]: '0.6' }}
+        className="header-img sticky top-0 z-50 border-b border-border/40 bg-transparent backdrop-blur-md"
+        style={{ ['--header-img' as string]: "url('/header-bg-cosmic.png')", ['--header-img-opacity' as string]: '1' }}
       >
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-3">
@@ -198,7 +198,7 @@ export function SiteHeader() {
               height={80}
               className="h-20 w-20 object-contain drop-shadow-[0_0_12px_oklch(0.52_0.22_20_/_60%)]"
             />
-            <span className="hidden font-heading text-lg font-bold uppercase tracking-widest text-foreground sm:inline">
+            <span className="hidden font-heading text-lg font-bold uppercase tracking-widest text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.8)] sm:inline">
               Зловісний
             </span>
           </Link>

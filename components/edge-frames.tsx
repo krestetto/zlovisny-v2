@@ -30,24 +30,24 @@ export function EdgeFrames() {
       style={{ height: height || '100%' }}
       aria-hidden="true"
     >
-      {/* Left edge — tiles vertically down the whole page */}
+      {/* Left edge — a single image stretched across the FULL page height */}
       <div
-        className="absolute inset-y-0 left-0 w-[80px] opacity-50 lg:w-[150px]"
+        className="absolute inset-y-0 left-0 w-[90px] opacity-70 lg:w-[170px]"
         style={{
           backgroundImage: 'url(/edge-frame.png)',
-          backgroundRepeat: 'repeat-y',
-          backgroundSize: '100% auto',
-          backgroundPosition: 'right top',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%',
+          backgroundPosition: 'left top',
         }}
       />
       {/* Right edge (mirrored) */}
       <div
-        className="absolute inset-y-0 right-0 w-[80px] opacity-50 lg:w-[150px]"
+        className="absolute inset-y-0 right-0 w-[90px] opacity-70 lg:w-[170px]"
         style={{
           backgroundImage: 'url(/edge-frame.png)',
-          backgroundRepeat: 'repeat-y',
-          backgroundSize: '100% auto',
-          backgroundPosition: 'right top',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%',
+          backgroundPosition: 'left top',
           transform: 'scaleX(-1)',
         }}
       />

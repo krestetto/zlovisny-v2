@@ -16,7 +16,7 @@ type NavItem = { href?: string; label: string; children?: NavChild[]; btnBg?: st
 const navItems: NavItem[] = [
   { href: '/', label: 'Головна', btnBg: '/button-bg-3.png', minW: '110px', btnH: '52px' },
   { href: '/features', label: 'Особливості', btnBg: '/button-bg-3.png', minW: '140px', btnH: '52px' },
-  { href: '/classes', label: 'Класи', btnBg: '/button-bg-3.png', minW: '100px', btnH: '52px' },
+  { href: '/classes', label: 'Класи', btnBg: '/button-bg-5.png', minW: '100px', btnH: '52px' },
   {
     label: 'Світ',
     btnBg: '/button-bg-3.png',

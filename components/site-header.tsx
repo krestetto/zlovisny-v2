@@ -14,6 +14,7 @@ type NavChild = { href: string; label: string; external?: boolean }
 type NavItem = { href?: string; label: string; children?: NavChild[]; btnBg?: string; minW?: string; btnH?: string }
 
 const navItems: NavItem[] = [
+  { href: '/', label: 'Головна', btnBg: '/button-bg-3.png', minW: '110px', btnH: '52px' },
   { href: '/features', label: 'Особливості', btnBg: '/button-bg-3.png', minW: '140px', btnH: '52px' },
   { href: '/classes', label: 'Класи', btnBg: '/button-bg-3.png', minW: '100px', btnH: '52px' },
   {
@@ -182,159 +183,101 @@ export function SiteHeader() {
   return (
     <>
       <header
-        className="header-img sticky top-0 z-50 bg-transparent backdrop-blur-md overflow-hidden"
+        className="header-img sticky top-0 z-50 bg-transparent backdrop-blur-md"
         style={{ ['--header-img' as string]: "url('/header-bg-cosmic.png')", ['--header-img-opacity' as string]: '1' }}
       >
-      <div className="mx-auto flex h-24 max-w-7xl items-stretch">
+      <div className="mx-auto flex h-24 max-w-7xl items-stretch justify-between relative">
 
-        {/* LEFT — Discord + left nav buttons */}
-        <div className="flex items-stretch">
-          {/* Discord */}
-          <div className="flex items-center px-3">
-            <div className="relative group/discord">
-              <a
-                href={DISCORD_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Приєднатися до Discord"
-                className="btn-img shine inline-flex h-16 w-16 items-center justify-center rounded-md border-2 border-primary/50 bg-primary/10 text-primary transition-all hover:scale-105 hover:bg-primary hover:text-primary-foreground"
-              >
-                <DiscordIcon className="h-8 w-8" />
-              </a>
-              {/* Discord Tooltip */}
-              <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-3 w-52 -translate-x-1/2 opacity-0 translate-y-1 transition-all duration-200 group-hover/discord:opacity-100 group-hover/discord:translate-y-0">
-                <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-primary/60" style={{ backgroundColor: 'rgba(10,5,5,0.92)' }} />
-                <div
-                  className="rounded-md border border-primary/60 p-3 text-center"
-                  style={{ backgroundColor: 'rgba(10,5,5,0.92)', backgroundImage: "url('/button-bg-2.png')", backgroundSize: 'cover', backgroundBlendMode: 'overlay' }}
-                >
-                  <DiscordIcon className="mx-auto mb-1.5 h-5 w-5 text-primary" />
-                  <p className="text-xs font-bold uppercase tracking-widest text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">Discord сервер</p>
-                  <p className="mt-1 text-[11px] text-primary/80 uppercase tracking-wide">Зловісний</p>
-                  <p className="mt-1.5 text-[10px] text-white/50 normal-case tracking-normal">Приєднуйся до спільноти!</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Left nav — first half of items */}
-          <nav className="hidden self-stretch items-center gap-1 lg:flex">
-            {navItems.slice(0, Math.ceil(navItems.length / 2)).map((item) =>
-              item.children ? (
-                <DesktopDropdown key={item.label} item={item} pathname={pathname} bgImg={item.label === 'Світ' ? '/button-bg-1.png' : '/button-bg-2.png'} btnBg={item.btnBg} />
-              ) : (
-                <Link
-                  key={item.label}
-                  href={item.href!}
-                  className={`shine flex items-center justify-center px-5 py-3 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] whitespace-nowrap ${
-                    pathname === item.href
-                      ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]'
-                      : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
-                  }`}
-                  style={{
-                    backgroundImage: item.btnBg ? `url('${item.btnBg}')` : undefined,
-                    backgroundSize: '100% 100%',
-                    backgroundPosition: 'center',
-                    minWidth: item.minW,
-                    height: item.btnH,
-                  }}
-                >
-                  {item.label}
-                </Link>
-              ),
-            )}
-          </nav>
+        {/* Logo — absolutely centered in header */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          <Link href="/" className="flex items-center justify-center pointer-events-auto">
+            <Image
+              src="/logo.png"
+              alt="Логотип Зловісний"
+              width={104}
+              height={104}
+              className="h-[104px] w-[104px] object-contain drop-shadow-[0_0_16px_oklch(0.52_0.22_20_/_70%)]"
+            />
+          </Link>
         </div>
 
-        {/* CENTER — Logo with tooltip */}
-        <div className="flex items-center justify-center px-2">
-          <div className="relative group/logo">
-            <Link href="/" className="flex items-center justify-center">
-              <Image
-                src="/logo.png"
-                alt="Логотип Зловісний"
-                width={80}
-                height={80}
-                className="h-20 w-20 object-contain drop-shadow-[0_0_16px_oklch(0.52_0.22_20_/_70%)] transition-transform duration-200 group-hover/logo:scale-105"
-              />
-            </Link>
-            {/* Logo Tooltip */}
-            <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-3 w-64 -translate-x-1/2 opacity-0 translate-y-1 transition-all duration-200 group-hover/logo:opacity-100 group-hover/logo:translate-y-0">
+        {/* Left — Discord */}
+        <div className="flex items-center px-4">
+          <div className="relative group/discord">
+            <a
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Приєднатися до Discord"
+              className="btn-img shine inline-flex h-16 w-16 items-center justify-center rounded-md border-2 border-primary/50 bg-primary/10 text-primary transition-all hover:scale-105 hover:bg-primary hover:text-primary-foreground"
+            >
+              <DiscordIcon className="h-8 w-8" />
+            </a>
+            {/* Discord Tooltip */}
+            <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-3 w-52 -translate-x-1/2 opacity-0 translate-y-1 transition-all duration-200 group-hover/discord:opacity-100 group-hover/discord:translate-y-0">
               <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-primary/60" style={{ backgroundColor: 'rgba(10,5,5,0.92)' }} />
               <div
-                className="rounded-md border border-primary/60 p-4 text-center"
+                className="rounded-md border border-primary/60 p-3 text-center"
                 style={{ backgroundColor: 'rgba(10,5,5,0.92)', backgroundImage: "url('/button-bg-2.png')", backgroundSize: 'cover', backgroundBlendMode: 'overlay' }}
               >
-                <p className="text-xs font-bold uppercase tracking-widest text-accent [text-shadow:0_0_8px_oklch(0.6_0.22_18_/_60%)]">⚔ Зловісний ⚔</p>
-                <p className="mt-2 text-[11px] font-medium uppercase tracking-wide text-white/90">Minecraft RPG Сервер</p>
-                <div className="my-2 border-t border-primary/30" />
-                <p className="text-[10px] leading-relaxed text-white/60 normal-case tracking-normal">
-                  Унікальний RPG-світ з елементами політики, кланових воєн та живою картою. Обери клас, побудуй фракцію та залиш слід в історії.
-                </p>
-                <div className="mt-2 flex items-center justify-center gap-1">
-                  <span className="inline-block rounded-sm bg-primary/20 px-2 py-0.5 text-[9px] uppercase tracking-widest text-primary border border-primary/40">RPG</span>
-                  <span className="inline-block rounded-sm bg-primary/20 px-2 py-0.5 text-[9px] uppercase tracking-widest text-primary border border-primary/40">Політика</span>
-                  <span className="inline-block rounded-sm bg-primary/20 px-2 py-0.5 text-[9px] uppercase tracking-widest text-primary border border-primary/40">Клани</span>
-                </div>
+                <DiscordIcon className="mx-auto mb-1.5 h-5 w-5 text-primary" />
+                <p className="text-xs font-bold uppercase tracking-widest text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">Discord сервер</p>
+                <p className="mt-1 text-[11px] text-primary/80 uppercase tracking-wide">Зловісний</p>
+                <p className="mt-1.5 text-[10px] text-white/50 normal-case tracking-normal">Приєднуйся до спільноти!</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* RIGHT — right nav buttons + IP */}
-        <div className="flex items-stretch">
-          {/* Right nav — second half of items */}
-          <nav className="hidden self-stretch items-center gap-1 lg:flex">
-            {navItems.slice(Math.ceil(navItems.length / 2)).map((item) =>
-              item.children ? (
-                <DesktopDropdown key={item.label} item={item} pathname={pathname} bgImg={item.label === 'Світ' ? '/button-bg-1.png' : '/button-bg-2.png'} btnBg={item.btnBg} />
-              ) : (
-                <Link
-                  key={item.label}
-                  href={item.href!}
-                  className={`shine flex items-center justify-center px-5 py-3 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] whitespace-nowrap ${
-                    pathname === item.href
-                      ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]'
-                      : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
-                  }`}
-                  style={{
-                    backgroundImage: item.btnBg ? `url('${item.btnBg}')` : undefined,
-                    backgroundSize: '100% 100%',
-                    backgroundPosition: 'center',
-                    minWidth: item.minW,
-                    height: item.btnH,
-                  }}
-                >
-                  {item.label}
-                </Link>
-              ),
-            )}
-          </nav>
-
-          {/* IP button */}
-          <div className="hidden items-center gap-3 px-3 lg:flex">
-            <div className="relative group/ip">
-              <button
-                onClick={copyIp}
-                className="btn-img shine group flex items-center gap-2 rounded-sm border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+        <nav className="hidden self-stretch items-center gap-1 lg:flex">
+          {navItems.map((item) =>
+            item.children ? (
+              <DesktopDropdown key={item.label} item={item} pathname={pathname} bgImg={item.label === 'Світ' ? '/button-bg-1.png' : '/button-bg-2.png'} btnBg={item.btnBg} />
+            ) : (
+              <Link
+                key={item.label}
+                href={item.href!}
+                className={`shine flex items-center justify-center px-5 py-3 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] whitespace-nowrap ${
+                  pathname === item.href
+                    ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]'
+                    : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
+                }`}
+                style={{
+                  backgroundImage: item.btnBg ? `url('${item.btnBg}')` : undefined,
+                  backgroundSize: '100% 100%',
+                  backgroundPosition: 'center',
+                  minWidth: item.minW,
+                  height: item.btnH,
+                }}
               >
-                <span className="font-mono">{SERVER_IP}</span>
-                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-              </button>
-              {/* IP Tooltip */}
-              <div className="pointer-events-none absolute right-0 top-full z-50 mt-3 w-56 opacity-0 translate-y-1 transition-all duration-200 group-hover/ip:opacity-100 group-hover/ip:translate-y-0">
-                <div className="absolute -top-1.5 right-5 h-3 w-3 rotate-45 border-l border-t border-primary/60" style={{ backgroundColor: 'rgba(10,5,5,0.92)' }} />
-                <div
-                  className="rounded-md border border-primary/60 p-3 text-center"
-                  style={{ backgroundColor: 'rgba(10,5,5,0.92)', backgroundImage: "url('/button-bg-2.png')", backgroundSize: 'cover', backgroundBlendMode: 'overlay' }}
-                >
-                  <Copy className="mx-auto mb-1.5 h-5 w-5 text-primary" />
-                  <p className="text-xs font-bold uppercase tracking-widest text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">Скопіювати IP</p>
-                  <p className="mt-1 font-mono text-[11px] text-primary/80">{SERVER_IP}</p>
-                  <p className="mt-1.5 text-[10px] text-white/50 normal-case tracking-normal">
-                    {copied ? '✓ Скопійовано!' : 'Натисни щоб скопіювати'}
-                  </p>
-                </div>
+                {item.label}
+              </Link>
+            ),
+          )}
+        </nav>
+
+        <div className="hidden items-center gap-3 px-4 lg:flex">
+          <div className="relative group/ip">
+            <button
+              onClick={copyIp}
+              className="btn-img shine group flex items-center gap-2 rounded-sm border border-primary/50 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            >
+              <span className="font-mono">{SERVER_IP}</span>
+              {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+            </button>
+            {/* IP Tooltip */}
+            <div className="pointer-events-none absolute right-0 top-full z-50 mt-3 w-56 opacity-0 translate-y-1 transition-all duration-200 group-hover/ip:opacity-100 group-hover/ip:translate-y-0">
+              <div className="absolute -top-1.5 right-5 h-3 w-3 rotate-45 border-l border-t border-primary/60" style={{ backgroundColor: 'rgba(10,5,5,0.92)' }} />
+              <div
+                className="rounded-md border border-primary/60 p-3 text-center"
+                style={{ backgroundColor: 'rgba(10,5,5,0.92)', backgroundImage: "url('/button-bg-2.png')", backgroundSize: 'cover', backgroundBlendMode: 'overlay' }}
+              >
+                <Copy className="mx-auto mb-1.5 h-5 w-5 text-primary" />
+                <p className="text-xs font-bold uppercase tracking-widest text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">Скопіювати IP</p>
+                <p className="mt-1 font-mono text-[11px] text-primary/80">{SERVER_IP}</p>
+                <p className="mt-1.5 text-[10px] text-white/50 normal-case tracking-normal">
+                  {copied ? '✓ Скопійовано!' : 'Натисни щоб скопіювати'}
+                </p>
               </div>
             </div>
           </div>

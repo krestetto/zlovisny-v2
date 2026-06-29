@@ -67,9 +67,9 @@ function DesktopDropdown({ item, pathname, bgImg, btnBg }: { item: NavItem; path
   }
 
   return (
-    <div className="relative self-stretch flex" onMouseEnter={show} onMouseLeave={hide}>
+    <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
       <button
-        className={`shine flex h-full items-center gap-1 px-5 text-sm font-medium uppercase tracking-widest transition-all duration-200 hover:text-accent [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] border-x border-white/10 ${
+        className={`shine flex items-center gap-1 px-4 py-2 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-200 hover:text-accent [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] ${
           isActive ? 'nav-active text-accent' : 'text-white'
         }`}
         style={{
@@ -210,7 +210,7 @@ export function SiteHeader() {
           </Link>
         </div>
 
-        <nav className="hidden self-stretch items-stretch lg:flex">
+        <nav className="hidden self-stretch items-center gap-1 lg:flex">
           {navItems.map((item) =>
             item.children ? (
               <DesktopDropdown key={item.label} item={item} pathname={pathname} bgImg={item.label === 'Світ' ? '/button-bg-1.png' : '/button-bg-2.png'} btnBg={item.btnBg} />
@@ -218,7 +218,7 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href!}
-                className={`shine flex items-center px-5 text-sm font-medium uppercase tracking-widest transition-all duration-300 border-x border-white/10 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
+                className={`shine flex items-center px-4 py-2 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
                   pathname === item.href
                     ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]'
                     : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'

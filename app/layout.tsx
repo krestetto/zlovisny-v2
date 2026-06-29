@@ -34,9 +34,9 @@ export default function RootLayout({
     <html
       lang="uk"
       data-scroll-behavior="smooth"
-      className={`dark ${geistSans.variable} ${geistMono.variable} ${cinzel.variable} bg-background`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} ${cinzel.variable} bg-[oklch(0.06_0.01_25)]`}
     >
-      <body className="font-sans antialiased pb-[36px] sm:pb-[38px]">
+      <body className="font-sans antialiased pb-[36px] sm:pb-[38px] bg-[oklch(0.06_0.01_25)]">
         <PageTransition />
         <EdgeFrames />
         <SiteHeader />

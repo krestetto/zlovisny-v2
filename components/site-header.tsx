@@ -69,7 +69,7 @@ function DesktopDropdown({ item, pathname, bgImg, btnBg }: { item: NavItem; path
   return (
     <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
       <button
-        className={`shine flex items-center gap-1 px-4 py-2 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-200 hover:text-accent [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] ${
+        className={`shine flex items-center justify-center gap-1 px-5 py-2 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-200 hover:text-accent [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] whitespace-nowrap ${
           isActive ? 'nav-active text-accent' : 'text-white'
         }`}
         style={{
@@ -200,13 +200,16 @@ export function SiteHeader() {
               height={80}
               className="h-20 w-20 object-contain drop-shadow-[0_0_12px_oklch(0.52_0.22_20_/_60%)]"
             />
-            <Image
-              src="/wordmark.png"
-              alt="Зловісний"
-              width={160}
-              height={40}
-              className="hidden h-10 w-auto object-contain drop-shadow-[0_0_10px_rgba(0,0,0,0.8)] sm:block"
-            />
+            <span className="hidden sm:block relative">
+              <span className="absolute inset-0 -mx-3 -my-1 rounded-sm bg-white/15 blur-sm" />
+              <Image
+                src="/wordmark.png"
+                alt="Зловісний"
+                width={160}
+                height={40}
+                className="relative h-10 w-auto object-contain drop-shadow-[0_2px_8px_rgba(255,255,255,0.4)]"
+              />
+            </span>
           </Link>
         </div>
 
@@ -218,7 +221,7 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href!}
-                className={`shine flex items-center px-4 py-2 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] ${
+                className={`shine flex items-center justify-center px-5 py-2 text-sm font-medium uppercase tracking-widest rounded-sm transition-all duration-300 hover:text-accent hover:[text-shadow:0_0_15px_oklch(0.6_0.22_18_/_80%)] whitespace-nowrap ${
                   pathname === item.href
                     ? 'nav-active text-accent [text-shadow:0_0_10px_oklch(0.6_0.22_18_/_50%)]'
                     : 'text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]'
